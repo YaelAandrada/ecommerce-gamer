@@ -5,11 +5,17 @@ position: fixed;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("/img-error/xenia-radchenko-ezEn4jYrVYQ-unsplash.jpg");
+  background-image: url("/src/img/img-error.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; /* 👈 ajusta la imagen manteniendo proporción */
-  background-attachment: fixed; /* opcional, efecto más estable */
+  background-size: cover; 
+  background-attachment: fixed; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(26, 21, 21);
 }
 
 
