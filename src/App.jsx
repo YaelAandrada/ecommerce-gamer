@@ -1,3 +1,7 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Error404 from "./page/Error404.jsx";
+
+
 function App() {
 
   return (
