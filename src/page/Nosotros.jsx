@@ -17,6 +17,12 @@ function Nosotros() {
             En GamerHub, valoramos la satisfacción del cliente por encima de todo. Nos comprometemos a brindar un servicio al cliente excepcional, con un equipo
             </p>
         </div>
+        <div className='w-100 bg-zinc-100 rounded-lg shadow-md p-10'>
+            <h3 className='text-2xl font-bold underline p-5 text-center'>Nuestro equipo</h3>
+            <ul className='list-disc list-inside text-lg leading-7'>
+                <li>Yael Andrada - Fundadora y CEO</li>
+            </ul>
+        </div>
     </section>
   )
 }
