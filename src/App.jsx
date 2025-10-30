@@ -1,3 +1,16 @@
+
+import React from 'react';
+
+import Navbar from './components/Navbar';
+
+function App(){
+  return (
+    <div clasName="App">
+
+    </div>
+  )
+}
+
 function App() {
 
   return (
@@ -9,7 +22,7 @@ function App() {
           element={
             
             <div>
-              <h1 className='text-red-600'>hola</h1>
+              
             </div>
           }
         />
