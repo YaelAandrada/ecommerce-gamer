@@ -1,69 +1,21 @@
- .error-container {
-position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background-image: url("/src/img/img-error.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; 
-  background-attachment: fixed; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: rgb(26, 21, 21);
+@keyframes rgbFlow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }
 
-
-/* Texto 404 RGB animado */
-.error-404 {
-  font-size: 180px;
-  font-weight: bold;
-  background: linear-gradient(90deg, red, blue, green, red);
-  background-size: 400%;
- background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: neonRGB 3s linear infinite;
-  text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-  margin-bottom: 20px;
+.rgb-anim {
+  animation: rgbFlow 5s linear infinite;
+}
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); 
+  }
 }
 
-@keyframes neonRGB {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-/* Texto secundario */
-.error-text {
-  font-size: 24px;
-  margin-bottom: 40px;
-  opacity: 0.9;
-}
-
-/* Botón estilo gamer */
-.home-button {
-  text-decoration: none;
-  color: white;
-  background: linear-gradient(90deg, red, blue, green);
-  background-size: 300%;
-  padding: 12px 30px;
-  border-radius: 30px;
-  font-weight: bold;
-  transition: 0.3s ease;
-  animation: rgbButton 4s linear infinite;
-}
-
-.home-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-}
-
-@keyframes rgbButton {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+.jump {
+  display: inline-block; 
+  animation: jump 0.6s ease-in-out infinite;
 }
