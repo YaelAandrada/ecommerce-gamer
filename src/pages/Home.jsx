@@ -2,7 +2,7 @@ import {useNavigate} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import TaskForm from '../components/TaskForm';;
 import TaskItem from '../components/TaskItem';
-import googleAuthService from '../services/googleAuth';
+import { auth, googleProvider, login } from '../services/googleAuth';
 
 function Home() {
   const navigate = useNavigate(); 

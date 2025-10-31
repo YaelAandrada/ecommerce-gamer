@@ -1,37 +1,32 @@
-import {useState} from 'react';
-import {toast} from 'react-toastify';
-import googleAuthService from '../services/googleAuth';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { login } from '../services/googleAuth'; // Asegurate que esté exportado como named export
 
+function GoogleLoginButton({ onLogin }) {
+  const [isLoading, setIsLoading] = useState(false);
 
-
-function GoogleLoginButton({onLogin}) {
-
-    const [isLoading, setIsLoading] = useState(false);
-
-    const handleGoogleLogin = async () => {
-        setIsLoading(true) 
-        try {
-           const user = await googleAuthService.loginWithGoogle(); 
-           onLogin(user);
-           toast.success('Login con google Exitoso!')
-        } catch (error) {
-            console.log(error);
-            toast.error(error.message)            
-        } finally{
-            setIsLoading(false)
-        }  
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    try {
+      const user = await login(); // Usamos la función login que ya definiste
+      onLogin(user);
+      toast.success('¡Login con Google exitoso!');
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message || 'Error al iniciar sesión');
+    } finally {
+      setIsLoading(false);
     }
-
-
+  };
 
   return (
     <button
-    type='button'
-    onClick={handleGoogleLogin}
-    disabled={isLoading}
-    className='w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50'
+      type="button"
+      onClick={handleGoogleLogin}
+      disabled={isLoading}
+      className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
     >
-    <svg className="w-5 h-5" viewBox="0 0 24 24">
+      <svg className="w-5 h-5" viewBox="0 0 24 24">
         <path
           fill="currentColor"
           d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -48,14 +43,12 @@ function GoogleLoginButton({onLogin}) {
           fill="currentColor"
           d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
         />
-    </svg>
-    <span 
-    className="ml-2"
-    >
-        {isLoading? 'Iniciando Sesión' : 'Continuar con Google'}
-    </span>        
+      </svg>
+      <span className="ml-2">
+        {isLoading ? 'Iniciando Sesión...' : 'Continuar con Google'}
+      </span>
     </button>
-  )
+  );
 }
 
-export default GoogleLoginButton
+export default GoogleLoginButton;

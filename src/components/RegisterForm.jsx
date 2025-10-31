@@ -5,6 +5,7 @@ import {toast} from 'react-toastify';
 import Input from './Input';
 import bcrypt from 'bcryptjs';
 
+
 function RegisterForm({onRegister}) {
 
   const {
