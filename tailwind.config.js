@@ -5,8 +5,14 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        fondoGamer: "#08152e", // ejemplo para tu fondo gamer
+     backgroundImage: {
+  'gamer-wall': "url('/img/retro.webp')", // ✅ desde public
+},
+      backgroundSize: {
+        'grid': '40px 40px',
+      },
+      fontFamily: {
+        gamer: ['Orbitron', 'sans-serif'],
       },
     },
   },

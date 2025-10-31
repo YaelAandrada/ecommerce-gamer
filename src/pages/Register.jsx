@@ -1,36 +1,37 @@
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
-
+import AuthLayout from '../components/AuthLayout'; 
 
 function Register() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleRegister = (userData) => {
-    navigate('/home')
-  }
+    navigate('/home');
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-md w-full space-y-8">
-      <div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Crear Cuenta
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          O{' '}
-          <Link
-            to="/login"
-            className="font-medium text-blue-600 hover:text-blue-500"
-          >
-            inicia sesión en tu cuenta
-          </Link>
+    <AuthLayout>
+      {/* Izquierda: Bienvenida */}
+      <div className="flex flex-col justify-center items-center text-white text-center px-4">
+        <h2 className="text-4xl font-bold mb-4 text-cyan-300">¡Bienvenido!</h2>
+        <p className="text-lg mb-6 text-gray-300">
+          Registrate para unirte a la experiencia gamer
         </p>
+        <Link
+          to="/login"
+          className="text-cyan-400 hover:text-cyan-300 underline text-sm"
+        >
+          ¿Ya tenés cuenta? Iniciá sesión acá
+        </Link>
       </div>
-      <RegisterForm onRegister={handleRegister} />
-    </div>
-  </div>
-  )
+
+      {/* Derecha: Formulario de registro */}
+      <div className="space-y-6 text-white">
+        <h2 className="text-3xl font-extrabold text-center text-cyan-300">Crear Cuenta</h2>
+        <RegisterForm onRegister={handleRegister} />
+      </div>
+    </AuthLayout>
+  );
 }
 
-export default Register
+export default Register;

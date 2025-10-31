@@ -24,8 +24,7 @@ function GoogleLoginButton({ onLogin }) {
       type="button"
       onClick={handleGoogleLogin}
       disabled={isLoading}
-      className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-    >
+className=" w-full flex items-center justify-center gap-2 bg-[#111827] border-2 border-cyan-400 shadow-[0_0_20px_#00ffff] rounded-xl p-4 hover:shadow-[0_0_20px_#00ffff] transition-all duration-300"    >
       <svg className="w-5 h-5" viewBox="0 0 24 24">
         <path
           fill="currentColor"
