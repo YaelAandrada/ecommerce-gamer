@@ -1,24 +1,17 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./page/Home";
+import React from 'react'
+import Register from './page/Register'
+import Login from './page/Login'
+import { Router, Routes, Route } from 'react-router-dom'
 
 
-function App() {
+
+ function App() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <div>
-            <h1 className="text-red-600">hola</h1>
-            <Link to="/home">Ir a Home</Link>
-          </div>
-        }
-      />
-      <Route path="/home" element={<Home />} />
-      
+    
+
     </Routes>
   );
 }
 
-export default App;
+export default App
