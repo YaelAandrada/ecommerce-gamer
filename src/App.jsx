@@ -1,3 +1,6 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Categorias from "./page/categorias"
+
 function App() {
 
   return (
@@ -15,7 +18,9 @@ function App() {
         />
 
         {/* Página de error 404 */}
-        <Route path="*" element={<Error404 />} />
+        <Route path="/categorias" element={<Categorias />} />
+
+        {/* <Route path="*" element={<Error404 />} /> */}
       </Routes>
     </BrowserRouter>
 
