@@ -1,70 +1,16 @@
-import { useRef } from "react";
-import valorant from '../assets/valorant.png';
-import freefire from '../assets/freefire.jpg';
-import mobilelegends1 from '../assets/mobilelegends.jpg';
-import steam from '../assets/steam.jpg';
-import lol from '../assets/lol.jpg';
-import cs2 from '../assets/cs2.jpeg';
-import marvelrivals from '../assets/marvelrivals.jpg';
+import {useState, useEffect, useRef } from "react";
 
-const juegos = [
-  {
-    id: 1,
-    img: freefire,
-    categoria: "Shooter",
-    title: "Free Fire",
-  },
-  {
-    id: 2,
-    img: valorant,
-    categoria: "Shooter",
-    title: "Valorant",
-  },
-  {
-    id: 3,
-    img: mobilelegends1,
-    categoria: "MOBA",
-    title: "Mobile Legends",
-  },
-//   {
-//     id: 4,
-//     img: "/img/mobilelegends2.jpg",
-//     title: "Mobile Legends",
-//     subtitle: "DOBLE RECARGA",
-//   },
-  {
-    id: 4,
-    img: steam,
-    title: "Steam",
-
-  },
-  {
-    id: 5,
-    img: cs2,
-    categoria: 'Shooter',
-    title: "Counter Strike 2",
-  },
-  {
-    id: 6,
-    img: lol,
-    categoria: "MOBA",
-    title: "League of Legends",
-  },
-  {
-    id: 7,
-    img: marvelrivals,
-    categoria: "MOBA",
-    title: "Marvel Rivals",
-  },
-    {
-    id: 7,
-    img: marvelrivals,
-    title: "Marvel Rivals",
-  },
-];
 
 export default function Carousel() {
   const scrollRef = useRef(null);
+  const [juegos, setJuegos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/juegos")
+      .then((res) => res.json())
+      .then((data) => setJuegos(data))
+      .catch((error) => console.error("Error al obtener juegos:", error));
+    }, []);
 
   const scroll = (direction) => {
     const { current } = scrollRef;
