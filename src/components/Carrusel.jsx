@@ -1,16 +1,26 @@
 import {useState, useEffect, useRef } from "react";
 
 
-export default function Carousel() {
-  const scrollRef = useRef(null);
+export default function Carousel({ categoria }) {
   const [juegos, setJuegos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://localhost:3001/juegos")
-      .then((res) => res.json())
-      .then((data) => setJuegos(data))
-      .catch((error) => console.error("Error al obtener juegos:", error));
-    }, []);
+    const fetchData = async () => {
+      try {
+        // ✅ Trae solo los juegos de la categoría elegida
+        const res = await fetch(`http://localhost:3001/juegos?categoria=${encodeURIComponent(categoria)}`);
+        const data = await res.json();
+        setJuegos(data);
+      } catch (error) {
+        console.error("Error al obtener juegos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [categoria]);
 
   const scroll = (direction) => {
     const { current } = scrollRef;
@@ -23,8 +33,13 @@ export default function Carousel() {
     }
   };
 
+  if (loading) return <p className="text-center text-white">Cargando {categoria}...</p>;
+
+  if (juegos.length === 0)
+    return <p className="text-center text-gray-400">No hay juegos en la categoría "{categoria}".</p>;
+
   return (
-    <div className="relative w-full flex justify-center bg-black py-6 h-40">
+    <div className="relative w-full flex justify-center py-6 h-40">
       {/* Botón izquierda */}
       <button
         onClick={() => scroll("left")}
@@ -49,7 +64,7 @@ export default function Carousel() {
       {/* Contenedor scrollable */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto w-300 space-x-4 px-10 scrollbar-hide scroll-smooth"
+        className="flex overflow-x-auto space-x-4 px-10 scrollbar-hide scroll-smooth"
       >
         {juegos.map((juego) => (
           <div
@@ -59,13 +74,11 @@ export default function Carousel() {
             <img
               src={juego.img}
               alt={juego.title}
-              className="object-cover w-full group-hover:scale-105 transition-transform duration-300"
+              className="object-cover w-full h-64 group-hover:scale-105 transition-transform duration-300"
             />
-            {juego.subtitle && (
-              <div className="absolute bottom-0 w-full bg-yellow-400 text-black text-center font-bold py-1 text-sm">
-                {juego.subtitle}
-              </div>
-            )}
+            <div className="absolute bottom-0 w-full bg-yellow-400 text-black text-center font-bold py-1 text-sm">
+              {juego.title}
+            </div>
           </div>
         ))}
       </div>

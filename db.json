@@ -9,7 +9,7 @@
     {
       "id": 2,
       "title": "Valorant",
-      "categoria": "FPS, shooter",
+      "categoria": "Shooter",
       "img": "/public/img/valorant.png"
     },
     {
@@ -21,7 +21,7 @@
     {
       "id": 4,
       "title": "cs2",
-      "categoria": "FPS, shooter",
+      "categoria": "Shooter",
       "img": "/public/img/cs2.jpeg"
     }
   ]
