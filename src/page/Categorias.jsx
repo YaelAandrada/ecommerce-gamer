@@ -24,10 +24,23 @@ function Categorias() {
         </div>  
 
         <div className='dark:bg-gray-900 mb-8 darka:text-white bg-gray-100 dark:shadow-neutral-900 rounded-lg shadow-md shadow-neutral-400'>
-            <h2 className="font-bold text-2xl ml-4">Populares</h2>
+            <h2 className="font-bold text-2xl ml-4">Deportes</h2>
             {/* Carrucel de juegos */}
-            <Carousel categoria="Shooter" />   
-        </div>    
+            <Carousel categoria="deportes" />   
+        </div>
+
+        <div className='dark:bg-gray-900 mb-8 darka:text-white bg-gray-100 dark:shadow-neutral-900 rounded-lg shadow-md shadow-neutral-400'>
+            <h2 className="font-bold text-2xl ml-4">Aventura</h2>
+            {/* Carrucel de juegos */}
+            <Carousel categoria="aventura" />   
+        </div>
+
+         <div className='dark:bg-gray-900 mb-8 darka:text-white bg-gray-100 dark:shadow-neutral-900 rounded-lg shadow-md shadow-neutral-400'>
+            <h2 className="font-bold text-2xl ml-4">Carrera</h2>
+            {/* Carrucel de juegos */}
+            <Carousel categoria="carrera" />   
+        </div>
+
 
     </section>
   )
