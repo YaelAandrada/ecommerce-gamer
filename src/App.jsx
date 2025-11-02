@@ -1,38 +1,35 @@
 
 import React from 'react';
 
+import { BrowserRouter as router, route } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 
-function App(){
-  return (
-    <div clasName="App">
+import Home from './components/Home';
 
-    </div>
-  )
-}
+import about from './components/About';
+
+import Admin from './components/Admin';
+
+import Login from './components/Login';
+
 
 function App() {
 
   return (
-   <BrowserRouter>
-      <Routes>
-        {/* Rutas de la aplicación */}
-        <Route
-          path="/"
-          element={
-            
-            <div>
-              
-            </div>
-          }
-        />
+    <Router>
+      <div className="App">
+        <Navbar/>
+        <Router>
+          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<About/>} />
+          <Route path="/" element={<Admin/>} />
+          <Route path="/" element={<Login/>} />
+        </Router>
 
-        {/* Página de error 404 */}
-        <Route path="*" element={<Error404 />} />
-      </Routes>
-    </BrowserRouter>
+      </div>
+    </Router>
+  );
+};
 
-  )
-}
-
-export default App
+export default App;
