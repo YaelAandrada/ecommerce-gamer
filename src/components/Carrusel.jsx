@@ -1,9 +1,10 @@
 import {useState, useEffect, useRef } from "react";
-
+import Modal from "./modal";
 
 export default function Carousel({ categoria }) {
   const [juegos, setJuegos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [juegoSeleccionado, setJuegoSeleccionado] = useState(null);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -32,6 +33,9 @@ export default function Carousel({ categoria }) {
       });
     }
   };
+
+  const abrirModal = (juego) => setJuegoSeleccionado(juego);
+  const cerrarModal = () => setJuegoSeleccionado(null);
 
   if (loading) return <p className="text-center text-white">Cargando {categoria}...</p>;
 
@@ -70,6 +74,7 @@ export default function Carousel({ categoria }) {
           <div
             key={juego.id}
             className="relative shrink-0 w-48 md:w-56 lg:w-64 rounded-xl overflow-hidden group"
+            onClick={() => abrirModal(juego)}
           >
             <img
               src={juego.img}
@@ -103,6 +108,8 @@ export default function Carousel({ categoria }) {
           />
         </svg>
       </button>
+
+      <Modal juego={juegoSeleccionado} onClose={cerrarModal} />
     </div>
   );
 }
