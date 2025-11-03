@@ -1,3 +1,5 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Footer from './components/Footer'
 function App() {
 
   return (
@@ -15,7 +17,7 @@ function App() {
         />
 
         {/* Página de error 404 */}
-        <Route path="*" element={<Error404 />} />
+        <Route path="/footer" element={<Footer />} />
       </Routes>
     </BrowserRouter>
 
