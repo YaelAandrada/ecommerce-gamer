@@ -11,7 +11,7 @@ export default function Carousel({ categoria }) {
     const fetchData = async () => {
       try {
         // ✅ Trae solo los juegos de la categoría elegida
-        const res = await fetch(`http://localhost:3001/juegos?categoria=${encodeURIComponent(categoria)}`);
+        const res = await fetch(`http://localhost:4000/juegos?categoria=${encodeURIComponent(categoria)}`);
         const data = await res.json();
         setJuegos(data);
       } catch (error) {
