@@ -1,5 +1,3 @@
-import React from 'react';
-
 import React, {useState, useEffect} from 'react';
 
 import {Link, useLocation} from 'react-router-dom';
@@ -40,11 +38,11 @@ const Navbar = () => {
     ];
 
     const totalItems = cartItems.reduce((sum, item) => sum + item.quality, 0);
-    const totalPrice = cartItems.reduce((sum, item) => + (item.price * item.quality), 0);
+    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quality), 0);
 
     useEffect(() => {
         localStorage.setItem('userLoggedIn', JSON.stringify(isLoggedIn));
-        localStorage.setItem('userInAdmin', JSON.stringify(isAdmin));
+        localStorage.setItem('userIsAdmin', JSON.stringify(isAdmin));
         localStorage.setItem('userName', userName);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     } , [isLoggedIn, isAdmin, userName, cartItems]);
@@ -78,11 +76,11 @@ const Navbar = () => {
             const existeItem = prevItems.find(item => item.id === product.id);
             if (existeItem) {
                 return prevItems.map(item => 
-                    item.id === product.id ? {...item, quality: item.quality + 1} 
+                    item.id === product.id ? {...item, quantity: item.quantity + 1} 
                     : item
                 );
             } else {
-                return [...prevItems, { ...product, quality:1}];
+                return [...prevItems, { ...product, quantity:1}];
             }
         });
     };
@@ -116,11 +114,7 @@ const Navbar = () => {
         setUserName('Ana Luz Balamceda');
     };
     
-   
-    localStorage.clear();
-    localStorage.removeItem('userLoggedIn');
-    localStorage.removeItem('userIsAdmin');
-    localStorage.removeItem('userName');
+
 
  const handleNormalUserLogin = () => {
     setIsLoggedIn(true);
@@ -130,25 +124,25 @@ const Navbar = () => {
  const handleLogout= () => {
         setIsLoggedIn(false);
         setIsAdmin(false);
-        setUserName ('')
+        setUserName ('');
         setIsMenuOpen(false);
         setIsCartOpen(false);
          };
     return (
-        <nav className= "bg-gray-800 text-white p-4 shadow-lg sticky top-0 z-50">
-            <div className= "container mx-auto flex justify-between items-center">
+        <nav className="bg-gray-800 text-white p-4 shadow-lg sticky top-0 z-50">
+            <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center space-x-3">
                  <div className="bg-blue-500 w-8 h-8 rounded-lg flex items-center justify-center">
                <span className="font-bold">🎮</span>
               </div>
                     <Link to="/" 
-                    className= "text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                       NEONBYTS
                       </Link>
                 </div>
-              <div className="hidden md: flex sapce-x-8">
+              <div className="hidden md:flex space-x-8">
                 <Link to="/" 
-                clasName={`transition-colors duration-200 ${isActiveLink('/')}`}>
+                className={`transition-colors duration-200 ${isActiveLink('/')}`}>
                     Inicio
                     </Link>
                     <div className="relative">
@@ -180,12 +174,12 @@ const Navbar = () => {
             )}
           </div>
                 <Link to="/about" 
-                clasName={`transition-colors duration-200 ${isActiveLink('/about')}`}>
+                className={`transition-colors duration-200 ${isActiveLink('/about')}`}>
                     Nosotros
                     </Link>
                 {isAdmin &&(
                 <Link to="/admin" 
-                clasName={`transition-colors duration-200 ${isActiveLink('/admin')}`}>
+                className={`transition-colors duration-200 ${isActiveLink('/admin')}`}>
                     Admin
                     </Link>
                 )}
@@ -196,7 +190,7 @@ const Navbar = () => {
                     </Link>
                 )}
             </div>
-            <div className="flex items-center space-x-4"></div>
+            
             
             <div className="hidden md:block relative">
                 <button
@@ -225,7 +219,7 @@ const Navbar = () => {
                                 </button>
                             </div>
                            <div className="max-h-64 overflow-y-auto">
-                            {cartItems.lenght === 0 ? (
+                            {cartItems.length === 0 ? (
                                 <p className="text-gray-400 text-center py-4">El carrito esta vacio</p>
                             ) : (
                                 cartItems.map(item => (
@@ -263,7 +257,7 @@ const Navbar = () => {
                             )}
 
                            </div>
-                           {cartItems.lenght > 0 && (
+                           {cartItems.length > 0 && (
                             <div className="mt-4 pt-4 border-t border-gray-700">
                                 <div className="flex justify-between items-center mb-3">
                                     <span className="font-semibold">Total</span>
