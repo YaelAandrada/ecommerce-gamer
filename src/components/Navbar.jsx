@@ -8,6 +8,8 @@ const Navbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isCategoriesOpen, setIsCategoriesOpen] 
+    = useState(false);
     const location = useLocation();
 
     const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -27,6 +29,16 @@ const Navbar = () => {
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
+    const categories = [
+        {id: 1, name:"Sandbox", slug: "sandbox" },
+        { id: 2, name: "Simulación", slug: "simulacion" },
+        { id: 3, name: "Aventura", slug: "aventura" },
+        { id: 4, name: "Estrategia", slug: "estrategia" },
+        { id: 5, name: "Deportes", slug: "deportes" },
+        { id: 6, name: "Carreras", slug: "carreras" },
+        { id: 7, name: "RPG", slug: "rpg" }
+    ];
+
     const totalItems = cartItems.reduce((sum, item) => sum + item.quality, 0);
     const totalPrice = cartItems.reduce((sum, item) => + (item.price * item.quality), 0);
 
@@ -40,13 +52,26 @@ const Navbar = () => {
     useEffect(() => {
         setIsMenuOpen(false);
         setIsCartOpen(false);
+        setIsCategoriesOpen(false);
     }, [location.pathname]);
     
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
         setIsCartOpen(false);
+        setIsCategoriesOpen(false);
     };
+
+    const toggleCart = () => {
+        setIsCartOpen(!isCartOpen);
+        setIsMenuOpen(false);
+        setIsCategoriesOpen(false); 
+    };
+
+    const toggleCategories = () => {
+    setIsCategoriesOpen(!isCategoriesOpen);
+    setIsCartOpen(false);
+  };
 
     const addToCart = (product) => {
         setCartItems(prevItems => {
@@ -126,6 +151,34 @@ const Navbar = () => {
                 clasName={`transition-colors duration-200 ${isActiveLink('/')}`}>
                     Inicio
                     </Link>
+                    <div className="relative">
+            <button 
+              onClick={toggleCategories}
+              className={`flex items-center space-x-1 transition-colors duration-200 ${isCategoriesOpen ? 'text-blue-400 font-semibold' : 'hover:text-blue-300'}`}
+            >
+              <span>Categorías</span>
+              <span className={`transform transition-transform duration-200 ${isCategoriesOpen ? 'rotate-180' : ''}`}>
+                ▼
+              </span>
+            </button>
+
+            {isCategoriesOpen && (
+              <div className="absolute top-full left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-700">
+                <div className="p-2 space-y-1">
+                  {categories.map(category => (
+                    <Link
+                      key={category.id}
+                      to={`/categoria/${category.slug}`}
+                      className="block px-3 py-2 hover:bg-gray-700 rounded-lg transition-colors duration-200 text-sm"
+                      onClick={() => setIsCategoriesOpen(false)}
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
                 <Link to="/about" 
                 clasName={`transition-colors duration-200 ${isActiveLink('/about')}`}>
                     Nosotros
