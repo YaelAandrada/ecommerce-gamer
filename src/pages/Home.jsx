@@ -1,14 +1,15 @@
-import {useNavigate} from 'react-router-dom';
-import {useState, useEffect} from 'react';
-import TaskForm from '../components/TaskForm';;
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import TaskForm from '../components/TaskForm';
 import TaskItem from '../components/TaskItem';
-import { auth, googleProvider, login } from '../services/googleAuth';
+import AuthModal from '../components/AuthModal';
 
 function Home() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [view, setView] = useState('login'); // 'login' o 'register'
 
-  //crear estados para manejar el CRUD de tareas
+  // CRUD de tareas
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
   const [showTaskForm, setShowTaskForm] = useState(false);
@@ -21,68 +22,97 @@ function Home() {
     }
   }, []);
 
-  //cargar las tareas que existen en localstorage cuando se monta el componente
-  useEffect( () => {
-    const savedTask = JSON.parse(localStorage.getItem('tasks') || '[]')
-    setTasks(savedTask)
-  }, [])
+  // Cargar tareas desde localStorage
+  useEffect(() => {
+    const savedTask = JSON.parse(localStorage.getItem('tasks') || '[]');
+    setTasks(savedTask);
+  }, []);
 
-
-  //guardar tareas en localstorage cunado cambien
+  // Guardar tareas en localStorage
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks])
+  }, [tasks]);
 
-  //FUNCIONES PROPIAS DEL CRUD
-
+  // CRUD funciones
   const handleTaskSubmit = (taskData) => {
-    if(editingTask){
-      //actualizar la tarea existente
-      setTasks(prevTask => 
-        prevTask.map(task => 
-          task.id === editingTask.id ? {...taskData, id:editingTask.id} : task
+    if (editingTask) {
+      setTasks(prev =>
+        prev.map(task =>
+          task.id === editingTask.id ? { ...taskData, id: editingTask.id } : task
         )
       );
-      setEditingTask(null)
+      setEditingTask(null);
     } else {
-      //crear una nueva tarea
-      const newTask = {
-        ...taskData,
-        id: crypto.randomUUID()
-      };
-     setTasks(prevTasks => [newTask, ...prevTasks]);
+      const newTask = { ...taskData, id: crypto.randomUUID() };
+      setTasks(prev => [newTask, ...prev]);
     }
-     setShowTaskForm(false)
-  }
-
- const handleEditTask = (task) => {
-    setEditingTask(task);
-    setShowTaskForm(true);
- } 
-
-  const handleDeleteTask = (taskId) => {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+    setShowTaskForm(false);
   };
 
-const handleCancelEdit = () => {
-  setEditingTask(null);
-  setShowTaskForm(false)
-}
+  const handleEditTask = (task) => {
+    setEditingTask(task);
+    setShowTaskForm(true);
+  };
+
+  const handleDeleteTask = (taskId) => {
+    setTasks(prev => prev.filter(task => task.id !== taskId));
+  };
+
+  const handleCancelEdit = () => {
+    setEditingTask(null);
+    setShowTaskForm(false);
+  };
 
   const handleLogout = async () => {
-      //SI EL USUARIO SE LOGUEÓ CON GOOGLE, TENGO QUE CERRAR SU SESIÓN DE GOOGLE
-      if(user && user.provider === 'google'){
-        await googleAuthService.logout();
-      }
+    if (user && user.provider === 'google') {
+      await googleAuthService.logout();
+    }
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
 
-      localStorage.removeItem('user');
-      navigate('/login')
-  }   
+  const handleLogin = (userData) => {
+    setUser(userData);
+  };
 
-  if(!user) return null
+  const handleRegister = (userData) => {
+    setUser(userData);
+  };
 
+  // Mostrar modal si no hay usuario
+  if (!user) {
+    return (
+      <>
+        <AuthModal
+          view={view}
+          onLogin={handleLogin}
+          onRegister={handleRegister}
+        />
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-50">
+          <button
+            onClick={() => setView('login')}
+            className={`px-4 py-2 rounded text-white text-sm ${
+              view === 'login' ? 'bg-blue-600' : 'bg-gray-700'
+            }`}
+          >
+            Iniciar sesión
+          </button>
+          <button
+            onClick={() => setView('register')}
+            className={`px-4 py-2 rounded text-white text-sm ${
+              view === 'register' ? 'bg-green-600' : 'bg-gray-700'
+            }`}
+          >
+            Registrarse
+          </button>
+        </div>
+      </>
+    );
+  }
+
+  // Render si el usuario está logueado
   return (
-   <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <div className="bg-white shadow rounded-lg">
           <div className="px-4 py-5 sm:p-6">
@@ -97,11 +127,9 @@ const handleCancelEdit = () => {
                 Cerrar Sesión
               </button>
             </div>
-            
+
             <div className="border-t border-gray-200 pt-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                Tu información
-              </h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">Tu información</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm font-medium text-gray-500">Usuario</p>
@@ -113,13 +141,11 @@ const handleCancelEdit = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Sección de Tareas */}
             <div className="mt-8 border-t border-gray-200 pt-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">
-                  Mis Tareas
-                </h2>
+                <h2 className="text-xl font-semibold text-gray-800">Mis Tareas</h2>
                 <button
                   onClick={() => setShowTaskForm(true)}
                   className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 flex items-center gap-2"
@@ -131,7 +157,6 @@ const handleCancelEdit = () => {
                 </button>
               </div>
 
-              {/* Formulario de Tareas */}
               {showTaskForm && (
                 <div className="mb-6">
                   <TaskForm
@@ -142,7 +167,6 @@ const handleCancelEdit = () => {
                 </div>
               )}
 
-              {/* Lista de Tareas */}
               {tasks.length === 0 ? (
                 <div className="text-center py-12">
                   <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,12 +187,12 @@ const handleCancelEdit = () => {
                   ))}
                 </div>
               )}
-            </div>            
+            </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

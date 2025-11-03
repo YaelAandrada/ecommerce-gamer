@@ -32,8 +32,7 @@ function Login() {
             className="text-cyan-400 hover:text-cyan-300 underline"
           >
             Registrate acá
-          </Link>
-        </p>
+          </Link>     </p>
       </div>
     </AuthLayout>
   );
