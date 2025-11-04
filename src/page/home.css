@@ -70,6 +70,7 @@
   padding: 20px;
   border-bottom: 2px solid #00ff99;
   margin-bottom: 30px;
+  
 }
 
 .promo-item {
@@ -107,7 +108,56 @@
   margin-left: 6px;
 }
 
-.inactive {
-  cursor: default;
-  opacity: 0.6;
+.dual-box-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 40px;
 }
+
+.news-box, .quiz-box {
+  flex: 1;
+  background-color: #0a0a0a;
+  border: 2px solid #00ff99;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.news-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.news-item:hover {
+  background-color: #111;
+}
+
+.news-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.quiz-button {
+  background-color: #00ff99;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.quiz-button:hover {
+  background-color: #00cc88;
+}
+

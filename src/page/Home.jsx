@@ -128,6 +128,43 @@ function Home() {
             />
           ))}
         </div>
+        <h2>Ver store</h2>
+      </div>
+
+      {/* 📰 Novedades Gamer + Quiz Diario como cajas separadas */}
+      <div className="dual-box-row">
+        {/* Novedades Gamer */}
+        <div className="news-box">
+          <h2 className="section-title">Novedades Gamer</h2>
+          <div className="news-item">
+            <img src={siImage} alt="Pokemon Retro" className="news-thumb" />
+            <div>
+              <h4>POKEMON ROJO Y AZUL | BNX RETRO</h4>
+              <p>Revive los clásicos con estilo retro.</p>
+            </div>
+          </div>
+          <div className="news-item">
+            <img src={siImage} alt="Animal Crossing" className="news-thumb" />
+            <div>
+              <h4>EL MISTERIO DE LAS 3AM EN ANIMAL CROSSING</h4>
+              <p>Descubrí los secretos ocultos del juego.</p>
+            </div>
+          </div>
+          <div className="news-item">
+            <img src={siImage} alt="Juegos Gratis" className="news-thumb" />
+            <div>
+              <h4>JUEGOS GRATIS DE LA SEMANA</h4>
+              <p>Descargá sin pagar y disfrutá.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Quiz Diario */}
+        <div className="quiz-box">
+          <h2 className="section-title">Quiz Diario</h2>
+          <p>Demostrá cuánto sabés. ¡Jugá y sorprendete con tus resultados!</p>
+          <button className="quiz-button">Jugar ya</button>
+        </div>
       </div>
     </div>
   );
