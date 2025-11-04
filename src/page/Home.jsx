@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css';
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import ProductCard from '../components/ProductCard.jsx';
 import siImage from '../img/si.jpg'; // ejemplo de imagen local
 
@@ -26,25 +25,44 @@ function Home() {
 
   const products = [
     {
-      title: 'Teclado Glorious GMMK3',
-      description: 'Full Size RGB Switches FOX Black US',
-      price: 421250,
+      title: 'Mobile Legends - Recarga Única',
       image: siImage,
-      customClass: 'card-vertical',
+      customClass: 'card-scroll',
     },
     {
-      title: 'Mouse Glorious Model D',
-      description: 'Wireless 2.4GHz Bluetooth 5.2 Matte White',
-      price: 115850,
+      title: 'Mobile Legends - Doble Recarga',
       image: siImage,
-      customClass: 'card-vertical',
+      customClass: 'card-scroll',
     },
     {
-      title: 'Auriculares Corsair HS55',
-      description: 'Surround Dolby Audio 7.1 PC/MAC/SWITCH/PS5',
-      price: 89500,
+      title: 'Counter Strike 2',
       image: siImage,
-      customClass: 'card-vertical',
+      customClass: 'card-scroll',
+    },
+    {
+      title: 'League of Legends',
+      image: siImage,
+      customClass: 'card-scroll',
+    },
+    {
+      title: 'Marvel Rivals',
+      image: siImage,
+      customClass: 'card-scroll',
+    },
+    {
+      title: 'Rainbow Six Mobile',
+      image: siImage,
+      customClass: 'card-scroll',
+    },
+    {
+      title: 'Roblox',
+      image: siImage,
+      customClass: 'card-scroll',
+    },
+    {
+      title: 'Honkai Star Rail',
+      image: siImage,
+      customClass: 'card-scroll',
     }
   ];
 
@@ -52,6 +70,40 @@ function Home() {
     <div className='home-container'>
       <h1>Catálogo Gamer</h1>
 
+      {/* 🔥 Sección promocional arriba del catálogo */}
+      <div className='promo-banner'>
+        <div className='promo-item'>
+          <Link to="/juegos" className='promo-button'>
+            <div className='promo-icon'>🛒</div>
+            <div>
+              <h3>Comprá</h3>
+              <p>Comprá y acumulá BNX Coins.</p>
+            </div>
+          </Link>
+        </div>
+
+        <div className='promo-item'>
+          <div className='promo-button inactive'>
+            <div className='promo-icon'>🎮</div>
+            <div>
+              <h3>Jugá <span className='new-badge'>¡Nuevo!</span></h3>
+              <p>Andá a la sección Gamify y divertite.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='promo-item'>
+          <div className='promo-button inactive'>
+            <div className='promo-icon'>🎁</div>
+            <div>
+              <h3>Canjeá</h3>
+              <p>Canjeá premios con tus coins.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 🧩 Catálogo principal */}
       <div className='container-card'>
         <h2 className='section-title'>Recomendados para ti</h2>
         <div className='featured-grid'>
@@ -66,13 +118,11 @@ function Home() {
         </div>
 
         <h2 className='section-title'>Populares</h2>
-        <div className='product-grid'>
+        <div className='scroll-row'>
           {products.map((item, index) => (
             <ProductCard
               key={index}
               title={item.title}
-              description={item.description}
-              price={item.price}
               image={item.image}
               customClass={item.customClass}
             />
