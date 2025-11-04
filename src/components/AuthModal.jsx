@@ -11,7 +11,7 @@ export default function AuthModal({ view, onLogin, onRegister }) {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-sm">
       <div
         className={`bg-[#111827] rounded-lg p-6 w-full max-w-md text-white relative shadow-xl transform transition-all duration-300 ${
           show ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
