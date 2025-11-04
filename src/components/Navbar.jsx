@@ -288,7 +288,7 @@ const Navbar = () => {
             
             <button className="md:hidden flex flex-col justify-center items-center w-8 h-8 transition-transform duration-300 hover:scale-110" 
             onClick={toggleMenu}
-            aria-lebel="Menu pricipal">
+            aria-lebel="Menu principal">
                 <span 
                 className={`bg-white h-1 w-8 rounded transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
                 <span 
@@ -298,10 +298,10 @@ const Navbar = () => {
             </button>
             <div className="hidden md:flex items-center space-x-4">
                 {isLoggedIn ? (
-            <div className="felx items-center space-x-4">
+            <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3 bg-gray-800 px-3 py-2 rounded-lg">
                 <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold">
-                    {userName.chatAt(0)}
+                    {userName.charAt(0)}
                     </div>
                     <div className="flex flex-col">
                      <span className="text-sm font-mediun">{userName}</span>
@@ -317,7 +317,7 @@ const Navbar = () => {
              
                 <button
                 onClick={handeleLogout}
-                clasName="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center space-x-2">
+                className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center space-x-2">
                     
                     <span>🚪</span>
                     <span>Salir</span>
@@ -356,10 +356,10 @@ const Navbar = () => {
                     </div>
                 </div>
                 </div>
-               )};
+               )}
           </div>
         </div>
-        <div className={`md:hidden absolute left-0 right-0 bg-gray-800 transition-all duration-300  shadow-2xl ${isMenuOpen ? 'top-16 opacity-100' : 'top-^[-100%] opacity-0'}`}>
+        <div className={`md:hidden absolute left-0 right-0 bg-gray-800 transition-all duration-300  shadow-2xl ${isMenuOpen ? 'top-16 opacity-100' : 'top-[-100%] opacity-0'}`}>
         
             <div className="flex flex-col space-y-1 p-4 max-h-[80vh] overflow-y-auto">
                 <div className="flex items-center justify-between py-3 px-4 bg-gray-800 rounded-lg mb-2">
@@ -396,12 +396,12 @@ const Navbar = () => {
                    ⚙️ Admin
                     </Link>)}
                {isLoggedIn && (
-                 <Link to="/whishlist" 
+                 <Link to="/wishlist" 
                  className={`py-3 px-4 rounded-lg transition-colors ${isActiveLink('/wishlist')} ${location.pathname === '/wishlist' ? 'bg-gray-800' : 'hover:bg-gray-800'}`}
                   onClick={() => setIsMenuOpen(false)}>
                    ❤️ Mis Favoritos
                 </Link>
-               )};
+               )}
 
                <div className="border-t border-gray-700 my-2"></div>
                
@@ -410,7 +410,7 @@ const Navbar = () => {
                     <div className="bg-gray-800 p-4 rounded-lg">
                         <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center font-bold">
-                         {userName. chatAt(0)}
+                         {userName.charAt(0)}
                     </div>
                     <div>
                     <p className="font-medium">{userName}</p>
@@ -422,7 +422,7 @@ const Navbar = () => {
                     </div>
                     </div>
                     <button
-                    onClick={jhandlelogout}
+                    onClick={handleLogout}
                     className="bg-red-500 hover:bg-red-600 px-4 py-3 rounded-lg transition-colors duration-200 flex items-center space-x-2">
                       <span>🚪</span>
                       <span>Cerrar Sesión</span>
