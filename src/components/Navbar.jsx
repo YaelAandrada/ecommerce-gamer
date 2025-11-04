@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 
 import {Link, useLocation} from 'react-router-dom';
 
+import ThemeToggle from './ThemeToggle';
+
 const Navbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -297,6 +299,7 @@ const Navbar = () => {
                 className={`bg-white h-1 w-8 rounded transition-all duration-300 ${isMenuOpen ?'-rotate-45 -translate-y-1' : ''} `}></span>
             </button>
             <div className="hidden md:flex items-center space-x-4">
+                <ThemeToggle />
                 {isLoggedIn ? (
             <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3 bg-gray-800 px-3 py-2 rounded-lg">
@@ -304,7 +307,7 @@ const Navbar = () => {
                     {userName.charAt(0)}
                     </div>
                     <div className="flex flex-col">
-                     <span className="text-sm font-mediun">{userName}</span>
+                     <span className="text-sm font-medium">{userName}</span>
                    
                 {isAdmin && (
                     <span className="text-xs text-yellow-400">
@@ -346,6 +349,17 @@ const Navbar = () => {
                             <span>Usuario Normal</span>
 
                         </button>
+                        <button
+          onClick={() => {
+       setIsMenuOpen(false);
+           }}
+          className="flex items-center justify-between py-3 px-4 bg-gray-700 rounded-lg mb-2"
+>
+            <div className="flex items-center space-x-3">
+            <span>🌙/☀️</span>
+            <span>Cambiar Tema</span>
+            </div>
+                 </button>
                        <button
                        onClick={handleLogin}
                        className="w-full text-left px-4 py-3 hover:bg-gray-700 rounded-b-lg flex items-center space-x-2">
