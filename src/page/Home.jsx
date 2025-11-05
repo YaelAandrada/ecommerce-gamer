@@ -3,22 +3,32 @@ import './Home.css';
 import { Link } from "react-router-dom";
 import ProductCard from '../components/ProductCard.jsx';
 import siImage from '../img/si.jpg'; // ejemplo de imagen local
+import freefireImage from '../img/freefire.png';
+import valorantImage from '../img/valorant.jpg';
+import steamImage from '../img/steam.jfif';
+import mobilelegendImage from '../img/mobilelegends.png';
+import csgoImage from '../img/csgo.jpg';
+import legendsImage from '../img/legends.avif';
+import marvelImage from '../img/marvel.jpg';
+import rainbowImage from '../img/rainbow.jpeg';
+import robloxImage from '../img/roblox.jpg';
+import starrailImage from '../img/starrail.jpg';
 
 function Home() {
   const featuredProducts = [
     {
       title: 'Free Fire',
-      image: siImage,
+      image: freefireImage,
       customClass: 'card-featured',
     },
     {
       title: 'Valorant',
-      image: siImage,
+      image: valorantImage,
       customClass: 'card-featured',
     },
     {
       title: 'Steam',
-      image: siImage,
+      image: steamImage,
       customClass: 'card-featured',
     }
   ];
@@ -26,42 +36,38 @@ function Home() {
   const products = [
     {
       title: 'Mobile Legends - Recarga Única',
-      image: siImage,
+      image: mobilelegendImage,
       customClass: 'card-scroll',
     },
-    {
-      title: 'Mobile Legends - Doble Recarga',
-      image: siImage,
-      customClass: 'card-scroll',
-    },
+    
     {
       title: 'Counter Strike 2',
-      image: siImage,
+      image: csgoImage,
       customClass: 'card-scroll',
     },
     {
       title: 'League of Legends',
-      image: siImage,
+      image: legendsImage,
       customClass: 'card-scroll',
     },
     {
       title: 'Marvel Rivals',
-      image: siImage,
+      image: marvelImage,
       customClass: 'card-scroll',
     },
     {
       title: 'Rainbow Six Mobile',
-      image: siImage,
+      image: rainbowImage,
       customClass: 'card-scroll',
     },
     {
       title: 'Roblox',
-      image: siImage,
+      image: robloxImage,
       customClass: 'card-scroll',
     },
     {
       title: 'Honkai Star Rail',
-      image: siImage,
+      image: starrailImage,
       customClass: 'card-scroll',
     }
   ];
@@ -71,37 +77,38 @@ function Home() {
       <h1>Catálogo Gamer</h1>
 
       {/*  Seccion promocional arriba del catálogo */}
-      <div className='promo-banner'>
-        <div className='promo-item'>
-          <Link to="/juegos" className='promo-button'>
-            <div className='promo-icon'>🛒</div>
-            <div>
-              <h3>Comprá</h3>
-              <p>Comprá y acumulá BNX Coins.</p>
-            </div>
-          </Link>
-        </div>
-
-        <div className='promo-item'>
-          <div className='promo-button inactive'>
-            <div className='promo-icon'>🎮</div>
-            <div>
-              <h3>Jugá <span className='new-badge'>¡Nuevo!</span></h3>
-              <p>Andá a la sección Gamify y divertite.</p>
-            </div>
-          </div>
-        </div>
-
-        <div className='promo-item'>
-          <div className='promo-button inactive'>
-            <div className='promo-icon'>🎁</div>
-            <div>
-              <h3>Canjeá</h3>
-              <p>Canjeá premios con tus coins.</p>
-            </div>
-          </div>
-        </div>
+      <div className="promo-boxes">
+  <div className="promo-box">
+    <Link to="/juegos" className="promo-content">
+      <div className="promo-icon">🛒</div>
+      <div>
+        <h3>Comprá</h3>
+        <p>Comprá y acumulá BNX Coins.</p>
       </div>
+    </Link>
+  </div>
+
+  <div className="promo-box">
+    <div className="promo-content inactive">
+      <div className="promo-icon">🎮</div>
+      <div>
+        <h3>Jugá <span className="new-badge">¡Nuevo!</span></h3>
+        <p>Andá a la sección Gamify y divertite.</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="promo-box">
+    <div className="promo-content inactive">
+      <div className="promo-icon">🎁</div>
+      <div>
+        <h3>Canjeá</h3>
+        <p>Canjeá premios con tus coins.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
       {/*  Catálogo principal */}
       <div className='container-card'>
