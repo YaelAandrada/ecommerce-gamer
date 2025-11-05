@@ -353,11 +353,10 @@ const Navbar = () => {
           onClick={() => {
        setIsMenuOpen(false);
            }}
-          className="flex items-center justify-between py-3 px-4 bg-gray-700 rounded-lg mb-2"
+        
 >
-            <div className="flex items-center space-x-3">
-            <span>🌙/☀️</span>
-            <span>Cambiar Tema</span>
+            <div>
+           
             </div>
                  </button>
                        <button
