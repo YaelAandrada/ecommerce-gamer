@@ -5,10 +5,10 @@ import './ProductCard.css';
 function ProductCard({ title, image, customClass }) {
   return (
     <div className={`product-card ${customClass}`}>
-      <img src={image} alt={title} className="product-image" />
-      <div className="product-info">
-        <h3 className="product-title">{title}</h3>
-        <button className="buy-button">Ver más...</button>
+      <div className="card-image" style={{ backgroundImage: `url(${image})` }}>
+        <div className="card-overlay">
+          <h3 className="card-title">{title}</h3>
+        </div>
       </div>
     </div>
   );

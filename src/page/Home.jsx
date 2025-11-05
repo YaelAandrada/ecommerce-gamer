@@ -70,7 +70,7 @@ function Home() {
     <div className='home-container'>
       <h1>Catálogo Gamer</h1>
 
-      {/* 🔥 Sección promocional arriba del catálogo */}
+      {/*  Seccion promocional arriba del catálogo */}
       <div className='promo-banner'>
         <div className='promo-item'>
           <Link to="/juegos" className='promo-button'>
@@ -103,7 +103,7 @@ function Home() {
         </div>
       </div>
 
-      {/* 🧩 Catálogo principal */}
+      {/*  Catálogo principal */}
       <div className='container-card'>
         <h2 className='section-title'>Recomendados para ti</h2>
         <div className='featured-grid'>
@@ -131,7 +131,7 @@ function Home() {
         <h2>Ver store</h2>
       </div>
 
-      {/* 📰 Novedades Gamer + Quiz Diario como cajas separadas */}
+      {/*  Novedades Gamer + quiz diario como cajas separadas */}
       <div className="dual-box-row">
         {/* Novedades Gamer */}
         <div className="news-box">
@@ -159,7 +159,7 @@ function Home() {
           </div>
         </div>
 
-        {/* Quiz Diario */}
+        {/* quiz diario */}
         <div className="quiz-box">
           <h2 className="section-title">Quiz Diario</h2>
           <p>Demostrá cuánto sabés. ¡Jugá y sorprendete con tus resultados!</p>
