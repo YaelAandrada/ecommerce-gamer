@@ -110,7 +110,8 @@ const Navbar = ({ onAuthClick }) => {
 
   const isActiveLink = path =>
     location.pathname === path ? 'text-blue-400 font-semibold' : 'hover:text-blue-300';
-    return (
+
+  return (
     <nav className="bg-gray-800 text-white p-4 shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
@@ -129,23 +130,25 @@ const Navbar = ({ onAuthClick }) => {
         {/* Links desktop */}
         <div className="hidden md:flex space-x-6 items-center">
           <Link to="/" className={isActiveLink('/')}>Inicio</Link>
-          <button onClick={toggleCategories} className={isActiveLink('/categoria')}>
-            Categorías ▼
-          </button>
-          {isCategoriesOpen && (
-            <div className="absolute mt-2 bg-gray-900 rounded-lg shadow-lg p-2 z-50">
-              {categories.map(cat => (
-                <Link
-                  key={cat.id}
-                  to={`/categoria/${cat.slug}`}
-                  className="block px-3 py-2 hover:bg-gray-700 rounded"
-                  onClick={() => setIsCategoriesOpen(false)}
-                >
-                  {cat.name}
-                </Link>
-              ))}
-            </div>
-          )}
+          <div className="relative">
+            <button onClick={toggleCategories} className={isActiveLink('/categoria')}>
+              Categorías ▼
+            </button>
+            {isCategoriesOpen && (
+              <div className="absolute top-full left-0 mt-2 bg-gray-900 rounded-lg shadow-lg p-2 z-50 min-w-40">
+                {categories.map(cat => (
+                  <Link
+                    key={cat.id}
+                    to={`/categoria/${cat.slug}`}
+                    className="block px-3 py-2 hover:bg-gray-700 rounded whitespace-nowrap"
+                    onClick={() => setIsCategoriesOpen(false)}
+                  >
+                    {cat.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
           <Link to="/about" className={isActiveLink('/about')}>Nosotros</Link>
           {isAdmin && <Link to="/admin" className={isActiveLink('/admin')}>Admin</Link>}
           {isLoggedIn && <Link to="/wishlist" className={isActiveLink('/wishlist')}>❤️ Favoritos</Link>}
@@ -187,16 +190,35 @@ const Navbar = ({ onAuthClick }) => {
 
         {/* Mobile menu toggle */}
         <button onClick={toggleMenu} className="md:hidden flex flex-col justify-center items-center w-8 h-8">
-          <span className={`bg-white h-1 w-8 rounded ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
-          <span className={`bg-white h-1 w-8 rounded my-1 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`bg-white h-1 w-8 rounded ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+          <span className={`bg-white h-1 w-8 rounded transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
+          <span className={`bg-white h-1 w-8 rounded my-1 transition-opacity ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`bg-white h-1 w-8 rounded transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
         </button>
       </div>
-            {/* Menú mobile */}
+
+      {/* Menú mobile */}
       {isMenuOpen && (
         <div className="md:hidden mt-4 space-y-3 px-4">
           <Link to="/" onClick={toggleMenu} className="block py-2 hover:text-blue-400">🏠 Inicio</Link>
           <Link to="/about" onClick={toggleMenu} className="block py-2 hover:text-blue-400">👥 Nosotros</Link>
+          
+          {/* Categorías en mobile */}
+          <div className="py-2">
+            <span className="text-gray-400">Categorías:</span>
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              {categories.map(cat => (
+                <Link
+                  key={cat.id}
+                  to={`/categoria/${cat.slug}`}
+                  onClick={toggleMenu}
+                  className="block py-1 px-2 hover:bg-gray-700 rounded text-sm"
+                >
+                  {cat.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {isAdmin && <Link to="/admin" onClick={toggleMenu} className="block py-2 hover:text-blue-400">⚙️ Admin</Link>}
           {isLoggedIn && <Link to="/wishlist" onClick={toggleMenu} className="block py-2 hover:text-blue-400">❤️ Favoritos</Link>}
 
