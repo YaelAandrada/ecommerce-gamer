@@ -290,7 +290,7 @@ const Navbar = () => {
             
             <button className="md:hidden flex flex-col justify-center items-center w-8 h-8 transition-transform duration-300 hover:scale-110" 
             onClick={toggleMenu}
-            aria-lebel="Menu principal">
+            aria-label="Menu principal">
                 <span 
                 className={`bg-white h-1 w-8 rounded transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
                 <span 
@@ -372,7 +372,7 @@ const Navbar = () => {
                )}
           </div>
         </div>
-        <div className={`md:hidden absolute left-0 right-0 bg-gray-800 transition-all duration-300  shadow-2xl ${isMenuOpen ? 'top-16 opacity-100' : 'top-[-100%] opacity-0'}`}>
+        <div className={`md:hidden absolute left-0 right-0 bg-gray-800 transition-all duration-300  shadow-2xl ${isMenuOpen ? 'top-16 opacity-100' : 'traslate-y-full opacity-0'}`}>
         
             <div className="flex flex-col space-y-1 p-4 max-h-[80vh] overflow-y-auto">
                 <div className="flex items-center justify-between py-3 px-4 bg-gray-800 rounded-lg mb-2">
