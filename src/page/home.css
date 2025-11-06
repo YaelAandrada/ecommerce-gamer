@@ -23,18 +23,18 @@
   width: 140px;
 }
 
-
-
 .container-card {
-  background-color: #111;
-  border: 2px solid #00ff99;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 30px auto;
+ 
   max-width: 90vw !important;
-  box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+
 }
 
+.container-card {
+  background-color: var(--neonbyte-dark) !important;
+  border: 2px solid var(--neonbyte-cyan) !important;
+  box-shadow: 0 0 20px var(--neonbyte-magenta) !important;
+  color: var(--neonbyte-cyan) !important;
+}
 
 
 
