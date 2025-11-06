@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { crearJuegoAPI, editarJuegoAPI, obtenerUnSoloJuegoAPI } from "../helpers/queries";
+import {
+  crearJuegoAPI,
+  editarJuegoAPI,
+  obtenerUnSoloJuegoAPI,
+} from "../helpers/queries";
 import { useNavigate, useParams } from "react-router";
 
 const FormularioJuegos = ({ crearJuego }) => {
@@ -8,6 +12,7 @@ const FormularioJuegos = ({ crearJuego }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
     setValue,
   } = useForm();
 
@@ -15,38 +20,59 @@ const FormularioJuegos = ({ crearJuego }) => {
   const navegacion = useNavigate();
 
   useEffect(() => {
-    if (!crearJuego) cargarDatosJuego();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!crearJuego) {
+      cargarDatosJuego();
+    }
+  }, [crearJuego]); 
 
   const cargarDatosJuego = async () => {
-    const respuesta = await obtenerUnSoloJuegoAPI(id);
-    if (respuesta.status === 200) {
-      const datos = await respuesta.json();
-      setValue("nombre", datos.nombre);
-      setValue("precio", datos.precio);
-      setValue("categoria", datos.categoria);
-      setValue("imagen", datos.imagen);
-      setValue("descripcion", datos.descripcion);
-      setValue("requisitosMinimos", datos.requisitosMinimos);
-      setValue("requisitosRecomendados", datos.requisitosRecomendados);
-      setValue("desarrollador", datos.desarrollador);
+    try {
+      const respuesta = await obtenerUnSoloJuegoAPI(id);
+      if (respuesta.status === 200) {
+        const datos = await respuesta.json();
+        reset(); // Limpiar antes de setear
+        setValue("nombre", datos.nombre);
+        setValue("precio", datos.precio);
+        setValue("categoria", datos.categoria);
+        setValue("imagen", datos.imagen);
+        setValue("descripcion", datos.descripcion);
+        setValue("requisitosMinimos", datos.requisitosMinimos);
+        setValue("requisitosRecomendados", datos.requisitosRecomendados);
+        setValue("desarrollador", datos.desarrollador);
+      } else {
+        console.error("Error al obtener juego:", respuesta.status);
+      }
+    } catch (error) {
+      console.error("Error en cargarDatosJuego:", error);
     }
   };
 
   const onSubmit = async (juego) => {
-    const respuesta = crearJuego
-      ? await crearJuegoAPI(juego)
-      : await editarJuegoAPI(juego, id);
+    try {
+      const respuesta = crearJuego
+        ? await crearJuegoAPI(juego)
+        : await editarJuegoAPI(juego, id);
 
-    if (respuesta.status === 201 || respuesta.status === 200) {
-      alert(crearJuego ? "El juego fue creado correctamente" : "El juego fue actualizado");
-      navegacion("/administrador");
-    } else {
-      alert("Ha ocurrido un error, vuelve a intentar esta operación en unos momentos");
+      if (respuesta.status === 201 || respuesta.status === 200) {
+        alert(
+          crearJuego
+            ? "El juego fue creado correctamente"
+            : "El juego fue actualizado"
+        );
+        navegacion("/administrador");
+      } else {
+        alert(
+          "Ha ocurrido un error, vuelve a intentar esta operación en unos momentos"
+        );
+      }
+    } catch (error) {
+      console.error("Error en onSubmit:", error);
+      alert("Error inesperado al guardar el juego.");
     }
   };
 
   return (
+
     <section className="max-w-4xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg mt-10">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6">
         {crearJuego ? "Agregar Juego" : "Editar Juego"}
@@ -138,7 +164,7 @@ const FormularioJuegos = ({ crearJuego }) => {
             Descripción*
           </label>
           <textarea
-            placeholder="Ej: Dark Souls III es un juego de rol de acción..."
+            placeholder="Ej: Cuando sale la luna, en su corcel aparece el bravo zorro..."
             {...register("descripcion", {
               required: "La descripción es obligatoria",
               minLength: { value: 5, message: "Debe ingresar como mínimo 5 caracteres" },
@@ -156,7 +182,7 @@ const FormularioJuegos = ({ crearJuego }) => {
               Requisitos Mínimos*
             </label>
             <textarea
-              placeholder="Ej: SO: Windows 7 SP1 64bit..."
+              placeholder="Ej: una lata de sardinas..."
               {...register("requisitosMinimos", {
                 required: "Los requisitos mínimos son obligatorios",
                 minLength: { value: 5, message: "Debe ingresar como mínimo 5 caracteres" },
@@ -174,7 +200,7 @@ const FormularioJuegos = ({ crearJuego }) => {
               Requisitos Recomendados*
             </label>
             <textarea
-              placeholder="Ej: SO: Windows 10 64bit..."
+              placeholder="Ej: un buen vaso de fernet..."
               {...register("requisitosRecomendados", {
                 required: "Los requisitos recomendados son obligatorios",
                 minLength: { value: 5, message: "Debe ingresar como mínimo 5 caracteres" },
@@ -195,7 +221,7 @@ const FormularioJuegos = ({ crearJuego }) => {
           </label>
           <input
             type="text"
-            placeholder="Ej: From Software"
+            placeholder="Ej: Lionel Messi Studios"
             {...register("desarrollador", {
               required: "El desarrollador es un dato obligatorio",
               minLength: { value: 2, message: "Debe ingresar como mínimo 2 caracteres" },

@@ -1,16 +1,32 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Administrador from "./page/Administrador";
-import { Routes, Route } from 'react-router-dom';
+import FormularioJuegos from "./components/FormularioJuegos"; // Asegurate que la ruta sea correcta
 import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/administrador" element={<Administrador/>} />
-      {/* otras rutas */}
-    </Routes>
+    <>
+      <ThemeToggle />
+      <Routes>
+        {/* Panel principal */}
+        <Route path="/administrador" element={<Administrador />} />
 
+        {/* Crear juego */}
+        <Route
+          path="/administrador/crear"
+          element={<FormularioJuegos crearJuego={true} />}
+        />
 
+        {/* Editar juego */}
+        <Route
+          path="/administrador/editar/:id"
+          element={<FormularioJuegos crearJuego={false} />}
+        />
+
+        {/* otras rutas */}
+      </Routes>
+    </>
   );
 }
 
