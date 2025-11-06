@@ -135,7 +135,7 @@ const Navbar = () => {
             <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center space-x-3">
                  <div className="bg-blue-500 w-8 h-8 rounded-lg flex items-center justify-center">
-               <span className="font-bold">🎮</span>
+               <span className="font-bold"><img src="src/img/logo2.png" alt="" /></span>
               </div>
                     <Link to="/" 
                     className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
