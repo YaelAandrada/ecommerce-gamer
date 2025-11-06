@@ -13,13 +13,12 @@ function App() {
       <Route
         path="/"
         element={
-          <div>
-            <h1 className="text-red-600">hola</h1>
-            <Link to="/home">Ir a Home</Link>
-          </div>
+          <>
+            <Link to="/home">Home</Link>
+          </>
         }
       />
-      <Route path="/home" element={<Home />} />
+      <Route path="/*" element={<Home />} />
       
     </Routes>
   );
