@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@tailwind utilities;
 
+@layer base {
+  html {
+    @apply bg-green-50 text-green-900;
+  }
 
+  html.dark {
+    @apply bg-gray-900 text-red-100;
+  }
+
+  body {
+    @apply transition-colors duration-500;
+  }
+}
 
