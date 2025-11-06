@@ -1,4 +1,5 @@
 @import "tailwindcss";
+<<<<<<< HEAD
 
 /* Ocultar scrollbar */
 .scrollbar-hide::-webkit-scrollbar {
@@ -9,3 +10,5 @@
   scrollbar-width: none;
 }
 
+=======
+>>>>>>> login/register
