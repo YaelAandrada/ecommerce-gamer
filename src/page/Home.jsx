@@ -1,10 +1,9 @@
 import React from 'react';
 import './Home.css';
-import { useState } from 'react';
+
 // import { FaShoppingCart } from 'react-icons/fa'; // Ya no lo necesitamos
 import { Link } from "react-router-dom";
 import ProductCard from '../components/ProductCard.jsx';
-import siImage from '../img/si.jpg';
 import freefireImage from '../img/freefire.png';
 import valorantImage from '../img/valorant.jpg';
 import steamImage from '../img/steam.jfif';
@@ -25,21 +24,9 @@ import gtavImage from '../img/gtav.jpg';
 import redImage  from '../img/red.jfif';
 
 function Home() {
-  const featuredProducts = [
-    { title: 'Free Fire', image: freefireImage, customClass: 'card-featured' },
-    { title: 'Valorant', image: valorantImage, customClass: 'card-featured' },
-    { title: 'Steam', image: steamImage, customClass: 'card-featured' }
-  ];
+  
 
-  const products = [
-    { title: 'Mobile Legends - Recarga Única', image: mobilelegendImage, customClass: 'card-scroll' },
-    { title: 'Counter Strike 2', image: csgoImage, customClass: 'card-scroll' },
-    { title: 'League of Legends', image: legendsImage, customClass: 'card-scroll' },
-    { title: 'Marvel Rivals', image: marvelImage, customClass: 'card-scroll' },
-    { title: 'Rainbow Six Mobile', image: rainbowImage, customClass: 'card-scroll' },
-    { title: 'Roblox', image: robloxImage, customClass: 'card-scroll' },
-    { title: 'Honkai Star Rail', image: starrailImage, customClass: 'card-scroll' }
-  ];
+
   
   
 

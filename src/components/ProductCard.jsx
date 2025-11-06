@@ -1,5 +1,4 @@
 import React from 'react';
-import siImage from '../img/si.jpg';
 import './ProductCard.css';
 
 function ProductCard({ title, image, customClass }) {
