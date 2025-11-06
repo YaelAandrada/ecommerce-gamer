@@ -17,6 +17,7 @@ import Nosotros from './page/nosotros';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
+import Footer from './components/Footer';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -66,7 +67,9 @@ function App() {
           <Route path="/register" element={<Register abrirModalRegister={abrirModalRegister} />} />
           <Route path="/wishlist" element={<Home />} />
           <Route path="/categoria/:slug" element={<Home />} />
+          <Route path="/footer" element={<Footer />} />
 
+          
           
           <Route
             path="/home"

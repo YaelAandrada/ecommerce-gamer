@@ -319,7 +319,7 @@ const Navbar = () => {
                 
              
                 <button
-                onClick={handeleLogout}
+                onClick={handleLogout}
                 className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center space-x-2">
                     
                     <span>🚪</span>
