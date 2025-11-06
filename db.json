@@ -1,0 +1,60 @@
+{
+  "juegos": [
+    {
+      "id": 1,
+      "title": "Free Fire",
+      "categoria": "battle royale",
+      "img": "/public/img/freefire.jpg",
+      "precio": 0,
+      "descripcion": "Free Fire es un juego de acción y aventura de tipo battle royale que se juega únicamente en tercera persona. El juego consiste en que hasta (según el juego; en realidad hasta 52) 50 jugadores caen desde un paracaídas en una isla o diversos lugares en busca de armas y equipamiento para eliminar a los demás jugadores."
+    },
+    {
+      "id": 2,
+      "title": "Valorant",
+      "categoria": "Shooter",
+      "img": "/public/img/valorant.png",
+      "precio": 1500,
+      "descripcion": "Valorant es un shooter en primera persona ambientado en un futuro cercano. ​​​​ En este juego, los jugadores toman el control de agentes, personajes que representan diversas culturas y nacionalidades de todo el mundo. Los agentes pueden utilizar armas y habilidades para derrotar a los enemigos y resolver los desafíos de la partida."
+    },
+    {
+      "id": 3,
+      "title": "Mobile Legends",
+      "categoria": "MOBA",
+      "img": "/public/img/mobilelegends.jpg",
+      "precio": 0,
+      "descripcion": "Mobile Legends: Bang Bang es un juego multijugador en línea tipo MOBA (arena de batalla) diseñado para dispositivos móviles, donde dos equipos de cinco jugadores compiten en intensas partidas estratégicas."
+    },
+    {
+      "id": 4,
+      "title": "Counter Strike 2",
+      "categoria": "Shooter",
+      "img": "/public/img/cs2.jpeg",
+      "precio": 0,
+      "descripcion": "Counter-Strike 2 es un videojuego de disparos táctico en primera persona multijugador desarrollado por Valve, lanzado en septiembre de 2023 como sucesor de Counter-Strike: Global Offensive."
+    },
+    {
+        "id": 5,
+        "title": "fifa25",
+        "categoria": "deportes",
+        "img": "/public/img/fifa25.jpg",
+        "precio": 0,
+        "descripcion": "FIFA 25 es un juego de deportes en tercera persona desarrollado por EA Sports y lanzado en 2023 para las plataformas PlayStation 5, Xbox Series X y Series S, Windows, y macOS."
+    },
+    {
+        "id": 6,
+        "title": "Mario Bross",
+        "categoria": "aventura",
+        "img": "/public/img/mariobross.jpg",
+        "precio": 0,
+        "descripcion": "Mario Bross es un juego de aventura desarrollado por Nintendo y lanzado en 2023 para las plataformas Nintendo Switch y Nintendo Switch Online."
+    },
+    {
+        "id": 7,
+        "title": "Gran Turismo 7",
+        "categoria": "carrera",
+        "img": "/public/img/granturismo.jpg",
+        "precio": 1500,
+        "descripcion": "Gran Turismo 7 es un simulador de carreras desarrollado por Polyphony Digital para PlayStation 4 y PlayStation 5, lanzado el 4 de marzo de 2022. Es considerado uno de los títulos más completos y realistas de la franquicia."
+    }
+  ]
+}

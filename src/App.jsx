@@ -1,27 +1,33 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Footer from './components/Footer'
-function App() {
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Administrador from "./page/Administrador";
+import FormularioJuegos from "./components/FormularioJuegos"; // Asegurate que la ruta sea correcta
+import ThemeToggle from "./components/ThemeToggle";
 
+function App() {
   return (
-   <BrowserRouter>
+    <>
+      <ThemeToggle />
       <Routes>
-        {/* Rutas de la aplicación */}
+        {/* Panel principal */}
+        <Route path="/administrador" element={<Administrador />} />
+
+        {/* Crear juego */}
         <Route
-          path="/"
-          element={
-            
-            <div>
-              <h1 className='text-red-600'>hola</h1>
-            </div>
-          }
+          path="/administrador/crear"
+          element={<FormularioJuegos crearJuego={true} />}
         />
 
-        {/* Página de error 404 */}
-        <Route path="/footer" element={<Footer />} />
-      </Routes>
-    </BrowserRouter>
+        {/* Editar juego */}
+        <Route
+          path="/administrador/editar/:id"
+          element={<FormularioJuegos crearJuego={false} />}
+        />
 
-  )
+        {/* otras rutas */}
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
