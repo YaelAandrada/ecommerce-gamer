@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Componentes
+
 import Navbar from './components/Navbar';
 import AuthModal from './components/AuthModal';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 
-// Páginas
+
 import Home from './pages/Home';
 import About from './components/About';
 import Admin from './components/Admin';
@@ -47,7 +47,7 @@ function App() {
       <div className="App relative">
         <Navbar />
 
-        {/* Modal de autenticación */}
+       
         {showModal && (
           <AuthModal
             view={modalView}
@@ -57,7 +57,7 @@ function App() {
         )}
 
         <Routes>
-          {/* Públicas */}
+     
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/admin" element={<Admin />} />
@@ -67,7 +67,7 @@ function App() {
           <Route path="/wishlist" element={<Home />} />
           <Route path="/categoria/:slug" element={<Home />} />
 
-          {/* Protegidas */}
+          
           <Route
             path="/home"
             element={
