@@ -1,1 +1,14 @@
+<<<<<<< HEAD
 @import 'tailwindcss';
+=======
+@import "tailwindcss";
+
+/* Ocultar scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+>>>>>>> ac8668fd5ebc56e4092ca4591816981c7242a734
