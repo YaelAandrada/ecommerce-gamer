@@ -21,6 +21,8 @@ import gratisImage from   '../img/gratis.jfif'
 import neonImage from '../img/neon.png';
 import neon2Image from '../img/neon2.png';
 import neon3Image from '../img/neon3.png';
+import gtavImage from '../img/gtav.jpg';
+import redImage  from '../img/red.jfif';
 
 function Home() {
   const featuredProducts = [
@@ -146,27 +148,27 @@ function Home() {
 
 
 
-   <div className="card card-hover bg-dark text-white border-success" style={{ width: '200px' }}>
+   <div className="card card-hover bg-dark text-white border-success" style={{ width: '450px' }}>
 
-  <img src={freefireImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '120px', objectFit: 'cover' }} />
+  <img src={freefireImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '200px', objectFit: 'cover' }} />
   <div className="card-body text-center p-3">
     <h5 className="card-title mb-0">Free Fire</h5>
   </div>
 </div>
 
 
-   <div className="card card-hover bg-dark text-white border-success" style={{ width: '200px' }}>
+   <div className="card card-hover bg-dark text-white border-success" style={{ width: '450px' }}>
 
-  <img src={valorantImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '120px', objectFit: 'cover' }} />
+  <img src={valorantImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '200px', objectFit: 'cover' }} />
   <div className="card-body text-center p-3">
     <h5 className="card-title mb-0">Valorant</h5>
   </div>
 </div>
 
 
-     <div className="card card-hover bg-dark text-white border-success" style={{ width: '200px' }}>
+     <div className="card card-hover bg-dark text-white border-success" style={{ width: '450px' }}>
 
-  <img src={steamImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '120px', objectFit: 'cover' }} />
+  <img src={steamImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '200px', objectFit: 'cover' }} />
   <div className="card-body text-center p-3">
     <h5 className="card-title mb-0" >Steam</h5>
   </div>
@@ -229,6 +231,41 @@ function Home() {
     <img src={starrailImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
       <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Honkai Star Rail</h6>
+    </div>
+  </div>
+    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
+
+    <img src={pokemonImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Pokemon</h6>
+    </div>
+  </div>
+    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
+
+    <img src={minecraftImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>minecraft</h6>
+    </div>
+  </div>
+    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
+
+    <img src={gratisImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Juegos gratis</h6>
+    </div>
+  </div>
+    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
+
+    <img src={gtavImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>GTA V</h6>
+    </div>
+  </div>
+    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
+
+    <img src={redImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Red Dead Redemption</h6>
     </div>
   </div>
   
