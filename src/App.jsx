@@ -3,71 +3,61 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 import Navbar from './components/Navbar';
 import AuthModal from './components/AuthModal';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 
-
 import Home from './pages/Home';
 import About from './components/About';
 import Admin from './components/Admin';
-import Nosotros from './page/nosotros';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import { Dashboard } from './pages/Dashboard';
+import Nosotros from './page/Nosotros';
+
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const [modalView, setModalView] = useState('login');
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [authView, setAuthView] = useState('login'); // 'login' o 'register'
 
-  const abrirModalLogin = () => {
-    setModalView('login');
-    setShowModal(true);
+  const openAuthModal = (mode) => {
+    setAuthView(mode);
+    setModalOpen(true);
   };
 
-  const abrirModalRegister = () => {
-    setModalView('register');
-    setShowModal(true);
+  const closeAuthModal = () => {
+    setModalOpen(false);
   };
 
   const handleLogin = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
-    setShowModal(false);
+    setModalOpen(false);
   };
 
   const handleRegister = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
-    setShowModal(false);
+    setModalOpen(false);
   };
 
   return (
     <Router>
       <div className="App relative">
-        <Navbar />
+        <Navbar onAuthClick={openAuthModal} />
 
-       
-        {showModal && (
-          <AuthModal
-            view={modalView}
-            onLogin={handleLogin}
-            onRegister={handleRegister}
-          />
-        )}
+        <AuthModal
+          view={authView}
+          onLogin={handleLogin}
+          onRegister={handleRegister}
+          isOpen={isModalOpen}
+          onClose={closeAuthModal}
+        />
 
         <Routes>
-     
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/login" element={<Login abrirModalLogin={abrirModalLogin} />} />
-          <Route path="/register" element={<Register abrirModalRegister={abrirModalRegister} />} />
           <Route path="/wishlist" element={<Home />} />
           <Route path="/categoria/:slug" element={<Home />} />
 
-          
           <Route
             path="/home"
             element={
@@ -80,7 +70,6 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedAdminRoute>
-                <Dashboard />
               </ProtectedAdminRoute>
             }
           />

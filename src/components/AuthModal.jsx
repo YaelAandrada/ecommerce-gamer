@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
-import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
-
-export default function AuthModal({ view, onLogin, onRegister }) {
+import { useState, useEffect } from 'react';
+export default function AuthModal({ view, onLogin, onRegister, isOpen, onClose }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShow(true), 10);
-    return () => clearTimeout(timeout);
-  }, []);
+    if (isOpen) {
+      const timeout = setTimeout(() => setShow(true), 10);
+      return () => clearTimeout(timeout);
+    } else {
+      setShow(false);
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-sm">
@@ -17,6 +20,13 @@ export default function AuthModal({ view, onLogin, onRegister }) {
           show ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`}
       >
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-white text-xl hover:text-red-400"
+        >
+          ✕
+        </button>
+
         <h2 className="text-2xl font-bold mb-6 text-center">
           {view === 'login' ? 'Iniciar sesión' : 'Registrarse'}
         </h2>
