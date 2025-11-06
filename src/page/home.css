@@ -4,17 +4,13 @@
   overflow-y: hidden;
   white-space: nowrap;
   max-width: 100%;
-  padding-bottom: 12px;
-  scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 8px;
 }
 
 .scroll-populares::-webkit-scrollbar {
-  height: 8px;
-}
-
-.scroll-populares::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  height: 6px;
 }
 
 .scroll-populares::-webkit-scrollbar-thumb {
@@ -22,6 +18,21 @@
   border-radius: 4px;
 }
 
+.scroll-populares .card {
+  flex-shrink: 0;
+  width: 140px;
+}
+
+
+.container-card {
+  background-color: #111;
+  border: 2px solid #00ff99;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 90vw !important;
+  box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+}
 
 
 
@@ -114,6 +125,26 @@
   box-shadow: 0 0 10px #00ff99;
 }
 
+
+/*Novedades */
+.noticia-box {
+  background-color: #121212;
+  border: 2px solid #00ff99;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 255, 153, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.noticia-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(0, 255, 153, 0.5);
+}
+
+.noticia-wrapper {
+  max-width: 1000px;
+  max-height: 100;
+  margin: 0 auto;
+}
 
 
 

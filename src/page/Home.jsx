@@ -175,7 +175,8 @@ function Home() {
   </div>
 
 <h2 className='section-title'>Populares</h2>
-<div className="scroll-populares d-flex gap-2 px-2 pb-2 mb-4">
+<div className="scroll-populares d-flex flex-nowrap gap-2 px-2 pb-2 mb-4">
+
   <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={mobilelegendImage} className="card-img-top img-fluid" alt="Mobile Legends" style={{ height: '80px', objectFit: 'cover' }} />
@@ -242,7 +243,21 @@ function Home() {
 </div>
 
 
-      {/* Novedades + Quiz */} <div className="row g-3"> <div className="col-md-8"> <h2 className="h5 text-success mb-3">Novedades Gamer</h2> {[pokemonImage, minecraftImage, gratisImage].map((img, i) => ( <div className="d-flex gap-3 mb-3" key={i}> <img src={img} alt="Noticia" className="img-fluid rounded" style={{ width: '80px', height: '80px', objectFit: 'cover' }} /> <div> <h6 className="mb-1">Título de la noticia {i + 1}</h6> <p className="mb-0">Descripción breve de la noticia.</p> </div> </div> ))} </div>
+      {/* Novedades + Quiz */} 
+      <div className="row g-3"> 
+        <div className="col-md-8"> 
+          <h2 className="h5 text-success mb-3">Novedades Gamer</h2>
+           {[pokemonImage, minecraftImage, gratisImage].map((img, i) => (
+            <div className="noticia-wrapper" key={i}>
+  <div className="noticia-box d-flex gap-3 p-2">
+    <img src={img} alt="Noticia" className="img-fluid rounded" style={{ width: '60px', height: '60px', objectFit: 'cover' }} />
+    <div>
+      <h6 className="mb-1">Título de la noticia {i + 1}</h6>
+      <p className="mb-0">Descripción breve de la noticia.</p>
+    </div>
+  </div>
+         </div> ))}
+       </div>
 
         <div className="quiz-box card bg-dark text-white border-success ">
           <h2 className="section-title">Quiz Diario</h2>
