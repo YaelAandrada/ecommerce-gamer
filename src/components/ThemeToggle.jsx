@@ -1,38 +1,33 @@
 import { useEffect, useState } from "react";
-import { FaSun, FaMoon } from "react-icons/fa";
 
-function ThemeToggle() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  });
+const ThemeToggle = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") === "dark";
+    setDarkMode(saved);
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === "dark") {
+    if (darkMode) {
       root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const handleChangeTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
+  }, [darkMode]);
 
   return (
     <button
-      onClick={handleChangeTheme}
+      onClick={() => setDarkMode(!darkMode)}
       aria-label="Alternar tema oscuro/claro"
-      className="fixed top-4 right-4 z-50 flex items-center gap-2 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:ring-2 hover:ring-indigo-500"
+      className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md transition-all duration-300"
     >
-      {theme === "dark" ? <FaMoon /> : <FaSun />}
-      <span className="hidden sm:inline">
-        {theme === "dark" ? "" : ""}
-      </span>
+      {darkMode ? "🌙 Modo oscuro" : "☀️ Modo claro"}
     </button>
   );
-}
+};
 
 export default ThemeToggle;
