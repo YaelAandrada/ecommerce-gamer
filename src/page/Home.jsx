@@ -1,8 +1,9 @@
 import React from 'react';
 import './Home.css';
+// import { FaShoppingCart } from 'react-icons/fa'; // Ya no lo necesitamos
 import { Link } from "react-router-dom";
 import ProductCard from '../components/ProductCard.jsx';
-import siImage from '../img/si.jpg'; // ejemplo de imagen local
+import siImage from '../img/si.jpg';
 import freefireImage from '../img/freefire.png';
 import valorantImage from '../img/valorant.jpg';
 import steamImage from '../img/steam.jfif';
@@ -13,74 +14,47 @@ import marvelImage from '../img/marvel.jpg';
 import rainbowImage from '../img/rainbow.jpeg';
 import robloxImage from '../img/roblox.jpg';
 import starrailImage from '../img/starrail.jpg';
+import pokemonImage from '../img/pokemon.webp';
+import minecraftImage from '../img/minecraft.jfif';
+import gratisImage from   '../img/gratis.jfif'
 
 function Home() {
   const featuredProducts = [
-    {
-      title: 'Free Fire',
-      image: freefireImage,
-      customClass: 'card-featured',
-    },
-    {
-      title: 'Valorant',
-      image: valorantImage,
-      customClass: 'card-featured',
-    },
-    {
-      title: 'Steam',
-      image: steamImage,
-      customClass: 'card-featured',
-    }
+    { title: 'Free Fire', image: freefireImage, customClass: 'card-featured' },
+    { title: 'Valorant', image: valorantImage, customClass: 'card-featured' },
+    { title: 'Steam', image: steamImage, customClass: 'card-featured' }
   ];
 
   const products = [
-    {
-      title: 'Mobile Legends - Recarga Única',
-      image: mobilelegendImage,
-      customClass: 'card-scroll',
-    },
-    
-    {
-      title: 'Counter Strike 2',
-      image: csgoImage,
-      customClass: 'card-scroll',
-    },
-    {
-      title: 'League of Legends',
-      image: legendsImage,
-      customClass: 'card-scroll',
-    },
-    {
-      title: 'Marvel Rivals',
-      image: marvelImage,
-      customClass: 'card-scroll',
-    },
-    {
-      title: 'Rainbow Six Mobile',
-      image: rainbowImage,
-      customClass: 'card-scroll',
-    },
-    {
-      title: 'Roblox',
-      image: robloxImage,
-      customClass: 'card-scroll',
-    },
-    {
-      title: 'Honkai Star Rail',
-      image: starrailImage,
-      customClass: 'card-scroll',
-    }
+    { title: 'Mobile Legends - Recarga Única', image: mobilelegendImage, customClass: 'card-scroll' },
+    { title: 'Counter Strike 2', image: csgoImage, customClass: 'card-scroll' },
+    { title: 'League of Legends', image: legendsImage, customClass: 'card-scroll' },
+    { title: 'Marvel Rivals', image: marvelImage, customClass: 'card-scroll' },
+    { title: 'Rainbow Six Mobile', image: rainbowImage, customClass: 'card-scroll' },
+    { title: 'Roblox', image: robloxImage, customClass: 'card-scroll' },
+    { title: 'Honkai Star Rail', image: starrailImage, customClass: 'card-scroll' }
   ];
+  
 
   return (
     <div className='home-container'>
       <h1>Catálogo Gamer</h1>
 
-      {/*  Seccion promocional arriba del catálogo */}
+      {/* Sección promocional */}
       <div className="promo-boxes">
   <div className="promo-box">
     <Link to="/juegos" className="promo-content">
-      <div className="promo-icon">🛒</div>
+      <div
+        className="cart-icon"
+        dangerouslySetInnerHTML={{
+          __html: `<lord-icon
+            src="https://cdn.lordicon.com/slkvcfos.json"
+            trigger="hover"
+            colors="primary:#00ff99"
+            style="width:40px;height:40px">
+          </lord-icon>`
+        }}
+      />
       <div>
         <h3>Comprá</h3>
         <p>Comprá y acumulá BNX Coins.</p>
@@ -90,7 +64,17 @@ function Home() {
 
   <div className="promo-box">
     <div className="promo-content inactive">
-      <div className="promo-icon">🎮</div>
+      <div
+        className="promo-icon"
+        dangerouslySetInnerHTML={{
+          __html: `<lord-icon
+            src="https://cdn.lordicon.com/kthelypq.json"
+            trigger="hover"
+            colors="primary:#00ff99"
+            style="width:40px;height:40px">
+          </lord-icon>`
+        }}
+      />
       <div>
         <h3>Jugá <span className="new-badge">¡Nuevo!</span></h3>
         <p>Andá a la sección Gamify y divertite.</p>
@@ -100,7 +84,17 @@ function Home() {
 
   <div className="promo-box">
     <div className="promo-content inactive">
-      <div className="promo-icon">🎁</div>
+      <div
+        className="promo-icon"
+        dangerouslySetInnerHTML={{
+          __html: `<lord-icon
+            src="https://cdn.lordicon.com/xljvqlng.json"
+            trigger="hover"
+            colors="primary:#00ff99"
+            style="width:40px;height:40px">
+          </lord-icon>`
+        }}
+      />
       <div>
         <h3>Canjeá</h3>
         <p>Canjeá premios con tus coins.</p>
@@ -110,7 +104,7 @@ function Home() {
 </div>
 
 
-      {/*  Catálogo principal */}
+      {/* Catálogo principal */}
       <div className='container-card'>
         <h2 className='section-title'>Recomendados para ti</h2>
         <div className='featured-grid'>
@@ -138,27 +132,26 @@ function Home() {
         <h2>Ver store</h2>
       </div>
 
-      {/*  Novedades Gamer + quiz diario como cajas separadas */}
+      {/* Novedades Gamer + Quiz Diario */}
       <div className="dual-box-row">
-        {/* Novedades Gamer */}
         <div className="news-box">
           <h2 className="section-title">Novedades Gamer</h2>
           <div className="news-item">
-            <img src={siImage} alt="Pokemon Retro" className="news-thumb" />
+            <img src={pokemonImage} alt="Pokemon Retro" className="news-thumb" />
             <div>
               <h4>POKEMON ROJO Y AZUL | BNX RETRO</h4>
               <p>Revive los clásicos con estilo retro.</p>
             </div>
           </div>
           <div className="news-item">
-            <img src={siImage} alt="Animal Crossing" className="news-thumb" />
+            <img src={minecraftImage} alt="Animal Crossing" className="news-thumb" />
             <div>
               <h4>EL MISTERIO DE LAS 3AM EN ANIMAL CROSSING</h4>
               <p>Descubrí los secretos ocultos del juego.</p>
             </div>
           </div>
           <div className="news-item">
-            <img src={siImage} alt="Juegos Gratis" className="news-thumb" />
+            <img src={gratisImage} alt="Juegos Gratis" className="news-thumb" />
             <div>
               <h4>JUEGOS GRATIS DE LA SEMANA</h4>
               <p>Descargá sin pagar y disfrutá.</p>
@@ -166,7 +159,6 @@ function Home() {
           </div>
         </div>
 
-        {/* quiz diario */}
         <div className="quiz-box">
           <h2 className="section-title">Quiz Diario</h2>
           <p>Demostrá cuánto sabés. ¡Jugá y sorprendete con tus resultados!</p>

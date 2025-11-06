@@ -116,22 +116,6 @@
   cursor: default;
 }
 
-
-.new-badge {
-  background-color: orange;
-  color: black;
-  font-size: 0.65rem;
-  padding: 2px 5px;
-  border-radius: 5px;
-  margin-left: 4px;
-}
-
-.inactive {
-  cursor: default;
-  opacity: 0.6;
-}
-
-
 .dual-box-row {
   display: flex;
   justify-content: space-between;
@@ -147,27 +131,47 @@
   padding: 20px;
 }
 
+.news-box {
+  flex: 1;
+  background-color: #0a0a0a;
+  border: 2px solid #00ff99;
+  border-radius: 12px;
+  padding: 20px;
+}
+
 .news-item {
   display: flex;
-  gap: 12px;
   align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 16px;
+  background-color: transparent;
+  border: 2px solid transparent;
 }
 
 .news-item:hover {
+  transform: scale(1.03);
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   background-color: #111;
 }
 
 .news-thumb {
-  width: 60px;
-  height: 60px;
+  width: 50%;
+  height: 120px; /* 🔄 altura fija para todas */
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: cover; /* 🔄 recorta sin deformar */
 }
+
+
+.news-item > div {
+  width: 50%;
+  padding-left: 12px;
+  color: white;
+}
+
 
 .quiz-button {
   background-color: #00ff99;
@@ -184,5 +188,3 @@
 .quiz-button:hover {
   background-color: #00cc88;
 }
-
-
