@@ -1,0 +1,92 @@
+{
+  "juegos": [
+    {
+      "nombre": "Dark Souls III",
+      "precio": "25000",
+      "categoria": "SoulsLike",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/8/87790/3081870-box_ds3.jpg",
+      "descripcion": "Dark Souls III es un juego de rol de acción de 2016 desarrollado por FromSoftware y publicado por Bandai Namco Entertainment para PlayStation 4, Xbox One y PC. Tercera y última entrega de la saga Dark Souls, se juega en una perspectiva en tercera persona, y los jugadores tienen acceso a varias armas, armaduras, magia y consumibles que pueden usar para luchar contra sus enemigos. Hidetaka Miyazaki, el creador de la saga, volvió para dirigir el juego tras dejar las tareas de desarrollo de Dark Souls II en manos de otros.",
+      "requisitosMinimos": "SO: Windows 7 SP1 64-bit, Windows 8.1 64-bit, Windows 10 64-bit.\nProcesador: Intel Core i3-2100 / AMD FX-6300.\nMemoria: 4 GB de RAM.\nGráficos: NVIDIA GeForce GTX 750 Ti / AMD Radeon HD 7950.\nDirectX: Versión 11.\nAlmacenamiento: 25 GB de espacio disponible.",
+      "requisitosRecomendados": "SO: Windows 7 SP1 64-bit, Windows 8.1 64-bit, Windows 10 64-bit.\nProcesador: Intel Core i7-3770 / AMD FX-8350.\nMemoria: 8 GB de RAM.\nGráficos: NVIDIA GeForce GTX 970 / AMD Radeon R9 series.\nDirectX: Versión 11.\nAlmacenamiento: 25 GB de espacio disponible.\n\n",
+      "desarrollador": "FromSoftware",
+      "id": "ab1"
+    },
+    {
+      "nombre": "Red Dead Redemption 2",
+      "precio": "60000",
+      "categoria": "Aventura",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/5/56742/3018545-3469813732-redde.jpg",
+      "descripcion": "Con más de 175 premios al Juego del año y más de 250 valoraciones perfectas, Red Dead Redemption 2 es la épica historia de Arthur Morgan y la banda de Van der Linde, que huyen por Estados Unidos en los albores del siglo XX. También incluye acceso al mundo multijugador compartido de Red Dead Online.",
+      "requisitosMinimos": "Requiere un procesador y un sistema operativo de 64 bits\nSO: Windows 10 - 64-bit\nProcesador: Intel® Core™ i5-2500K / AMD FX-6300\nMemoria: 8 GB de RAM\nGráficos: Nvidia GeForce GTX 770 2GB / AMD Radeon R9 280 3GB\nRed: Conexión de banda ancha a Internet\nAlmacenamiento: 150 GB de espacio disponible\nTarjeta de sonido: Direct X Compatible",
+      "requisitosRecomendados": "Requiere un procesador y un sistema operativo de 64 bits\nSO: Windows 10 - 64-bit\nProcesador: Intel® Core™ i7-4770K / AMD Ryzen 5 1500X\nMemoria: 12 GB de RAM\nGráficos: Nvidia GeForce GTX 1060 6GB / AMD Radeon RX 480 4GB\nRed: Conexión de banda ancha a Internet\nAlmacenamiento: 150 GB de espacio disponible\nTarjeta de sonido: Direct X Compatible",
+      "desarrollador": " Rockstar Games",
+      "id": "XxuFURY"
+    },
+    {
+      "nombre": "Resident Evil 4",
+      "precio": "25000",
+      "categoria": "Horror",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/5/56742/3502363-co6bo0.jpg",
+      "descripcion": "La supervivencia es solo el comienzo. A seis años del desastre biológico en Raccoon City, Leon S. Kennedy, uno de los sobrevivientes, rastreó a la hija secuestrada del presidente hasta una aldea europea aislada, donde algo terrible le ha ocurrido a los lugareños.",
+      "requisitosMinimos": "Requiere un procesador y un sistema operativo de 64 bits\nSO: Windows 10 (64 bit)\nProcesador: AMD Ryzen 3 1200 / Intel Core i5-7500\nMemoria: 8 GB de RAM\nGráficos: AMD Radeon RX 560 with 4GB VRAM / NVIDIA GeForce GTX 1050 Ti with 4GB VRAM\nDirectX: Versión 12\nRed: Conexión de banda ancha a Internet\nNotas adicionales: Estimated performance (when set to Prioritize Performance): 1080p/45fps. ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2060 required to support ray tracing.",
+      "requisitosRecomendados": "Requiere un procesador y un sistema operativo de 64 bits\nSO: Windows 10 (64 bit)/Windows 11 (64 bit)\nProcesador: AMD Ryzen 5 3600 / Intel Core i7 8700\nMemoria: 16 GB de RAM\nGráficos: AMD Radeon RX 5700 / NVIDIA GeForce GTX 1070\nDirectX: Versión 12\nRed: Conexión de banda ancha a Internet\nNotas adicionales: Rendimiento estimado: 1080p/60 fps ・La tasa de imágenes será menor en escenas de gráficos intensos. ・AMD Radeon RX 6700 XT o NVIDIA GeForce RTX 2070 son necesarias para activar el trazado de rayos.",
+      "desarrollador": "CAPCOM Ltd.",
+      "id": "zh7tHwg"
+    },
+    {
+      "nombre": "Terraria",
+      "precio": "6000",
+      "categoria": "Sandbox",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/8/87790/2994875-box_terr.png",
+      "descripcion": "Terraria es un videojuego de acción, aventura y de sandbox producido de forma independiente por el estudio Re-Logic. Tiene características tales como la exploración, la artesanía, la construcción de estructuras y el combate.​Se lanzó el 16 de mayo de 2011.",
+      "requisitosMinimos": "OS: Windows Xp, Vista, 7, 8/8.1, 10\nProcessor: 2.0 Ghz\nMemory: 2.5GB\nHard Disk Space: 200MB\nVideo Card: 128mb Video Memory, capable of Shader Model 2.0+\nDirectX®: 9.0c or Greater",
+      "requisitosRecomendados": "OS: Windows 7, 8/8.1, 10\nProcessor: Dual Core 3.0 Ghz\nMemory: 4GB\nHard Disk Space: 200MB\nVideo Card: 256mb Video Memory, capable of Shader Model 2.0+\nDirectX®: 9.0c or Greater",
+      "desarrollador": "Re-Logic",
+      "id": "bZZIkmE"
+    },
+    {
+      "nombre": "Bully: Scholarship Edition",
+      "precio": "15000",
+      "categoria": "Aventura",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/0/3699/3171225-bully.jpg",
+      "descripcion": "Bully: Scholarship Edition cuenta la historia de Jimmy Hopkins, un travieso chico de 15, que atraviesa la adolescencia. Vence a los más deportistas en dodgeball, hazles bromas a los niños ricos, protege a los nerds, besa a la chica y recorre toda la jerarquía social en la peor escuela del mundo.",
+      "requisitosMinimos": "OS: Windows 10\nProcessor: Intel Pentium 4 (3+ GHZ) / AMD Athlon 3000+\nMemory: 1 GB RAM\nGraphics: DirectX 9.0c Shader 3.0 supported, Nvidia 6800 or 7300 or better, ATI Radeon X1300 or better\nDirectX Version: DirectX 9.0c\nHard Drive: 4.7 GB free space\nSound Card: DX9-compatible\nInput: Keyboard, Mouse, Xbox 360 Controller supported",
+      "requisitosRecomendados": "OS: Windows 10\nProcessor: Intel Pentium 4 (3+ GHZ) / AMD Athlon 3000+\nMemory: 1 GB RAM\nGraphics: DirectX 9.0c Shader 3.0 supported, Nvidia 6800 or 7300 or better, ATI Radeon X1300 or better\nDirectX Version: DirectX 9.0c\nHard Drive: 4.7 GB free space\nSound Card: DX9-compatible\nInput: Keyboard, Mouse, Xbox 360 Controller supported",
+      "desarrollador": " Rockstar New England",
+      "id": "ptT2Lzw"
+    },
+    {
+      "nombre": "Grand Theft Auto V",
+      "precio": "23000",
+      "categoria": "Aventura",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/20/201266/3532840-6042895878-co2lb.png",
+      "descripcion": "Grand Theft Auto V es un juego de acción y aventura en mundo abierto desarrollado por Rockstar Games. Está ambientado en la ciudad ficticia de Los Santos y sus alrededores, basada en Los Ángeles. El juego sigue la historia de tres personajes principales: Michael, Franklin y Trevor, cuyas vidas se entrelazan en una serie de misiones llenas de crimen, acción y drama. Además de la campaña principal, GTA V incluye GTA Online, un modo multijugador masivo que permite a los jugadores explorar el mundo y participar en actividades cooperativas y competitivas.",
+      "requisitosMinimos": "SO: Windows 8.1 64-bit, Windows 8 64-bit, Windows 7 64-bit Service Pack 1.\nProcesador: Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz.\nMemoria: 4 GB de RAM.\nGráficos: NVIDIA 9800 GT 1GB / AMD HD 4870 1GB (DX 10, 10.1, 11).\nDirectX: Versión 10.\nAlmacenamiento: 110 GB de espacio disponible.",
+      "requisitosRecomendados": "SO: Windows 10 64-bit.\nProcesador: Intel Core i5 3470 @ 3.2GHz (4 CPUs) / AMD X8 FX-8350 @ 4GHz (8 CPUs).\nMemoria: 8 GB de RAM.\nGráficos: NVIDIA GTX 660 2GB / AMD HD 7870 2GB.\nDirectX: Versión 11.\nAlmacenamiento: 110 GB de espacio disponible.",
+      "desarrollador": " Rockstar Games",
+      "id": "xnDfAlB"
+    },
+    {
+      "nombre": "Hitman (2016)",
+      "precio": "17000",
+      "categoria": "Shooter",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/8/82063/3124186-1671936150-packs.jpg",
+      "descripcion": "Hitman (2016) es un juego de sigilo y acción desarrollado por IO Interactive. Es el sexto título principal de la serie Hitman y funciona como un reinicio de la franquicia. El jugador controla a Agent 47, un asesino profesional, que viaja por todo el mundo para eliminar objetivos en misiones complejas y altamente detalladas. El juego se destaca por su enfoque en la libertad del jugador, permitiendo múltiples enfoques para completar cada misión, desde el sigilo absoluto hasta el caos total.",
+      "requisitosMinimos": "SO: Windows 7 64-bit.\nProcesador: Intel CPU Core i5-2500K 3.3GHz / AMD CPU Phenom II X4 940.\nMemoria: 8 GB de RAM.\nGráficos: NVIDIA GeForce GTX 660 / AMD Radeon HD 7870.\nDirectX: Versión 11.\nAlmacenamiento: 50 GB de espacio disponible.",
+      "requisitosRecomendados": "SO: Windows 7 64-bit o superior.\nProcesador: Intel CPU Core i7 3770 3.4GHz / AMD CPU AMD FX-8350 4GHz.\nMemoria: 8 GB de RAM.\nGráficos: NVIDIA GeForce GTX 770 / AMD Radeon R9 290.\nDirectX: Versión 11.\nAlmacenamiento: 50 GB de espacio disponible.",
+      "desarrollador": "IO Interactive",
+      "id": "bxh0x9J"
+    },
+    {
+      "nombre": "Minecraft",
+      "precio": "11999",
+      "categoria": "Sandbox",
+      "imagen": "https://www.giantbomb.com/a/uploads/scale_small/8/87790/3020660-box_mc.png",
+      "descripcion": "Minecraft es un juego de sandbox desarrollado por Mojang Studios (ahora propiedad de Microsoft). Los jugadores exploran un mundo generado proceduralmente compuesto por bloques, donde pueden recolectar recursos, construir estructuras, crear herramientas y enfrentarse a criaturas. El juego tiene dos modos principales: Supervivencia (donde los jugadores deben gestionar recursos y salud) y Creativo (donde los jugadores tienen recursos ilimitados para construir libremente). Además, cuenta con un modo multijugador y una gran comunidad que crea mods, texturas y mapas personalizados.",
+      "requisitosMinimos": "SO: Windows 7 o superior.\nProcesador: Intel Core i3-3210 / AMD A8-7600 APU o equivalente.\nMemoria: 4 GB de RAM.\nGráficos: Intel HD Graphics 4000 / AMD Radeon R5 series con OpenGL 4.4.\nAlmacenamiento: 4 GB de espacio disponible (más para mapas y mods).",
+      "requisitosRecomendados": "SO: Windows 10.\nProcesador: Intel Core i5-4690 / AMD A10-7800 o equivalente.\nMemoria: 8 GB de RAM.\nGráficos: NVIDIA GeForce 700 Series / AMD Radeon Rx 200 Series con OpenGL 4.5.\nAlmacenamiento: 4 GB de espacio disponible (más para mapas y mods).",
+      "desarrollador": "Mojang Studios",
+      "id": "T0m13uG"
+    }
+  ]
+}

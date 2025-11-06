@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { borrarJuegoAPI, listarJuegosAPI } from '../../helpers/queries';
+import { borrarJuegoAPI, listaJuegosAPI } from "../helpers/queries";
 import { Edit2, Trash2 } from 'react-feather'; // íconos modernos y personalizables
 
 const JuegoAdministrador = ({ datosJuego, setListaJuegos }) => {
   const borrarJuego = async () => {
     const respuesta = await borrarJuegoAPI(datosJuego.id);
     if (respuesta.status === 200) {
-      const respuestaListaJuegos = await listarJuegosAPI();
+      const respuestaListaJuegos = await listaJuegosAPI();
       if (respuestaListaJuegos.status === 200) {
         const datos = await respuestaListaJuegos.json();
         setListaJuegos(datos);
@@ -35,21 +35,25 @@ const JuegoAdministrador = ({ datosJuego, setListaJuegos }) => {
       </td>
       <td className="px-4 py-2">{datosJuego.desarrollador}</td>
       <td className="px-4 py-2">
-        <div className="flex justify-center gap-3">
-          <Link
-            to={`/administrador/editar/${datosJuego.id}`}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-md transition duration-200"
-          >
-            <Edit2 size={18} />
-          </Link>
-          <button
-            onClick={borrarJuego}
-            className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-md transition duration-200"
-          >
-            <Trash2 size={18} />
-          </button>
-        </div>
-      </td>
+  <div className="flex justify-center gap-3">
+    <Link
+      to={`/administrador/editar/${datosJuego.id}`}
+      className="p-2 rounded-md transition duration-300 transform hover:scale-105
+                 bg-yellow-500 hover:bg-yellow-600 text-white
+                 dark:bg-yellow-400 dark:hover:bg-yellow-500"
+    >
+      <Edit2 className="transition-transform duration-300 hover:rotate-12" size={18} />
+    </Link>
+    <button
+      onClick={borrarJuego}
+      className="p-2 rounded-md transition duration-300 transform hover:scale-105
+                 bg-red-600 hover:bg-red-700 text-white
+                 dark:bg-red-500 dark:hover:bg-red-600"
+    >
+      <Trash2 className="transition-transform duration-300 hover:rotate-12" size={18} />
+    </button>
+  </div>
+</td>
     </tr>
   );
 };

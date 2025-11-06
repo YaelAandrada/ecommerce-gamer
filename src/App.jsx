@@ -1,15 +1,15 @@
-import Footer from "./components/Footer";
-import ThemeToggle from "./components/ThemeToggle";
-import { BrowserRouter, Routes, Route } from 'react-router'
+import React from "react";
 import Administrador from "./page/Administrador";
+import { Routes, Route } from 'react-router-dom';
+import ThemeToggle from "./components/ThemeToggle";
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* otras rutas */}
-        <Route path="/administrador" element={<Administrador />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/administrador" element={<Administrador/>} />
+      {/* otras rutas */}
+    </Routes>
+
 
   );
 }
