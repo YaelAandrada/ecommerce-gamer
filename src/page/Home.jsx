@@ -17,6 +17,9 @@ import starrailImage from '../img/starrail.jpg';
 import pokemonImage from '../img/pokemon.webp';
 import minecraftImage from '../img/minecraft.jfif';
 import gratisImage from   '../img/gratis.jfif'
+import neonImage from '../img/neon.png';
+import neon2Image from '../img/neon2.png';
+import neon3Image from '../img/neon3.png';
 
 function Home() {
   const featuredProducts = [
@@ -37,7 +40,34 @@ function Home() {
   
 
   return (
+    
     <div className='home-container'>
+    <div id="carouselGamer" className="carousel slide mb-4 mx-auto" data-bs-ride="carousel" style={{ maxWidth: '780px' }}>
+
+
+
+
+  <div className="carousel-inner">
+    <div className="carousel-item active">
+      <img src={neonImage} className="d-block w-100" alt="NeonByte" style={{ height: '500px', objectFit: 'cover' }} />
+    </div>
+    <div className="carousel-item">
+      <img src={neon2Image} className="d-block w-100" alt="NeonByte" style={{ height: '500px', objectFit: 'cover' }} />
+    </div>
+    <div className="carousel-item">
+      <img src={neon3Image} className="d-block w-100" alt="NeonByte" style={{ height: '500px', objectFit: 'cover' }} />
+    </div>
+  </div>
+  <button className="carousel-control-prev" type="button" data-bs-target="#carouselGamer" data-bs-slide="prev">
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Anterior</span>
+  </button>
+  <button className="carousel-control-next" type="button" data-bs-target="#carouselGamer" data-bs-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
       <h1>Catálogo Gamer</h1>
 
       {/* Sección promocional */}
@@ -57,7 +87,10 @@ function Home() {
       />
       <div>
         <h3>Comprá</h3>
-        <p>Comprá y acumulá BNX Coins.</p>
+        <div>
+  <p className="promo-text">Comprá y acumulá BNX Coins.</p>
+</div>
+
       </div>
     </Link>
   </div>
@@ -77,7 +110,7 @@ function Home() {
       />
       <div>
         <h3>Jugá <span className="new-badge">¡Nuevo!</span></h3>
-        <p>Andá a la sección Gamify y divertite.</p>
+        <p className="promo-text">Andá a la sección Gamify y divertite.</p>
       </div>
     </div>
   </div>
@@ -97,7 +130,7 @@ function Home() {
       />
       <div>
         <h3>Canjeá</h3>
-        <p>Canjeá premios con tus coins.</p>
+        <p className="promo-text">Canjeá premios con tus coins.</p>
       </div>
     </div>
   </div>
@@ -105,59 +138,104 @@ function Home() {
 
 
       {/* Catálogo principal */}
-      <div className='container-card'>
-        <h2 className='section-title'>Recomendados para ti</h2>
-        <div className='featured-grid'>
-          {featuredProducts.map((item, index) => (
-            <ProductCard
-              key={index}
-              title={item.title}
-              image={item.image}
-              customClass={item.customClass}
-            />
-          ))}
-        </div>
+<div className='container-card'>
+  <h2 className='section-title'>Recomendados para ti</h2>
+<div className="d-flex gap-3 flex-wrap justify-content-center px-2 pb-4">
 
-        <h2 className='section-title'>Populares</h2>
-        <div className='scroll-row'>
-          {products.map((item, index) => (
-            <ProductCard
-              key={index}
-              title={item.title}
-              image={item.image}
-              customClass={item.customClass}
-            />
-          ))}
-        </div>
-        <h2>Ver store</h2>
-      </div>
 
-      {/* Novedades Gamer + Quiz Diario */}
-      <div className="dual-box-row">
-        <div className="news-box">
-          <h2 className="section-title">Novedades Gamer</h2>
-          <div className="news-item">
-            <img src={pokemonImage} alt="Pokemon Retro" className="news-thumb" />
-            <div>
-              <h4>POKEMON ROJO Y AZUL | BNX RETRO</h4>
-              <p>Revive los clásicos con estilo retro.</p>
-            </div>
-          </div>
-          <div className="news-item">
-            <img src={minecraftImage} alt="Animal Crossing" className="news-thumb" />
-            <div>
-              <h4>EL MISTERIO DE LAS 3AM EN ANIMAL CROSSING</h4>
-              <p>Descubrí los secretos ocultos del juego.</p>
-            </div>
-          </div>
-          <div className="news-item">
-            <img src={gratisImage} alt="Juegos Gratis" className="news-thumb" />
-            <div>
-              <h4>JUEGOS GRATIS DE LA SEMANA</h4>
-              <p>Descargá sin pagar y disfrutá.</p>
-            </div>
-          </div>
-        </div>
+
+
+   <div className="card card-hover bg-dark text-white border-success" style={{ width: '200px' }}>
+
+  <img src={freefireImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '120px', objectFit: 'cover' }} />
+  <div className="card-body text-center p-3">
+    <h5 className="card-title mb-0">Free Fire</h5>
+  </div>
+</div>
+
+
+   <div className="card card-hover bg-dark text-white border-success" style={{ width: '200px' }}>
+
+  <img src={valorantImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '120px', objectFit: 'cover' }} />
+  <div className="card-body text-center p-3">
+    <h5 className="card-title mb-0">Valorant</h5>
+  </div>
+</div>
+
+
+     <div className="card card-hover bg-dark text-white border-success" style={{ width: '200px' }}>
+
+  <img src={steamImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '120px', objectFit: 'cover' }} />
+  <div className="card-body text-center p-3">
+    <h5 className="card-title mb-0" >Steam</h5>
+  </div>
+</div>
+  </div>
+
+<h2 className='section-title'>Populares</h2>
+<div className="d-flex gap-2 overflow-auto px-2 pb-2 mb-4">
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+
+    <img src={mobilelegendImage} className="card-img-top img-fluid" alt="Mobile Legends" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Mobile Legends - Recarga Única</h6>
+    </div>
+  </div>
+
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+
+    <img src={csgoImage} className="card-img-top img-fluid" alt="Counter Strike 2" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Counter Strike 2</h6>
+    </div>
+  </div>
+
+ <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+
+    <img src={legendsImage} className="card-img-top img-fluid" alt="League of Legends" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>League of Legends</h6>
+    </div>
+  </div>
+
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+
+    <img src={marvelImage} className="card-img-top img-fluid" alt="Marvel Rivals" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Marvel Rivals</h6>
+    </div>
+  </div>
+
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+
+    <img src={rainbowImage} className="card-img-top img-fluid" alt="Rainbow Six Mobile" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Rainbow Six Mobile</h6>
+    </div>
+  </div>
+
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+
+    <img src={robloxImage} className="card-img-top img-fluid" alt="Roblox" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Roblox</h6>
+    </div>
+  </div>
+
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+
+    <img src={starrailImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
+    <div className="card-body text-center p-2">
+      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Honkai Star Rail</h6>
+    </div>
+  </div>
+</div>
+
+  <h2>Ver store</h2>
+</div>
+
+
+      {/* Novedades + Quiz */} <div className="row g-3"> <div className="col-md-8"> <h2 className="h5 text-success mb-3">Novedades Gamer</h2> {[pokemonImage, minecraftImage, gratisImage].map((img, i) => ( <div className="d-flex gap-3 mb-3" key={i}> <img src={img} alt="Noticia" className="img-fluid rounded" style={{ width: '80px', height: '80px', objectFit: 'cover' }} /> <div> <h6 className="mb-1">Título de la noticia {i + 1}</h6> <p className="mb-0">Descripción breve de la noticia.</p> </div> </div> ))} </div>
 
         <div className="quiz-box">
           <h2 className="section-title">Quiz Diario</h2>
@@ -166,7 +244,9 @@ function Home() {
         </div>
       </div>
     </div>
+    
   );
+  
 }
 
 export default Home;

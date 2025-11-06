@@ -1,75 +1,18 @@
-.home-container {
-  background-color: white;
-  padding: 40px;
-  text-align: center;
-}
 
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-.scroll-row {
-  display: flex;
-  overflow-x: auto;
-  gap: 20px;
-  padding-bottom: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: #00ff99 transparent;
-}
 
-.scroll-row::-webkit-scrollbar {
-  height: 8px;
-}
 
-.scroll-row::-webkit-scrollbar-thumb {
-  background-color: #00ff99;
-  border-radius: 4px;
-}
 
-.card-scroll {
-  min-width: 160px;
-  height: 250px;
-  flex-shrink: 0;
-}
 
-.card-featured {
-  width: 300px;
-  height: 180px;
-}
 
-.featured-grid {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-.section-title {
-  color: #00ffcc;
-  margin: 20px 0 10px;
-  font-size: 1.5rem;
-  text-align: left;
-}
-
-.container-card {
-  background-color: #111;
-  border: 2px solid #00ff99;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 30px auto;
-  max-width: 1000px;
-  box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
-}
+/* catalogo*/
 .promo-boxes {
   display: flex;
-  justify-content: center; /* 🔄 centra horizontalmente */
+  justify-content: center; 
   align-items: center;
-  gap: 16px; /* 🔄 espacio entre cajas, más compacto */
+  gap: 16px; 
   margin: 20px auto;
   flex-wrap: wrap;
-  max-width: 900px; /* 🔄 evita que se separen demasiado en pantallas grandes */
+  max-width: 900px; 
 }
 
 
@@ -80,10 +23,9 @@
   border-radius: 12px;
   padding: 12px;
   transition: transform 0.3s ease;
-  max-width: 260px; /* 🔄 ancho controlado */
+  max-width: 260px; 
   height: 120px;
 }
-
 
 
 .promo-box:hover {
@@ -111,17 +53,10 @@
   margin-left: 4px;
 }
 
-.inactive {
-  opacity: 0.6;
-  cursor: default;
-}
 
-.dual-box-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  margin-top: 40px;
-}
+
+/* quiz */
+
 
 .news-box, .quiz-box {
   flex: 1;
@@ -130,48 +65,6 @@
   border-radius: 12px;
   padding: 20px;
 }
-
-.news-box {
-  flex: 1;
-  background-color: #0a0a0a;
-  border: 2px solid #00ff99;
-  border-radius: 12px;
-  padding: 20px;
-}
-
-.news-item {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  background-color: transparent;
-  border: 2px solid transparent;
-}
-
-.news-item:hover {
-  transform: scale(1.03);
-  border: 2px solid #ffd700;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-  background-color: #111;
-}
-
-.news-thumb {
-  width: 50%;
-  height: 120px; /* 🔄 altura fija para todas */
-  border-radius: 8px;
-  object-fit: cover; /* 🔄 recorta sin deformar */
-}
-
-
-.news-item > div {
-  width: 50%;
-  padding-left: 12px;
-  color: white;
-}
-
 
 .quiz-button {
   background-color: #00ff99;
@@ -188,3 +81,19 @@
 .quiz-button:hover {
   background-color: #00cc88;
 }
+
+/*Cards*/
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #00ff99;
+}
+
+
+
+
+
+  
