@@ -70,7 +70,6 @@ function Home() {
   </button>
 </div>
 
-      <h1>Catálogo Gamer</h1>
 
       {/* Sección promocional */}
       <div className="promo-boxes">
