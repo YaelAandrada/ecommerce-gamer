@@ -1,38 +1,22 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-import React from 'react';
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import Navbar from './components/Navbar';
-
-import Home from './components/Home';
-
-import About from './components/About';
-
-import Admin from './components/Admin';
-
-import Login from './components/Login';
-
-=======
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Nosotros from './page/nosotros'
->>>>>>> ac8668fd5ebc56e4092ca4591816981c7242a734
-=======
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
 
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Home from './pages/Home';
-import { Dashboard } from './pages/Dashboard';
+// Componentes
+import Navbar from './components/Navbar';
+import AuthModal from './components/AuthModal';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
-import AuthModal from './components/AuthModal';
->>>>>>> login/register
+
+// Páginas
+import Home from './pages/Home';
+import About from './components/About';
+import Admin from './components/Admin';
+import Nosotros from './page/nosotros';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { Dashboard } from './pages/Dashboard';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -59,52 +43,11 @@ function App() {
   };
 
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Router>
-      <div className="App">
-        <Navbar/>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/admin" element={<Admin/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Login/>} />
-          <Route path="/wishlist" element={<Home/>} />
-          <Route path="/categoria/:slug" element={<Home/>} />
-        </Routes>
-
-      </div>
-    </Router>
-  );
-};
-=======
-   <BrowserRouter>
-      <Routes>
-        {/* Rutas de la aplicación */}
-        <Route
-          path="/"
-          element={
-            
-            <div>
-              <p>Hola</p>
-            </div>
-          }
-        />
-
-        <Route path="/nosotros" element={<Nosotros />} />
-
-        {/* Página de error 404 */}
-        {/* <Route path="*" element={<Error404 />} /> */}
-      </Routes>
-    </BrowserRouter>
->>>>>>> ac8668fd5ebc56e4092ca4591816981c7242a734
-
-export default App;
-=======
     <Router>
       <div className="App relative">
-        {/* Modal */}
+        <Navbar />
+
+        {/* Modal de autenticación */}
         {showModal && (
           <AuthModal
             view={modalView}
@@ -113,10 +56,18 @@ export default App;
           />
         )}
 
-        {/* Rutas */}
         <Routes>
+          {/* Públicas */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/login" element={<Login abrirModalLogin={abrirModalLogin} />} />
           <Route path="/register" element={<Register abrirModalRegister={abrirModalRegister} />} />
+          <Route path="/wishlist" element={<Home />} />
+          <Route path="/categoria/:slug" element={<Home />} />
+
+          {/* Protegidas */}
           <Route
             path="/home"
             element={
@@ -133,7 +84,6 @@ export default App;
               </ProtectedAdminRoute>
             }
           />
-          <Route path="/" element={<Navigate to="/login" replace />} />
         </Routes>
 
         <ToastContainer position="bottom-right" />
@@ -143,4 +93,3 @@ export default App;
 }
 
 export default App;
->>>>>>> login/register
