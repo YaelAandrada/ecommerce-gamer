@@ -1,4 +1,33 @@
+/* PALETA NEONBYTE */
+:root {
+  --neonbyte-dark: #0a0a0a;
+  --neonbyte-light: #f5f5f5;
+  --neonbyte-cyan: #00ffcc;
+  --neonbyte-magenta: #ff00cc;
+  --neonbyte-green: #00ff99;
+  --neonbyte-glow: rgba(0, 255, 153, 0.3);
+  --neonbyte-text: #111;
+}
 
+.dark-mode {
+  --neonbyte-bg: var(--neonbyte-dark);
+  --neonbyte-border: var(--neonbyte-cyan);
+  --neonbyte-shadow: var(--neonbyte-magenta);
+  --neonbyte-text: var(--neonbyte-cyan);
+  --neonbyte-card-bg: #121212;
+  --neonbyte-scrollbar: #093423;
+}
+
+.light-mode {
+  --neonbyte-bg: var(--neonbyte-light);
+  --neonbyte-border: var(--neonbyte-magenta);
+  --neonbyte-shadow: var(--neonbyte-cyan);
+  --neonbyte-text: #222;
+  --neonbyte-card-bg: #ffffff;
+  --neonbyte-scrollbar: #cccccc;
+}
+
+/* SCROLL POPULARES */
 .scroll-populares {
   overflow-x: auto;
   overflow-y: hidden;
@@ -14,7 +43,7 @@
 }
 
 .scroll-populares::-webkit-scrollbar-thumb {
-  background-color: #00ff99;
+  background-color: var(--neonbyte-scrollbar);
   border-radius: 4px;
 }
 
@@ -23,47 +52,41 @@
   width: 140px;
 }
 
+/* CONTENEDOR PRINCIPAL */
 .container-card {
- 
   max-width: 90vw !important;
-
+  background-color: var(--neonbyte-bg) !important;
+  border: 2px solid var(--neonbyte-border) !important;
+  box-shadow: 0 0 20px var(--neonbyte-shadow) !important;
+  color: var(--neonbyte-text) !important;
 }
 
-.container-card {
-  background-color: var(--neonbyte-dark) !important;
-  border: 2px solid var(--neonbyte-cyan) !important;
-  box-shadow: 0 0 20px var(--neonbyte-magenta) !important;
-  color: var(--neonbyte-cyan) !important;
-}
-
-
-
-/* catalogo*/
+/* PROMO BOXES */
 .promo-boxes {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  gap: 16px; 
+  gap: 16px;
   margin: 20px auto;
   flex-wrap: wrap;
-  max-width: 900px; 
+  max-width: 900px;
 }
-
 
 .promo-box {
   flex: 0 0 auto;
-  background-color: #0a0a0a;
-  border: none;
+  background-color: var(--neonbyte-card-bg);
+  border: 2px solid var(--neonbyte-border);
+  box-shadow: 0 0 12px var(--neonbyte-shadow);
   border-radius: 12px;
-  padding: 12px;
-  transition: transform 0.3s ease;
-  max-width: 260px; 
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 260px;
   height: 120px;
 }
 
-
 .promo-box:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 0 16px var(--neonbyte-shadow);
 }
 
 .promo-content {
@@ -71,7 +94,7 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: white;
+  color: var(--neonbyte-text);
 }
 
 .promo-icon {
@@ -87,21 +110,20 @@
   margin-left: 4px;
 }
 
-
-
-/* quiz */
-
-
-.news-box, .quiz-box {
+/* QUIZ */
+.news-box,
+.quiz-box {
   flex: 1;
-  background-color: #0a0a0a;
-  border: 2px solid #00ff99;
+  background-color: var(--neonbyte-card-bg);
+  border: 2px solid var(--neonbyte-border);
   border-radius: 12px;
   padding: 20px;
+  box-shadow: 0 0 12px var(--neonbyte-shadow);
 }
 
+/* BOTÓN QUIZ */
 .quiz-button {
-  background-color: #00ff99;
+  background-color: var(--neonbyte-green);
   color: #000;
   border: none;
   padding: 10px 20px;
@@ -116,38 +138,32 @@
   background-color: #00cc88;
 }
 
-/*Cards*/
+/* CARDS */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-hover:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 10px #00ff99;
+  box-shadow: 0 0 10px var(--neonbyte-green);
 }
 
-
-/*Novedades */
+/* NOVEDADES */
 .noticia-box {
-  background-color: #121212;
-  border: 2px solid #00ff99;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 255, 153, 0.3);
+  background-color: var(--neonbyte-card-bg);
+  border: 2px solid var(--neonbyte-border);
+  border-radius: 12px;
+  box-shadow: 0 0 10px var(--neonbyte-glow);
+  padding: 12px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .noticia-box:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 12px rgba(0, 255, 153, 0.5);
+  box-shadow: 0 0 14px var(--neonbyte-glow);
 }
 
 .noticia-wrapper {
   max-width: 1000px;
-  max-height: 100;
   margin: 0 auto;
 }
-
-
-
-
-  

@@ -1,9 +1,10 @@
 import React from 'react';
 import './Home.css';
-
+import { useState } from 'react';
 // import { FaShoppingCart } from 'react-icons/fa'; // Ya no lo necesitamos
 import { Link } from "react-router-dom";
 import ProductCard from '../components/ProductCard.jsx';
+import siImage from '../img/si.jpg';
 import freefireImage from '../img/freefire.png';
 import valorantImage from '../img/valorant.jpg';
 import steamImage from '../img/steam.jfif';
@@ -24,13 +25,26 @@ import gtavImage from '../img/gtav.jpg';
 import redImage  from '../img/red.jfif';
 
 function Home() {
-  
+  const featuredProducts = [
+    { title: 'Free Fire', image: freefireImage, customClass: 'card-featured' },
+    { title: 'Valorant', image: valorantImage, customClass: 'card-featured' },
+    { title: 'Steam', image: steamImage, customClass: 'card-featured' }
+  ];
 
-
+  const products = [
+    { title: 'Mobile Legends - Recarga Única', image: mobilelegendImage, customClass: 'card-scroll' },
+    { title: 'Counter Strike 2', image: csgoImage, customClass: 'card-scroll' },
+    { title: 'League of Legends', image: legendsImage, customClass: 'card-scroll' },
+    { title: 'Marvel Rivals', image: marvelImage, customClass: 'card-scroll' },
+    { title: 'Rainbow Six Mobile', image: rainbowImage, customClass: 'card-scroll' },
+    { title: 'Roblox', image: robloxImage, customClass: 'card-scroll' },
+    { title: 'Honkai Star Rail', image: starrailImage, customClass: 'card-scroll' }
+  ];
   
   
 
   return (
+
     
     <div className='home-container'>
     <div id="carouselGamer" className="carousel slide mb-4 mx-auto" data-bs-ride="carousel" style={{ maxWidth: '780px' }}>
@@ -60,6 +74,9 @@ function Home() {
 </div>
 
 
+
+
+
       {/* Sección promocional */}
       <div className="promo-boxes">
   <div className="promo-box">
@@ -78,7 +95,7 @@ function Home() {
       <div>
         <h3>Comprá</h3>
         <div>
-  <p className="promo-text">Comprá y acumulá BNX Coins.</p>
+  <p className="promo-text">Comprá y acumulá  Coins.</p>
 </div>
 
       </div>
@@ -100,7 +117,7 @@ function Home() {
       />
       <div>
         <h3>Jugá <span className="new-badge">¡Nuevo!</span></h3>
-        <p className="promo-text">Andá a la sección Gamify y divertite.</p>
+        <p className="promo-text">Jugá y divertite.</p>
       </div>
     </div>
   </div>
@@ -266,38 +283,53 @@ function Home() {
 </div>
 
 
-      {/* Novedades + Quiz */} 
-      <div className="row g-3"> 
-        <div className="col-md-8"> 
-          <h2 className="h5 text-success mb-3">Novedades Gamer</h2>
-           {[pokemonImage, minecraftImage, gratisImage].map((img, i) => (
-            <div className="noticia-wrapper" key={i}>
-  <div className="noticia-box d-flex gap-3 p-2">
-    <img src={img} alt="Noticia" className="img-fluid rounded" style={{ width: '60px', height: '60px', objectFit: 'cover' }} />
-    <div>
-      <h6 className="mb-1">Título de la noticia {i + 1}</h6>
-      <p className="mb-0">Descripción breve de la noticia.</p>
-    </div>
-  </div>
-         </div> ))}
-       </div>
-
-        <div className="quiz-box card bg-dark text-white border-success ">
-          <h2 className="section-title">Quiz Diario</h2>
-          <p>Demostrá cuánto sabés. ¡Jugá y sorprendete con tus resultados!</p>
-          <div className="d-flex flex-column gap-2">
-
-            <p className="mb-2">¿Cuál de estos juegos es un shooter táctico?</p>
-             <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. LoL es un MOBA.')}>League of Legends</button>
-      <button className="btn btn-outline-success" onClick={() => alert('¡Correcto! Valorant es un shooter táctico.')}>Valorant</button>
-      <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. Roblox es una plataforma de juegos.')}>Roblox</button>
+     <div className="row g-3">
+  <div className="col-md-8">
+    <h2 className="h5 text-success mb-3">Novedades Gamer</h2>
+    {[
+      {
+        img: pokemonImage,
+        title: 'Pokémon',
+        desc: 'Explorá regiones, capturá criaturas únicas y convertite en Maestro Pokémon.'
+      },
+      {
+        img: minecraftImage,
+        title: 'Minecraft',
+        desc: 'Construí, explorá y sobreviví en mundos infinitos con bloques y creatividad.'
+      },
+      {
+        img: gratisImage,
+        title: 'Juegos Gratis',
+        desc: 'Descubrí títulos gratuitos para jugar sin gastar un peso. ¡Diversión asegurada!'
+      }
+    ].map((noticia, i) => (
+      <div className="noticia-wrapper" key={i}>
+        <div className="noticia-box d-flex gap-3 p-2 align-items-center">
+          <img src={noticia.img} alt={noticia.title} className="img-fluid rounded" style={{ width: '60px', height: '60px', objectFit: 'cover' }} />
+          <div>
+            <h6 className="mb-1">{noticia.title}</h6>
+            <p className="mb-0">{noticia.desc}</p>
           </div>
         </div>
       </div>
-    </div>
-    
-  );
-  
-}
+    ))}
+  </div>
 
+  <div className="col-md-4">
+    <div className="quiz-box card bg-dark text-white border-success">
+      <h2 className="section-title">Quiz Diario</h2>
+      <p>Demostrá cuánto sabés. ¡Jugá y sorprendete con tus resultados!</p>
+      <div className="d-flex flex-column gap-2">
+        <p className="mb-2">¿Cuál de estos juegos es un shooter táctico?</p>
+        <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. LoL es un MOBA.')}>League of Legends</button>
+        <button className="btn btn-outline-success" onClick={() => alert('¡Correcto! Valorant es un shooter táctico.')}>Valorant</button>
+        <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. Roblox es una plataforma de juegos.')}>Roblox</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  );
+}
 export default Home;
