@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import { useState } from 'react';
 // import { FaShoppingCart } from 'react-icons/fa'; // Ya no lo necesitamos
 import { Link } from "react-router-dom";
 import ProductCard from '../components/ProductCard.jsx';
@@ -37,6 +38,7 @@ function Home() {
     { title: 'Roblox', image: robloxImage, customClass: 'card-scroll' },
     { title: 'Honkai Star Rail', image: starrailImage, customClass: 'card-scroll' }
   ];
+  
   
 
   return (
@@ -173,8 +175,8 @@ function Home() {
   </div>
 
 <h2 className='section-title'>Populares</h2>
-<div className="d-flex gap-2 overflow-auto px-2 pb-2 mb-4">
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+<div className="scroll-populares d-flex gap-2 px-2 pb-2 mb-4">
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={mobilelegendImage} className="card-img-top img-fluid" alt="Mobile Legends" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
@@ -182,7 +184,7 @@ function Home() {
     </div>
   </div>
 
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={csgoImage} className="card-img-top img-fluid" alt="Counter Strike 2" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
@@ -190,7 +192,7 @@ function Home() {
     </div>
   </div>
 
- <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+ <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={legendsImage} className="card-img-top img-fluid" alt="League of Legends" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
@@ -198,7 +200,7 @@ function Home() {
     </div>
   </div>
 
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={marvelImage} className="card-img-top img-fluid" alt="Marvel Rivals" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
@@ -206,7 +208,7 @@ function Home() {
     </div>
   </div>
 
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={rainbowImage} className="card-img-top img-fluid" alt="Rainbow Six Mobile" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
@@ -214,7 +216,7 @@ function Home() {
     </div>
   </div>
 
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={robloxImage} className="card-img-top img-fluid" alt="Roblox" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
@@ -222,14 +224,19 @@ function Home() {
     </div>
   </div>
 
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '140px' }}>
+  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
 
     <img src={starrailImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
     <div className="card-body text-center p-2">
       <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Honkai Star Rail</h6>
     </div>
   </div>
+  
+  
+  
 </div>
+
+
 
   <h2>Ver store</h2>
 </div>
@@ -237,10 +244,16 @@ function Home() {
 
       {/* Novedades + Quiz */} <div className="row g-3"> <div className="col-md-8"> <h2 className="h5 text-success mb-3">Novedades Gamer</h2> {[pokemonImage, minecraftImage, gratisImage].map((img, i) => ( <div className="d-flex gap-3 mb-3" key={i}> <img src={img} alt="Noticia" className="img-fluid rounded" style={{ width: '80px', height: '80px', objectFit: 'cover' }} /> <div> <h6 className="mb-1">Título de la noticia {i + 1}</h6> <p className="mb-0">Descripción breve de la noticia.</p> </div> </div> ))} </div>
 
-        <div className="quiz-box">
+        <div className="quiz-box card bg-dark text-white border-success ">
           <h2 className="section-title">Quiz Diario</h2>
           <p>Demostrá cuánto sabés. ¡Jugá y sorprendete con tus resultados!</p>
-          <button className="quiz-button">Jugar ya</button>
+          <div className="d-flex flex-column gap-2">
+
+            <p className="mb-2">¿Cuál de estos juegos es un shooter táctico?</p>
+             <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. LoL es un MOBA.')}>League of Legends</button>
+      <button className="btn btn-outline-success" onClick={() => alert('¡Correcto! Valorant es un shooter táctico.')}>Valorant</button>
+      <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. Roblox es una plataforma de juegos.')}>Roblox</button>
+          </div>
         </div>
       </div>
     </div>
