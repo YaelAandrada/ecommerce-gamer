@@ -139,7 +139,7 @@ const Navbar = () => {
               </div>
                     <Link to="/" 
                     className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                      NEONBYTS
+                      NeonByte
                       </Link>
                 </div>
               <div className="hidden md:flex space-x-8">
