@@ -1,26 +1,86 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./page/Home";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
-
+import { Routes, Route, Navigate } from "react-router-dom";
+import Footer from "./components/Footer";
+import About from "./components/About";
+import Nosotros from "./page/Nosotros";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
+import Register from "./components/RegisterForm";
+import Home from "./components/Home";
+import Administrador from './page/Administrador';
+import FormularioJuegos from "./components/FormularioJuegos";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+import AuthModal from "./components/AuthModal";
+import { ToastContainer } from "react-toastify";
 
 function App() {
+  const [showModal, setShowModal] = React.useState(false);
+  const [modalView, setModalView] = React.useState("login");
+
+  const abrirModalLogin = () => {
+    setShowModal(true);
+    setModalView("login");
+  };
+
+  const abrirModalRegister = () => {
+    setShowModal(true);
+    setModalView("register");
+  };
+
+  const handleLogin = () => setShowModal(false);
+  const handleRegister = () => setShowModal(false);
+
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <>
-            <Link to="/home">Home</Link>
-          </>
-        }
-      />
-      <Route path="/*" element={<Home />} />
-      
-    </Routes>
+    <div className="App relative">
+      <Navbar />
+
+      {showModal && (
+        <AuthModal
+          view={modalView}
+          onLogin={handleLogin}
+          onRegister={handleRegister}
+        />
+      )}
+
+      <Login />
+
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route
+          path="/login"
+          element={<Login abrirModalLogin={abrirModalLogin} />}
+        />
+        <Route path="/admin" element={<Administrador />} />
+        <Route
+          path="/register"
+          element={<Register abrirModalRegister={abrirModalRegister} />}
+        />
+        <Route path="/wishlist" element={<Home />} />
+        <Route path="/categoria/:slug" element={<Home />} />
+        <Route path="/formulario" element={<FormularioJuegos />} />
+
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedAdminRoute>
+            </ProtectedAdminRoute>
+          }
+        />
+      </Routes>
+          <Footer />
+      <ToastContainer position="bottom-right" />
+    </div>
   );
 }
 
