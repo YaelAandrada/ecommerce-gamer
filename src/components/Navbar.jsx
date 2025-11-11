@@ -114,7 +114,7 @@ const Navbar = ({ onAuthClick }) => {
   return (
     <nav className="bg-gray-800 text-white p-4 shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
+      
         <div className="flex items-center space-x-3">
           <div className="bg-blue-500 w-8 h-8 rounded-lg flex items-center justify-center">
             <span className="font-bold">🎮</span>
@@ -127,7 +127,7 @@ const Navbar = ({ onAuthClick }) => {
           </Link>
         </div>
 
-        {/* Links desktop */}
+        
         <div className="hidden md:flex space-x-6 items-center">
           <Link to="/" className={isActiveLink('/')}>Inicio</Link>
           <div className="relative">
@@ -154,7 +154,7 @@ const Navbar = ({ onAuthClick }) => {
           {isLoggedIn && <Link to="/wishlist" className={isActiveLink('/wishlist')}>❤️ Favoritos</Link>}
         </div>
 
-        {/* Auth & Cart */}
+       
         <div className="hidden md:flex items-center space-x-4">
           <ThemeToggle />
           {isLoggedIn ? (
@@ -173,7 +173,7 @@ const Navbar = ({ onAuthClick }) => {
               <button onClick={() => onAuthClick('register')} className="bg-green-500 px-3 py-1 rounded hover:bg-green-600">
                 Registrarse
               </button>
-              <button onClick={() => onAuthClick('/login')} className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+              <button onClick={() => onAuthClick('login')} className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                 Ingresar
               </button>
             </div>
@@ -188,7 +188,7 @@ const Navbar = ({ onAuthClick }) => {
           </button>
         </div>
 
-        {/* Mobile menu toggle */}
+      
         <button onClick={toggleMenu} className="md:hidden flex flex-col justify-center items-center w-8 h-8">
           <span className={`bg-white h-1 w-8 rounded transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
           <span className={`bg-white h-1 w-8 rounded my-1 transition-opacity ${isMenuOpen ? 'opacity-0' : ''}`}></span>
@@ -196,13 +196,12 @@ const Navbar = ({ onAuthClick }) => {
         </button>
       </div>
 
-      {/* Menú mobile */}
       {isMenuOpen && (
         <div className="md:hidden mt-4 space-y-3 px-4">
           <Link to="/" onClick={toggleMenu} className="block py-2 hover:text-blue-400">🏠 Inicio</Link>
           <Link to="/about" onClick={toggleMenu} className="block py-2 hover:text-blue-400">👥 Nosotros</Link>
           
-          {/* Categorías en mobile */}
+         
           <div className="py-2">
             <span className="text-gray-400">Categorías:</span>
             <div className="grid grid-cols-2 gap-2 mt-2">
@@ -262,7 +261,7 @@ const Navbar = ({ onAuthClick }) => {
         </div>
       )}
 
-      {/* Carrito */}
+ 
       {isCartOpen && (
         <>
           <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={toggleCart}></div>

@@ -6,7 +6,7 @@ import Nosotros from "./page/Nosotros";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/RegisterForm";
-import Home from "./components/Home";
+import Home from "./src/page/Home";
 import Administrador from './page/Administrador';
 import FormularioJuegos from "./components/FormularioJuegos";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -40,6 +40,8 @@ function App() {
           view={modalView}
           onLogin={handleLogin}
           onRegister={handleRegister}
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
         />
       )}
 
