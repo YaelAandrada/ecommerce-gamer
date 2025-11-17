@@ -7,7 +7,7 @@ import Nosotros from "./page/Nosotros";
 import Login from "./components/Login";
 import Register from "./components/RegisterForm";
 import Home from "./components/Home";
-import Administrador from '../page/Administrador';
+import Administrador from './page/Administrador';
 import FormularioJuegos from "./components/FormularioJuegos";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
