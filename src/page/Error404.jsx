@@ -22,7 +22,7 @@ function Error404() {
 
  <a
   href="/"
-  className="relative border-2 border-[#00ff9d] text-[#00ff9d] px-6 py-3 rounded-xl font-semibold overflow-hidden group transition-all duration-300"
+  className="relative border-2 border-[#08fd9f] text-[#00ff9d] px-6 py-3 rounded-xl font-semibold overflow-hidden group transition-all duration-300"
 >
   <span className="relative z-10 group-hover:text-black transition-colors duration-300">
     Reiniciar Partida
