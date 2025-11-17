@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/vite": "^4.1.16",
     "bcryptjs": "^3.0.2",
+    "cookie": "^1.0.2",
     "firebase": "^12.5.0",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
@@ -25,6 +26,7 @@
     "react-router-dom": "^7.9.5",
     "react-toastify": "^11.0.5",
     "semver": "^7.7.3",
+    "set-cookie-parser": "^2.7.2",
     "tailwindcss": "^4.1.16",
     "zod": "^4.1.12"
   },

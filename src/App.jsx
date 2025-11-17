@@ -43,10 +43,8 @@ function App() {
         />
       )}
 
-      <Login />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/about" element={<About />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route
@@ -62,7 +60,7 @@ function App() {
         <Route path="/categoria/:slug" element={<Home />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
 
-        <Route
+        {/* <Route
           path="/home"
           element={
             <ProtectedRoute>
@@ -76,7 +74,7 @@ function App() {
             <ProtectedAdminRoute>
             </ProtectedAdminRoute>
           }
-        />
+        /> */}
       </Routes>
           <Footer />
       <ToastContainer position="bottom-right" />

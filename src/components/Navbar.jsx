@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
 const Navbar = ({ onAuthClick }) => {
@@ -7,6 +7,7 @@ const Navbar = ({ onAuthClick }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const saved = localStorage.getItem('userLoggedIn');
@@ -252,7 +253,7 @@ const Navbar = ({ onAuthClick }) => {
                 Registrarse
               </button>
               <button
-                onClick={() => onAuthClick('login')}
+                onClick={() => navigate('/login')}
                 className="w-full bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
               >
                 Ingresar
