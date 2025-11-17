@@ -139,7 +139,7 @@ const Navbar = ({ onAuthClick }) => {
                 {categories.map(cat => (
                   <Link
                     key={cat.id}
-                    to={`/categoria/${cat.slug}`}
+                    to={`/categorias`}
                     className="block px-3 py-2 hover:bg-gray-700 rounded whitespace-nowrap"
                     onClick={() => setIsCategoriesOpen(false)}
                   >
@@ -149,7 +149,7 @@ const Navbar = ({ onAuthClick }) => {
               </div>
             )}
           </div>
-          <Link to="/about" className={isActiveLink('/about')}>Nosotros</Link>
+          <Link to="/nosotros" className={isActiveLink('/about')}>Nosotros</Link>
           {isAdmin && <Link to="/admin" className={isActiveLink('/admin')}>Admin</Link>}
           {isLoggedIn && <Link to="/wishlist" className={isActiveLink('/wishlist')}>❤️ Favoritos</Link>}
         </div>

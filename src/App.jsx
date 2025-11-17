@@ -12,6 +12,7 @@ import FormularioJuegos from "./components/FormularioJuegos";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import AuthModal from "./components/AuthModal";
+import Categorias from "./page/Categorias";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -51,13 +52,14 @@ function App() {
           path="/login"
           element={<Login abrirModalLogin={abrirModalLogin} />}
         />
+        <Route path="/categorias" element={<Categorias />} />
         <Route path="/admin" element={<Administrador />} />
         <Route
           path="/register"
           element={<Register abrirModalRegister={abrirModalRegister} />}
         />
         <Route path="/wishlist" element={<Home />} />
-        <Route path="/categoria/:slug" element={<Home />} />
+        {/* <Route path="/categoria/:slug" element={<Home />} /> */}
         <Route path="/footer" element={<Footer />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
 
