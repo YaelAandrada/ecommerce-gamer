@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Nosotros from "./page/Nosotros";
-import Login from "./components/Login";
+import Login from "./components/LoginModal";
 import Register from "./components/RegisterForm";
 import Home from "./components/Home";
 import Administrador from './page/Administrador';
@@ -48,16 +48,13 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/about" element={<About />} />
         <Route path="/nosotros" element={<Nosotros />} />
-        <Route
-          path="/login"
-          element={<Login abrirModalLogin={abrirModalLogin} />}
-        />
+        <Route path="/loginModal" element={<Login />} />
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/admin" element={<Administrador />} />
-        <Route
+        {/* <Route
           path="/register"
           element={<Register abrirModalRegister={abrirModalRegister} />}
-        />
+        /> */}
         <Route path="/wishlist" element={<Home />} />
         {/* <Route path="/categoria/:slug" element={<Home />} /> */}
         <Route path="/footer" element={<Footer />} />

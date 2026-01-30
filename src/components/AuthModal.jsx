@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 export default function AuthModal({ view, onLogin, onRegister, isOpen, onClose }) {
   const [show, setShow] = useState(false);
 
