@@ -6,7 +6,7 @@ function ProtectedAdminRoute({children}) {
   // Si no hay usuario, redirigir
   if(!userString){
     console.log("NO PODES PASAR INTRUSO!!! - No hay usuario autenticado");    
-    return <Navigate to="/home" replace /> 
+    return <Navigate to="/" replace /> 
   }
 
   try {
@@ -15,7 +15,7 @@ function ProtectedAdminRoute({children}) {
     // Verificar que el usuario tenga rol de admin
     if(user.role !== 'admin'){
       console.log("NO PODES PASAR INTRUSO!!! - No tienes permisos de administrador");    
-      return <Navigate to="/home" replace /> 
+      return <Navigate to="/" replace /> 
     }
     
     // Si pasa todas las validaciones, permitir acceso
@@ -24,8 +24,9 @@ function ProtectedAdminRoute({children}) {
     
   } catch (error) {
     console.error("Error al parsear datos del usuario:", error);
-    return <Navigate to="/home" replace /> 
+    return <Navigate to="/" replace /> 
   }
 }
+
 
 export default ProtectedAdminRoute

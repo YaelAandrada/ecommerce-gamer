@@ -68,7 +68,7 @@ function Home() {
       await googleAuthService.logout();
     }
     localStorage.removeItem('user');
-    navigate('/login');
+    navigate('/loginForm');
   };
 
   const handleLogin = (userData) => {

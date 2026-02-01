@@ -49,33 +49,37 @@ function LoginForm({onLogin}) {
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-    <Input
-      label="Email"
-      type="email"
-      name="email"
-      placeholder="tu@email.com"
-      register={register}
-      error={errors.email}
-    />
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          placeholder="tu@email.com"
+          register={register}
+          error={errors.email}
+        />
 
-    <Input
-      label="Contraseña"
-      type="password"
-      name="password"
-      placeholder="••••••"
-      register={register}
-      error={errors.password}
-    />
+        <Input
+          label="Contraseña"
+          type="password"
+          name="password"
+          placeholder="••••••"
+          register={register}
+          error={errors.password}
+        />
 
-    <button
-      type="submit"
-      disabled={isSubmitting}
-      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-    >
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+        >
       {isSubmitting ? 'Iniciando sesión...' : 'Iniciar Sesión'}
     </button>
   </form>
+  </div>
+  </div>
   )
 }
 

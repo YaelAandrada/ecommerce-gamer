@@ -150,7 +150,7 @@ const Navbar = ({ onAuthClick }) => {
               </div>
             )}
           </div>
-          <Link to="/about" className={isActiveLink('/about')}>Nosotros</Link>
+          <Link to="/Nosotros" className={isActiveLink('/Nosotros')}>Nosotros</Link>
           {isAdmin && <Link to="/admin" className={isActiveLink('/admin')}>Admin</Link>}
           {isLoggedIn && <Link to="/wishlist" className={isActiveLink('/wishlist')}>❤️ Favoritos</Link>}
         </div>
@@ -174,9 +174,12 @@ const Navbar = ({ onAuthClick }) => {
               <button onClick={() => onAuthClick('register')} className="bg-green-500 px-3 py-1 rounded hover:bg-green-600">
                 Registrarse
               </button>
-              <button onClick={() => onAuthClick('/login')} className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+              <button onClick={() => navigate('/login')} className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                 Ingresar
               </button>
+              {/* <button onClick={() => onAuthClick('login')} className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                Ingresar
+              </button> */}
             </div>
           )}
           <button onClick={toggleCart} className="relative px-2 py-1 hover:bg-gray-700 rounded">

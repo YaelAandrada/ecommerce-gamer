@@ -3,10 +3,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Nosotros from "./page/Nosotros";
-import Login from "./components/Login";
+import Login from "./components/LoginForm";
 import Navbar from "./components/Navbar";
 import Register from "./components/RegisterForm";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import Administrador from './page/Administrador';
 import FormularioJuegos from "./components/FormularioJuegos";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -15,33 +15,12 @@ import AuthModal from "./components/AuthModal";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
-  const [modalView, setModalView] = React.useState("login");
 
-  const abrirModalLogin = () => {
-    setShowModal(true);
-    setModalView("login");
-  };
 
-  const abrirModalRegister = () => {
-    setShowModal(true);
-    setModalView("register");
-  };
-
-  const handleLogin = () => setShowModal(false);
-  const handleRegister = () => setShowModal(false);
 
   return (
     <div className="App relative">
       <Navbar />
-
-      {showModal && (
-        <AuthModal
-          view={modalView}
-          onLogin={handleLogin}
-          onRegister={handleRegister}
-        />
-      )}
 
 
       <Routes>
@@ -49,33 +28,19 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route
           path="/login"
-          element={<Login abrirModalLogin={abrirModalLogin} />}
+          element={<Login />}
         />
         <Route path="/admin" element={<Administrador />} />
         <Route
           path="/register"
-          element={<Register abrirModalRegister={abrirModalRegister} />}
+          element={<Register />}
         />
-        <Route path="/wishlist" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/categoria/:slug" element={<Home />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
-
-        {/* <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedAdminRoute>
-            </ProtectedAdminRoute>
-          }
-        /> */}
       </Routes>
+
+
           <Footer />
       <ToastContainer position="bottom-right" />
     </div>
