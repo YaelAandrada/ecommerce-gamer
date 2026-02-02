@@ -130,7 +130,7 @@ const Navbar = ({ onAuthClick }) => {
 
         {/* Links desktop */}
         <div className="hidden md:flex space-x-6 items-center">
-          <Link to="/" className={isActiveLink('/')}>Inicio</Link>
+          <Link to="/home" className={isActiveLink('/')}>Inicio</Link>
           <div className="relative">
             <button onClick={toggleCategories} className={isActiveLink('/categoria')}>
               Categorías ▼
@@ -267,7 +267,7 @@ const Navbar = ({ onAuthClick }) => {
       {isCartOpen && (
         <>
           <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={toggleCart}></div>
-          <div className="absolute right-4 top-20 w-80 bg-gray-900 rounded-lg shadow-xl z-50 p-4">
+          <div className="absolute right-4 top-20 w-80 bg-gray-900 rounded-lg bg-opacity-100 shadow-xl z-50 p-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-semibold">Carrito</h3>
               <button onClick={toggleCart} className="text-gray-400 hover:text-white">X</button>

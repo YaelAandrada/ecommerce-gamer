@@ -68,16 +68,18 @@ function Home() {
       await googleAuthService.logout();
     }
     localStorage.removeItem('user');
-    navigate('/loginForm');
+    setUser(null);
   };
 
   const handleLogin = (userData) => {
-    setUser(userData);
-  };
+  localStorage.setItem('user', JSON.stringify(userData));
+  setUser(userData);
+};
 
   const handleRegister = (userData) => {
-    setUser(userData);
-  };
+  localStorage.setItem('user', JSON.stringify(userData));
+  setUser(userData);
+};
 
   // Mostrar modal si no hay usuario
   if (!user) {
@@ -118,7 +120,7 @@ function Home() {
           <div className="px-4 py-5 sm:p-6">
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-3xl font-bold text-gray-900">
-                ¡Bienvenido, {user.name || user.username}!
+                ¡Bienvenido, {user?.name || user?.username || 'Usuario'}!
               </h1>
               <button
                 onClick={handleLogout}
