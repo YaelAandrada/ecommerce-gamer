@@ -1,335 +1,131 @@
-import React from 'react';
-import './Home.css';
-import { useState } from 'react';
-// import { FaShoppingCart } from 'react-icons/fa'; // Ya no lo necesitamos
+import React from "react";
 import { Link } from "react-router-dom";
-import ProductCard from '../components/ProductCard.jsx';
-import siImage from '../img/si.jpg';
-import freefireImage from '../img/freefire.png';
-import valorantImage from '../img/valorant.jpg';
-import steamImage from '../img/steam.jfif';
-import mobilelegendImage from '../img/mobilelegends.png';
-import csgoImage from '../img/csgo.jpg';
-import legendsImage from '../img/legends.avif';
-import marvelImage from '../img/marvel.jpg';
-import rainbowImage from '../img/rainbow.jpeg';
-import robloxImage from '../img/roblox.jpg';
-import starrailImage from '../img/starrail.jpg';
-import pokemonImage from '../img/pokemon.webp';
-import minecraftImage from '../img/minecraft.jfif';
-import gratisImage from   '../img/gratis.jfif'
-import neonImage from '../img/neon.png';
-import neon2Image from '../img/neon2.png';
-import neon3Image from '../img/neon3.png';
-import gtavImage from '../img/gtav.jpg';
-import redImage  from '../img/red.jfif';
+
+import freefireImage from "../img/freefire.png";
+import valorantImage from "../img/valorant.jpg";
+import steamImage from "../img/steam.jfif";
+import mobilelegendImage from "../img/mobilelegends.png";
+import csgoImage from "../img/csgo.jpg";
+import legendsImage from "../img/legends.avif";
+import marvelImage from "../img/marvel.jpg";
+import rainbowImage from "../img/rainbow.jpeg";
+import robloxImage from "../img/roblox.jpg";
+import starrailImage from "../img/starrail.jpg";
+import pokemonImage from "../img/pokemon.webp";
+import minecraftImage from "../img/minecraft.jfif";
+import gratisImage from "../img/gratis.jfif";
+import neonImage from "../img/neon.png";
+import neon2Image from "../img/neon2.png";
+import neon3Image from "../img/neon3.png";
+import gtavImage from "../img/gtav.jpg";
+import redImage from "../img/red.jfif";
 
 function Home() {
-  const featuredProducts = [
-    { title: 'Free Fire', image: freefireImage, customClass: 'card-featured' },
-    { title: 'Valorant', image: valorantImage, customClass: 'card-featured' },
-    { title: 'Steam', image: steamImage, customClass: 'card-featured' }
-  ];
-
-  const products = [
-    { title: 'Mobile Legends - Recarga Única', image: mobilelegendImage, customClass: 'card-scroll' },
-    { title: 'Counter Strike 2', image: csgoImage, customClass: 'card-scroll' },
-    { title: 'League of Legends', image: legendsImage, customClass: 'card-scroll' },
-    { title: 'Marvel Rivals', image: marvelImage, customClass: 'card-scroll' },
-    { title: 'Rainbow Six Mobile', image: rainbowImage, customClass: 'card-scroll' },
-    { title: 'Roblox', image: robloxImage, customClass: 'card-scroll' },
-    { title: 'Honkai Star Rail', image: starrailImage, customClass: 'card-scroll' }
-  ];
-  
-  
-
   return (
+    <div className="bg-black text-white min-h-screen px-4 pb-10">
 
-    
-    <div className='home-container'>
-    <div id="carouselGamer" className="carousel slide mb-4 mx-auto" data-bs-ride="carousel" style={{ maxWidth: '780px' }}>
-
-
-
-
-  <div className="carousel-inner">
-    <div className="carousel-item active">
-      <img src={neonImage} className="d-block w-100" alt="NeonByte" style={{ height: '500px', objectFit: 'cover' }} />
-    </div>
-    <div className="carousel-item">
-      <img src={neon2Image} className="d-block w-100" alt="NeonByte" style={{ height: '500px', objectFit: 'cover' }} />
-    </div>
-    <div className="carousel-item">
-      <img src={neon3Image} className="d-block w-100" alt="NeonByte" style={{ height: '500px', objectFit: 'cover' }} />
-    </div>
-  </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselGamer" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Anterior</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselGamer" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Siguiente</span>
-  </button>
-</div>
-
-
-
-
-
-      {/* Sección promocional */}
-      <div className="promo-boxes">
-  <div className="promo-box">
-    <Link to="/juegos" className="promo-content">
-      <div
-        className="cart-icon"
-        dangerouslySetInnerHTML={{
-          __html: `<lord-icon
-            src="https://cdn.lordicon.com/slkvcfos.json"
-            trigger="hover"
-            colors="primary:#00ff99"
-            style="width:40px;height:40px">
-          </lord-icon>`
-        }}
-      />
-      <div>
-        <h3>Comprá</h3>
-        <div>
-  <p className="promo-text">Comprá y acumulá  Coins.</p>
-</div>
-
+      {/* CAROUSEL */}
+      <div className="max-w-5xl mx-auto mb-10 rounded-xl overflow-hidden">
+        <div className="relative">
+          <img src={neonImage} alt="slide" className="w-full h-[420px] object-cover" />
+        </div>
       </div>
-    </Link>
-  </div>
 
-  <div className="promo-box">
-    <div className="promo-content inactive">
-      <div
-        className="promo-icon"
-        dangerouslySetInnerHTML={{
-          __html: `<lord-icon
-            src="https://cdn.lordicon.com/kthelypq.json"
-            trigger="hover"
-            colors="primary:#00ff99"
-            style="width:40px;height:40px">
-          </lord-icon>`
-        }}
-      />
-      <div>
-        <h3>Jugá <span className="new-badge">¡Nuevo!</span></h3>
-        <p className="promo-text">Jugá y divertite.</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="promo-box">
-    <div className="promo-content inactive">
-      <div
-        className="promo-icon"
-        dangerouslySetInnerHTML={{
-          __html: `<lord-icon
-            src="https://cdn.lordicon.com/xljvqlng.json"
-            trigger="hover"
-            colors="primary:#00ff99"
-            style="width:40px;height:40px">
-          </lord-icon>`
-        }}
-      />
-      <div>
-        <h3>Canjeá</h3>
-        <p className="promo-text">Canjeá premios con tus coins.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-      {/* Catálogo principal */}
-<div className='container-card'>
-  <h2 className='section-title'>Recomendados para ti</h2>
-<div className="d-flex gap-3 flex-wrap justify-content-center px-2 pb-4">
-
-
-
-
-   <div className="card card-hover bg-dark text-white border-success" style={{ width: '450px' }}>
-
-  <img src={freefireImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '200px', objectFit: 'cover' }} />
-  <div className="card-body text-center p-3">
-    <h5 className="card-title mb-0">Free Fire</h5>
-  </div>
-</div>
-
-
-   <div className="card card-hover bg-dark text-white border-success" style={{ width: '450px' }}>
-
-  <img src={valorantImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '200px', objectFit: 'cover' }} />
-  <div className="card-body text-center p-3">
-    <h5 className="card-title mb-0">Valorant</h5>
-  </div>
-</div>
-
-
-     <div className="card card-hover bg-dark text-white border-success" style={{ width: '450px' }}>
-
-  <img src={steamImage} className="card-img-top img-fluid" alt="Free Fire" style={{ height: '200px', objectFit: 'cover' }} />
-  <div className="card-body text-center p-3">
-    <h5 className="card-title mb-0" >Steam</h5>
-  </div>
-</div>
-  </div>
-
-<h2 className='section-title'>Populares</h2>
-<div className="scroll-populares d-flex flex-nowrap gap-2 px-2 pb-2 mb-4">
-
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={mobilelegendImage} className="card-img-top img-fluid" alt="Mobile Legends" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Mobile Legends - Recarga Única</h6>
-    </div>
-  </div>
-
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={csgoImage} className="card-img-top img-fluid" alt="Counter Strike 2" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Counter Strike 2</h6>
-    </div>
-  </div>
-
- <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={legendsImage} className="card-img-top img-fluid" alt="League of Legends" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>League of Legends</h6>
-    </div>
-  </div>
-
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={marvelImage} className="card-img-top img-fluid" alt="Marvel Rivals" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Marvel Rivals</h6>
-    </div>
-  </div>
-
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={rainbowImage} className="card-img-top img-fluid" alt="Rainbow Six Mobile" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Rainbow Six Mobile</h6>
-    </div>
-  </div>
-
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={robloxImage} className="card-img-top img-fluid" alt="Roblox" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Roblox</h6>
-    </div>
-  </div>
-
-  <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={starrailImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Honkai Star Rail</h6>
-    </div>
-  </div>
-    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={pokemonImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Pokemon</h6>
-    </div>
-  </div>
-    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={minecraftImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>minecraft</h6>
-    </div>
-  </div>
-    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={gratisImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Juegos gratis</h6>
-    </div>
-  </div>
-    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={gtavImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>GTA V</h6>
-    </div>
-  </div>
-    <div className="card card-hover bg-dark text-white border-success" style={{ width: '160px' }}>
-
-    <img src={redImage} className="card-img-top img-fluid" alt="Honkai Star Rail" style={{ height: '80px', objectFit: 'cover' }} />
-    <div className="card-body text-center p-2">
-      <h6 className="card-title mb-0" style={{ fontSize: '0.85rem' }}>Red Dead Redemption</h6>
-    </div>
-  </div>
-  
-  
-  
-</div>
-
-
-
-  <h2>Ver store</h2>
-</div>
-
-
-     <div className="row g-3">
-  <div className="col-md-8">
-    <h2 className="h5 text-success mb-3">Novedades Gamer</h2>
-    {[
-      {
-        img: pokemonImage,
-        title: 'Pokémon',
-        desc: 'Explorá regiones, capturá criaturas únicas y convertite en Maestro Pokémon.'
-      },
-      {
-        img: minecraftImage,
-        title: 'Minecraft',
-        desc: 'Construí, explorá y sobreviví en mundos infinitos con bloques y creatividad.'
-      },
-      {
-        img: gratisImage,
-        title: 'Juegos Gratis',
-        desc: 'Descubrí títulos gratuitos para jugar sin gastar un peso. ¡Diversión asegurada!'
-      }
-    ].map((noticia, i) => (
-      <div className="noticia-wrapper" key={i}>
-        <div className="noticia-box d-flex gap-3 p-2 align-items-center">
-          <img src={noticia.img} alt={noticia.title} className="img-fluid rounded" style={{ width: '60px', height: '60px', objectFit: 'cover' }} />
+      {/* PROMOS */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto mb-12">
+        <Link to="/juegos" className="bg-zinc-900 hover:bg-zinc-800 transition rounded-xl p-5 flex gap-4 items-center border border-green-500">
+          <div dangerouslySetInnerHTML={{ __html: `<lord-icon src="https://cdn.lordicon.com/slkvcfos.json" trigger="hover" colors="primary:#00ff99" style="width:40px;height:40px"></lord-icon>` }} />
           <div>
-            <h6 className="mb-1">{noticia.title}</h6>
-            <p className="mb-0">{noticia.desc}</p>
+            <h3 className="text-lg font-semibold">Comprá</h3>
+            <p className="text-sm text-zinc-400">Comprá y acumulá Coins</p>
+          </div>
+        </Link>
+
+        <div className="bg-zinc-900 rounded-xl p-5 flex gap-4 items-center opacity-70">
+          <div dangerouslySetInnerHTML={{ __html: `<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#00ff99" style="width:40px;height:40px"></lord-icon>` }} />
+          <div>
+            <h3 className="text-lg font-semibold">
+              Jugá <span className="text-xs bg-green-500 text-black px-2 py-0.5 rounded ml-1">Nuevo</span>
+            </h3>
+            <p className="text-sm text-zinc-400">Jugá y divertite</p>
+          </div>
+        </div>
+
+        <div className="bg-zinc-900 rounded-xl p-5 flex gap-4 items-center opacity-70">
+          <div dangerouslySetInnerHTML={{ __html: `<lord-icon src="https://cdn.lordicon.com/xljvqlng.json" trigger="hover" colors="primary:#00ff99" style="width:40px;height:40px"></lord-icon>` }} />
+          <div>
+            <h3 className="text-lg font-semibold">Canjeá</h3>
+            <p className="text-sm text-zinc-400">Canjeá premios</p>
           </div>
         </div>
       </div>
-    ))}
-  </div>
 
-  <div className="col-md-4">
-    <div className="quiz-box card bg-dark text-white border-success">
-      <h2 className="section-title">Quiz Diario</h2>
-      <p>Demostrá cuánto sabés. ¡Jugá y sorprendete con tus resultados!</p>
-      <div className="d-flex flex-column gap-2">
-        <p className="mb-2">¿Cuál de estos juegos es un shooter táctico?</p>
-        <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. LoL es un MOBA.')}>League of Legends</button>
-        <button className="btn btn-outline-success" onClick={() => alert('¡Correcto! Valorant es un shooter táctico.')}>Valorant</button>
-        <button className="btn btn-outline-success" onClick={() => alert('Incorrecto. Roblox es una plataforma de juegos.')}>Roblox</button>
-      </div>
-    </div>
-  </div>
-</div>
+      {/* RECOMENDADOS */}
+      <section className="max-w-6xl mx-auto mb-12">
+        <h2 className="text-xl font-bold mb-4 text-green-400">Recomendados para vos</h2>
+
+        <div className="flex flex-wrap justify-center gap-6">
+          {[freefireImage, valorantImage, steamImage].map((img, i) => (
+            <div key={i} className="w-[420px] bg-zinc-900 rounded-xl overflow-hidden border border-green-500 hover:scale-[1.02] transition">
+              <img src={img} className="h-[200px] w-full object-cover" />
+              <div className="p-3 text-center font-semibold">
+                {i === 0 ? "Free Fire" : i === 1 ? "Valorant" : "Steam"}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* POPULARES */}
+      <section className="max-w-6xl mx-auto mb-12">
+        <h2 className="text-xl font-bold mb-3 text-green-400">Populares</h2>
+
+        <div className="flex gap-3 overflow-x-auto pb-3">
+          {[
+            mobilelegendImage, csgoImage, legendsImage, marvelImage,
+            rainbowImage, robloxImage, starrailImage, pokemonImage,
+            minecraftImage, gratisImage, gtavImage, redImage
+          ].map((img, i) => (
+            <div key={i} className="min-w-40 bg-zinc-900 rounded-lg border border-green-500">
+              <img src={img} className="h-20 w-full object-cover rounded-t-lg" />
+              <div className="p-2 text-center text-xs font-medium">
+                Juego #{i + 1}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* NOTICIAS + QUIZ */}
+      <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:col-span-2">
+          <h2 className="text-lg font-semibold text-green-400 mb-3">Novedades Gamer</h2>
+
+          {[pokemonImage, minecraftImage, gratisImage].map((img, i) => (
+            <div key={i} className="flex gap-3 bg-zinc-900 p-3 rounded-lg mb-3">
+              <img src={img} className="w-16 h-16 object-cover rounded" />
+              <div>
+                <h4 className="font-semibold">Noticia {i + 1}</h4>
+                <p className="text-sm text-zinc-400">Descripción breve del juego</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-zinc-900 border border-green-500 rounded-xl p-4">
+          <h2 className="text-lg font-semibold mb-2">Quiz Diario</h2>
+          <p className="text-sm text-zinc-400 mb-3">¿Cuál es un shooter táctico?</p>
+
+          <div className="flex flex-col gap-2">
+            <button className="border border-green-500 rounded py-1 hover:bg-green-500 hover:text-black">League of Legends</button>
+            <button className="border border-green-500 rounded py-1 hover:bg-green-500 hover:text-black">Valorant</button>
+            <button className="border border-green-500 rounded py-1 hover:bg-green-500 hover:text-black">Roblox</button>
+          </div>
+        </div>
+      </section>
 
     </div>
   );
 }
+
 export default Home;

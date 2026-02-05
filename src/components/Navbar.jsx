@@ -60,7 +60,7 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
 
         {/* Desktop links */}
         <div className="hidden md:flex space-x-6 items-center">
-          <Link to="/" className={isActiveLink('/')}>Inicio</Link>
+          <Link to="/home" className={isActiveLink('/')}>Inicio</Link>
 
           <div className="relative">
             <button onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}>
