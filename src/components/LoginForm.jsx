@@ -17,10 +17,14 @@ function LoginForm({ onLogin }) {
   const onSubmit = async (data) => {
     try {
       const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find(u => u.email === data.email);
+      const user = users.find(
+        u =>
+          u.email === data.identifier ||
+          u.username === data.identifier
+      );
 
       if (!user) {
-        toast.error('Usuario no encontrado');
+        toast.error('Usuario o email no encontrado');
         return;
       }
 
@@ -55,12 +59,12 @@ function LoginForm({ onLogin }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Input
-        label="Email"
-        type="email"
-        name="email"
-        placeholder="tu@email.com"
+        label="Usuario o Email"
+        type="text"
+        name="identifier"
+        placeholder="usuario o email"
         register={register}
-        error={errors.email}
+        error={errors.identifier}
       />
 
       <Input
