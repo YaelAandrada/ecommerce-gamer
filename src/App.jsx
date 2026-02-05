@@ -1,4 +1,4 @@
-import React from "react";
+import {react, useState, useEffect} from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import About from "./components/About";
@@ -16,11 +16,41 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
 
+  const [user, setUser] = useState(null);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authView, setAuthView] = useState('login');
 
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setIsAuthOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+  };
 
   return (
-    <div className="App relative">
-      <Navbar />
+    <>
+      <Navbar
+        user={user}
+        onLoginClick={() => {
+          setAuthView('login');
+          setIsAuthOpen(true);
+        }}
+        onRegisterClick={() => {
+          setAuthView('register');
+          setIsAuthOpen(true);
+        }}
+        onLogout={handleLogout}
+      />
 
 
       <Routes>
@@ -39,11 +69,17 @@ function App() {
         <Route path="/categoria/:slug" element={<Home />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
       </Routes>
+      
+      <AuthModal
+        isOpen={isAuthOpen}
+        view={authView}
+        onClose={() => setIsAuthOpen(false)}
+        onLogin={handleLogin}
+      />
 
-
-          <Footer />
+      <Footer />
       <ToastContainer position="bottom-right" />
-    </div>
+    </>
   );
 }
 

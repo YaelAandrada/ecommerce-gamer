@@ -15,10 +15,10 @@ function Home() {
   const [showTaskForm, setShowTaskForm] = useState(false);
 
   // Cargar usuario desde localStorage
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
+ useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
     }
   }, []);
 
@@ -34,6 +34,13 @@ function Home() {
   }, [tasks]);
 
   // CRUD funciones
+
+  const handleAuthSuccess = (userData) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
+    setIsAuthOpen(false);
+  };
+  
   const handleTaskSubmit = (taskData) => {
     if (editingTask) {
       setTasks(prev =>
@@ -83,34 +90,39 @@ function Home() {
 
   // Mostrar modal si no hay usuario
   if (!user) {
-    return (
-      <>
-        <AuthModal
-          view={view}
-          onLogin={handleLogin}
-          onRegister={handleRegister}
-        />
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-50">
-          <button
-            onClick={() => setView('login')}
-            className={`px-4 py-2 rounded text-white text-sm ${
-              view === 'login' ? 'bg-blue-600' : 'bg-gray-700'
-            }`}
-          >
-            Iniciar sesión
-          </button>
-          <button
-            onClick={() => setView('register')}
-            className={`px-4 py-2 rounded text-white text-sm ${
-              view === 'register' ? 'bg-green-600' : 'bg-gray-700'
-            }`}
-          >
-            Registrarse
-          </button>
-        </div>
-      </>
-    );
-  }
+  return (
+    <>
+      <Navbar
+        onAuthClick={(type) => {
+          setView(type);
+          setIsAuthOpen(true);
+        }}
+      />
+
+      {/* 🔐 MODAL DE LOGIN / REGISTER */}
+      <AuthModal
+        view={view}
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onLogin={handleAuthSuccess}
+        onRegister={handleAuthSuccess}
+      />
+
+      {/* CONTENIDO */}
+      <div className="p-10">
+        {user ? (
+          <h1 className="text-2xl font-bold">
+            Bienvenido {user.name || user.username}
+          </h1>
+        ) : (
+          <h1 className="text-2xl font-bold">
+            No estás logueado
+          </h1>
+        )}
+      </div>
+    </>
+  );
+}
 
   // Render si el usuario está logueado
   return (
