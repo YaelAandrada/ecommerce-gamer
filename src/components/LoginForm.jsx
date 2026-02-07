@@ -1,87 +1,65 @@
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema } from '../utils/validationSchema';
-import { toast } from 'react-toastify';
-import Input from './Input';
 import bcrypt from 'bcryptjs';
+import { loginAPI } from "../helpers/queries";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function LoginForm({ onLogin }) {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
-  } = useForm({
-    resolver: zodResolver(loginSchema)
-  });
+    formState: { isSubmitting }
+  } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find(
-        u =>
-          u.email === data.identifier ||
-          u.username === data.identifier
-      );
+    const { emailOrUsername, password } = data;
 
-      if (!user) {
-        toast.error('Usuario o email no encontrado');
-        return;
-      }
+    const user = await loginAPI(emailOrUsername, password);
 
-      const isValidPassword = await bcrypt.compare(
-        data.password,
-        user.password
-      );
-
-      if (!isValidPassword) {
-        toast.error('Credenciales incorrectas');
-        return;
-      }
-
-      // 🔐 Usuario limpio y consistente
-      const userWithoutHash = {
-        id: user.id,
-        email: user.email,
-        name: user.name || user.username || 'Usuario',
-        role: user.role || 'user',
-      };
-
-      localStorage.setItem('user', JSON.stringify(userWithoutHash));
-      onLogin(userWithoutHash);
-      toast.success('¡Login exitoso!');
-
-    } catch (error) {
-      console.error(error);
-      toast.error('Error en el login :(');
+    if (!user) {
+      toast.error("Email/usuario o contraseña incorrectos");
+      return;
     }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (!isValidPassword) {
+      toast.error("Email/usuario o contraseña incorrectos");
+      return;
+    }
+
+    // Guardamos usuario completo
+    const userWithoutPassword = { ...user, password: undefined };
+    localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+    onLogin(userWithoutPassword);
+    toast.success('¡Bienvenido!');
+    navigate("/home");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <Input
-        label="Usuario o Email"
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <input
         type="text"
-        name="identifier"
-        placeholder="usuario o email"
-        register={register}
-        error={errors.identifier}
+        placeholder="Email o usuario"
+        {...register("emailOrUsername", { required: true })}
+        className="border p-2 w-full"
       />
 
-      <Input
-        label="Contraseña"
+      <input
         type="password"
-        name="password"
-        placeholder="••••••"
-        register={register}
-        error={errors.password}
+        placeholder="Contraseña"
+        {...register("password", { required: true })}
+        className="border p-2 w-full"
       />
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full flex justify-center py-2 px-4 rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+        className="bg-blue-600 text-white p-2 w-full"
       >
-        {isSubmitting ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+        Iniciar sesión
       </button>
     </form>
   );

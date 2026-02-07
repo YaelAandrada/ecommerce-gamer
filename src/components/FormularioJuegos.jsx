@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-  crearJuegoAPI,
-  editarJuegoAPI,
-  obtenerUnSoloJuegoAPI,
-} from "../helpers/queries";
+import { crearJuegoAPI, editarJuegoAPI, obtenerUnSoloJuegoAPI} from "../helpers/queries";
 import { useNavigate, useParams } from "react-router";
 
 const FormularioJuegos = ({ crearJuego }) => {

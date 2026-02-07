@@ -37,6 +37,12 @@ function App() {
     setUser(null);
   };
 
+  useEffect(() => {
+    if (user) {
+      setIsAuthOpen(false);
+    }
+  }, [user]);
+
   return (
     <>
       <Navbar
@@ -60,7 +66,9 @@ function App() {
           path="/login"
           element={<Login />}
         />
-        <Route path="/admin" element={<Administrador />} />
+        <Route path="/admin" element={<ProtectedAdminRoute>
+          <Administrador />
+          </ProtectedAdminRoute>} />
         <Route
           path="/register"
           element={<Register />}
@@ -75,6 +83,10 @@ function App() {
         view={authView}
         onClose={() => setIsAuthOpen(false)}
         onLogin={handleLogin}
+        onRegister={(userData) => {
+          setUser(userData);
+          setIsAuthOpen(false);
+        }}
       />
 
       <Footer />

@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from '../utils/validationSchema';
+import { registerAPI } from "../helpers/queries";
 import { toast } from 'react-toastify';
 import Input from './Input';
 import bcrypt from 'bcryptjs';
@@ -16,34 +17,34 @@ function RegisterForm({ onRegister }) {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const { confirmPassword, ...userData } = data;
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
+  try {
+    const hashedPassword = await bcrypt.hash(data.password, 10);
 
-      if (users.find(u => u.email === userData.email)) {
-        toast.error('El Usuario ya existe');
-        return;
-      }
+    const newUser = {
+      username: data.username,
+      email: data.email,
+      password: hashedPassword,
+      role: 'user',
+      isVerified: false   //Esta parte lo tendriamos que adaptar para el backend así no tengamos problemas
+    };
 
-      const hashedPassword = await bcrypt.hash(userData.password, 12);
-      const userToSave = {
-        ...userData,
-        password: hashedPassword
-      };
+    const res = await registerAPI(newUser);
 
-      users.push(userToSave);
-      localStorage.setItem('users', JSON.stringify(users));
-
-      const userWithoutHash = { ...userData, password: undefined };
-      localStorage.setItem('user', JSON.stringify(userWithoutHash));
-
-      onRegister(userToSave);
-      toast.success('Registro exitoso :)');
-    } catch (error) {
-      console.log(error);
-      toast.error('Error en el registro :(');
+    if (res.status === 201) {
+      toast.success('Registro exitoso 🎉');
+    } else {
+      toast.error('Error al registrar');
     }
-  };
+
+    toast.success('📩 Te enviamos un email de confirmación. Revisá tu bandeja.', {autoClose: 4000});
+
+    onRegister && onRegister();
+
+  } catch (error) {
+    console.error(error);
+    toast.error('Error en registro');
+  }
+};
 
   const handleGoogleRegister = async (user) => {
     try {
