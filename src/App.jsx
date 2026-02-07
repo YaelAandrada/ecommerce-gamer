@@ -1,12 +1,12 @@
-import React from "react";
+import {react, useState, useEffect} from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Nosotros from "./page/Nosotros";
-import Login from "./components/LoginModal";
-import Register from "./components/RegisterForm";
-import Home from "./components/Home";
+import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
+import Register from "./pages/Register";
+import Home from "./page/Home";
 import Administrador from './page/Administrador';
 import FormularioJuegos from "./components/FormularioJuegos";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -16,69 +16,83 @@ import Categorias from "./page/Categorias";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
-  const [modalView, setModalView] = React.useState("login");
 
-  const abrirModalLogin = () => {
-    setShowModal(true);
-    setModalView("login");
+  const [user, setUser] = useState(null);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authView, setAuthView] = useState('login');
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setIsAuthOpen(false);
   };
 
-  const abrirModalRegister = () => {
-    setShowModal(true);
-    setModalView("register");
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
   };
 
-  const handleLogin = () => setShowModal(false);
-  const handleRegister = () => setShowModal(false);
+  useEffect(() => {
+    if (user) {
+      setIsAuthOpen(false);
+    }
+  }, [user]);
 
   return (
-    <div className="App relative">
-      <Navbar />
+    <>
+      <Navbar
+        user={user}
+        onLoginClick={() => {
+          setAuthView('login');
+          setIsAuthOpen(true);
+        }}
+        onRegisterClick={() => {
+          setAuthView('register');
+          setIsAuthOpen(true);
+        }}
+        onLogout={handleLogout}
+      />
 
-      {showModal && (
-        <AuthModal
-          view={modalView}
-          onLogin={handleLogin}
-          onRegister={handleRegister}
-        />
-      )}
 
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/about" element={<About />} />
         <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/loginModal" element={<Login />} />
-        <Route path="/categorias" element={<Categorias />} />
-        <Route path="/admin" element={<Administrador />} />
-        {/* <Route
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+        <Route path="/admin" element={<ProtectedAdminRoute>
+          <Administrador />
+          </ProtectedAdminRoute>} />
+        <Route
           path="/register"
-          element={<Register abrirModalRegister={abrirModalRegister} />}
-        /> */}
-        <Route path="/wishlist" element={<Home />} />
-        {/* <Route path="/categoria/:slug" element={<Home />} /> */}
-        <Route path="/footer" element={<Footer />} />
+          element={<Register />}
+        />
+        <Route path="/home" element={<Home />} />
+        <Route path="/categoria/:slug" element={<Home />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
-
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedAdminRoute>
-            </ProtectedAdminRoute>
-          }
-        />
       </Routes>
+      
+      <AuthModal
+        isOpen={isAuthOpen}
+        view={authView}
+        onClose={() => setIsAuthOpen(false)}
+        onLogin={handleLogin}
+        onRegister={(userData) => {
+          setUser(userData);
+          setIsAuthOpen(false);
+        }}
+      />
 
+      <Footer />
       <ToastContainer position="bottom-right" />
-    </div>
+    </>
   );
 }
 
