@@ -159,6 +159,32 @@ export const loginAPI = async (emailOrUsername) => {
   }
 };
 
+// USUARIOS
+
+export const listarUsuariosAPI = async () => {
+  try {
+    const res = await fetch('http://localhost:3000/usuarios');
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const editarUsuarioAPI = async (usuario, id) => {
+  try {
+    return await fetch(`http://localhost:3000/usuarios/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usuario)
+    });
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+
 // ❌ Nunca validar contraseña en frontend
 // ✔️ Backend compara bcrypt
 // ✔️ Backend devuelve JWT
