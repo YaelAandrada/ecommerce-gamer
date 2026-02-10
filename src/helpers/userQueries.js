@@ -69,3 +69,19 @@ export const updateUserProfile = async (userId, userData) => {
   
   return response.json();
 };
+// Subir imagen de perfil
+export const uploadProfileImage = async (imageFile, userId) => {
+  const token = localStorage.getItem('token');
+  const formData = new FormData();
+  formData.append('avatar', imageFile);
+  
+  const response = await fetch(`${API_URL}/users/${userId}/upload-avatar`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    body: formData
+  });
+  
+  return response.json();
+};
