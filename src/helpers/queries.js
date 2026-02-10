@@ -106,7 +106,6 @@ export const editarJuegoAPI = async(juegoAEditar,id) =>{
 }
 
 
-
 // REGISTER
 export const registerAPI = async (newUser) => {
   try {
