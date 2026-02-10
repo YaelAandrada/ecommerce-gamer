@@ -79,6 +79,15 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/categoria/:slug" element={<Home />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
+
+         <Route 
+          path="/user-panel" 
+          element={
+            <ProtectedRoute>
+              <UserPanel />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
       
       <AuthModal
