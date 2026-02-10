@@ -46,6 +46,7 @@ const UserReviews = ({ userId }) => {
       />
     ));
   };
+
   if (loading) {
     return (
       <div className="flex justify-center py-8">
@@ -101,3 +102,52 @@ const UserReviews = ({ userId }) => {
                   >
                     <FaGamepad />
                   </button>
+                    <button
+                    onClick={() => window.location.href = `/reviews/${review._id}/edit`}
+                    className="text-yellow-500 hover:text-yellow-700"
+                    title="Editar reseña"
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(review._id)}
+                    className="text-red-500 hover:text-red-700"
+                    title="Eliminar reseña"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              </div>
+              
+              <div className="flex items-center mb-3">
+                <div className="flex mr-4">
+                  {renderStars(review.rating)}
+                </div>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  {new Date(review.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+              
+              <p className="text-gray-700 dark:text-gray-300">
+                {review.comment}
+              </p>
+              
+              {review.response && (
+                <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                  <p className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-1">
+                    Respuesta del desarrollador:
+                  </p>
+                  <p className="text-blue-700 dark:text-blue-200">
+                    {review.response}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default UserReviews;
