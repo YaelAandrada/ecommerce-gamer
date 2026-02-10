@@ -1,34 +1,19 @@
 import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-
-//Register
 
 export const register = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { username, email, password } = req.body;
 
-  //Buscamos si ya existe en la BD
-  const exists = await User.findOne({ email });
-  //Si existe devuelve error
-  if (exists) return res.status(400).json({ msg: "Usuario ya existe" });
+    const exists = await User.findOne({ email });
+    if (exists) return res.status(400).json({ msg: "Usuario ya existe" });
 
-  //Esto encripta la contraseña
-  const hash = await bcrypt.hash(password, 10);
-  await User.create({ email, password: hash });
+    const user = new User({ username, email, password });
+    await user.save(); 
 
-  res.json({ msg: "Usuario registrado" });
-};
+    res.status(201).json({ msg: "Usuario guardado en MongoDB" });
 
-//Login
-
-export const login = async (req, res) => {
-  const { email, password } = req.body;
-
-  //Buscamos al usuario por su email
-  const user = await User.findOne({ email });
-  if (!user) return res.status(400).json({ msg: "Usuario no existe" });
-
-  const ok = await bcrypt.compare(password, user.password);
-  if (!ok) return res.status(400).json({ msg: "Password incorrecta" });
-
-  res.json({ msg: "Login OK", userId: user._id });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Error servidor" });
+  }
 };
