@@ -106,3 +106,16 @@ export const submitReview = async (reviewData) => {
   
   return response.json();
 };
+
+// Eliminar reseña
+export const deleteReview = async (reviewId) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${API_URL}/reviews/${reviewId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  
+  return response.json();
+};
