@@ -38,7 +38,14 @@ const AdminUsuarios = () => {
           onUpdated={cargarUsuarios}
         />
       )}
+    
+    <div className="w-full text-center">
+        <h2 className="text-3xl font-bold underline p-5 dark:text-white">
+          Usuarios
+        </h2>
+    </div>
 
+    <div className="max-w-7xl mx-auto bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md shadow-neutral-400 dark:shadow-neutral-900 p-8 dark:text-white">
       <input
         type="text"
         placeholder="Buscar usuario..."
@@ -68,6 +75,7 @@ const AdminUsuarios = () => {
             ))}
           </tbody>
         </table>
+      </div>
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaHeart, FaShoppingCart, FaTrash } from 'react-icons/fa';
-import { getWishlist, removeFromWishlist } from '../../helpers/userQueries';
+import { getWishlist, removeFromWishlist } from '../../helpers/userQueriesFront';
 
 const Wishlist = ({ userId }) => {
   const [wishlist, setWishlist] = useState([]);

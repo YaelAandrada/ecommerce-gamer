@@ -1,137 +1,119 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { GiGamepad } from "react-icons/gi"; // Ícono gamer
-import { borrarJuegoAPI, listaJuegosAPI } from "../helpers/queries";
-import { FiEdit2, FiTrash2 } from 'react-icons/fi';
-import { Edit2, Trash2 } from 'react-feather';
-import JuegoAdministrador from "../components/JuegoAdministrador";
+import { useEffect, useState } from "react";
+import { listaJuegosAPI, borrarJuegoAPI } from "../helpers/queries";
+import { Edit2, Trash2 } from "react-feather";
+import CrearJuegoModal from "./CrearJuegoModal";
+import EditarJuegoModal from "./EditarJuegoModal";
 
-const Administrador = () => {
-  const [listaJuegos, setListaJuegos] = useState([]);
+const AdminJuegos = () => {
+  const [juegos, setJuegos] = useState([]);
+  const [mostrarCrear, setMostrarCrear] = useState(false);
+  const [mostrarEditar, setMostrarEditar] = useState(false);
+  const [juegoEditar, setJuegoEditar] = useState(null);
 
   useEffect(() => {
-    consultarAPI();
+    cargarJuegos();
   }, []);
-  const [mostrarModal, setMostrarModal] = useState(false);
 
+  const cargarJuegos = async () => {
+    const res = await listaJuegosAPI();
+    const data = await res.json();
+    setJuegos(data);
+  };
 
-  const consultarAPI = async () => {
-    const respuesta = await listaJuegosAPI();
-    if (respuesta.status === 200) {
-      const datos = await respuesta.json();
-      setListaJuegos(datos);
-    } else {
-      alert("Ha ocurrido un error, vuelve a intentar esta operación en unos momentos");
-    }
+  const abrirEditar = (juego) => {
+    setJuegoEditar(juego);
+    setMostrarEditar(true);
+  };
+
+  const borrarJuego = async (id) => {
+    await borrarJuegoAPI(id);
+    setJuegos(juegos.filter(j => j.id !== id));
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-8 text-gray-900 dark:text-white bg-light dark:bg-gray-080 transition-colors duration-500">
-  <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-    <h1 className="text-4xl font-bold text-indigo-500 dark:text-red-600 drop-shadow-neon">
-      Juegos disponibles
-    </h1>
-    <Link
-      to="/administrador/crear"
-      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg shadow-md
-                 bg-indigo-600 hover:bg-indigo-700 text-white
-                 dark:bg-red-600 dark:hover:bg-red-700
-                 transition duration-300 transform hover:scale-105 neon-glow"
-    >
-      <GiGamepad className="text-white text-xl transition-transform duration-300 hover:rotate-12" />
-      Agregar Juego
-    </Link>
-  </div>
+    <section className="w-full h-auto dark:bg-slate-950 pb-10">
+      {/* TÍTULO */}
+      <div className="w-full text-center">
+        <h2 className="text-3xl font-bold underline p-5 dark:text-white">
+          Juegos
+        </h2>
+      </div>
 
-  <hr className="border-indigo-300 dark:border-red-500 mb-6" />
+      {/* CONTENEDOR */}
+      <div className="max-w-7xl mx-auto bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md shadow-neutral-400 dark:shadow-neutral-900 p-8 dark:text-white">
 
-  <div className="overflow-x-auto shadow-lg rounded-lg border border-indigo-300 dark:border-red-500">
-    <table className="min-w-full text-sm text-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
-      <thead className="bg-indigo-700 dark:bg-red-700 text-white">
-        <tr>
-          <th className="px-4 py-2">Cod</th>
-          <th className="px-4 py-2">Nombre de Juego</th>
-          <th className="px-4 py-2">Precio</th>
-          <th className="px-4 py-2">Categoría</th>
-          <th className="px-4 py-2">Imagen</th>
-          <th className="px-4 py-2">Desarrollador</th>
-          <th className="px-4 py-2">Opciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {listaJuegos.map((datosJuego) => (
-          <tr
-            key={datosJuego.id}
-            className="text-center text-sm text-gray-800 dark:text-gray-200 hover:bg-indigo-100 dark:hover:bg-red-900 transition duration-200"
+        {/* BOTÓN */}
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={() => setMostrarCrear(true)}
+            className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded transition"
           >
-            <td className="px-4 py-2">{datosJuego.id}</td>
-            <td className="px-4 py-2 font-semibold text-red-600 dark:text-red-400">{datosJuego.nombre}</td>
-            <td className="px-4 py-2">${datosJuego.precio}</td>
-            <td className="px-4 py-2">{datosJuego.categoria}</td>
-            <td className="px-4 py-2">
-              <img
-                src={datosJuego.imagen}
-                alt={datosJuego.nombre}
-                className="w-20 h-20 object-cover rounded-lg border-2 border-indigo-500 dark:border-red-500 shadow-neon"
-              />
-            </td>
-            <td className="px-4 py-2">{datosJuego.desarrollador}</td>
-            <td className="px-4 py-2">
-              <div className="flex justify-center gap-3">
-                <Link
-                  to={`/administrador/editar/${datosJuego.id}`}
-                  className="p-2 rounded-md transition duration-300 transform hover:scale-105
-                             bg-yellow-500 hover:bg-yellow-600 text-white
-                             dark:bg-yellow-400 dark:hover:bg-yellow-500"
+            + Agregar juego
+          </button>
+        </div>
+
+        {/* TABLA */}
+        <div className="overflow-x-auto">
+          <table className="w-full border border-gray-300 dark:border-gray-700">
+            <thead className="bg-red-600 text-white">
+              <tr>
+                <th className="p-3">ID</th>
+                <th className="p-3">Nombre</th>
+                <th className="p-3">Precio</th>
+                <th className="p-3">Categoría</th>
+                <th className= "p-3">Imagen</th>
+                <th className="p-3">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {juegos.map(juego => (
+                <tr
+                  key={juego.id}
+                  className="text-center border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
                 >
-                  <Edit2 className="transition-transform duration-300 hover:rotate-12" size={18} />
-                </Link>
-                <button
-                  onClick={() => setMostrarModal(true)}
-                  className="p-2 rounded-md transition duration-300 transform hover:scale-105
-                             bg-red-600 hover:bg-red-700 text-white
-                             dark:bg-red-500 dark:hover:bg-red-600"
-                >
-                  <Trash2 className="transition-transform duration-300 hover:rotate-12" size={18} />
-                </button>
+                  <td className="p-3">{juego.id}</td>
+                  <td className="p-3 font-semibold">{juego.nombre}</td>
+                  <td className="p-3">${juego.precio}</td>
+                  <td className="p-3">{juego.categoria}</td>
+                  <td><img src={juego.imagen} alt={juego.nombre} className="w-16 h-16 mx-auto object-cover rounded" /></td>
+                  <td className="p-3 flex justify-center gap-2">
+                    <button
+                      onClick={() => abrirEditar(juego)}
+                      className="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded transition"
+                    >
+                      <Edit2 size={16} />
+                    </button>
+                    <button
+                      onClick={() => borrarJuego(juego.id)}
+                      className="bg-red-600 hover:bg-red-700 text-white p-2 rounded transition"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-                {mostrarModal && (
-                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg max-w-sm w-full text-center border-2 border-indigo-400 dark:border-fuchsia-500">
-                      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">
-                        ¿Seguro que quieres borrar este juego de la lista?
-                      </h2>
-                      <div className="flex justify-center gap-4">
-                        <button
-                          onClick={() => setMostrarModal(false)}
-                          className="px-4 py-2 rounded-md bg-gray-300 hover:bg-gray-400 text-gray-800 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 transition"
-                        >
-                          Cancelar
-                        </button>
-                        <button
-                          onClick={async () => {
-                            await borrarJuegoAPI(datosJuego.id);
-                            setListaJuegos(listaJuegos.filter(j => j.id !== datosJuego.id));
-                            setMostrarModal(false);
-                          }}
-                          className="px-4 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white dark:bg-red-500 dark:hover:bg-red-600 transition">
-                          Borrar
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</section>
+      {/* MODALES */}
+      {mostrarCrear && (
+        <CrearJuegoModal
+          onClose={() => setMostrarCrear(false)}
+          onCreated={cargarJuegos}
+        />
+      )}
 
-
+      {mostrarEditar && juegoEditar && (
+        <EditarJuegoModal
+          juego={juegoEditar}
+          onClose={() => setMostrarEditar(false)}
+          onUpdated={cargarJuegos}
+        />
+      )}
+    </section>
   );
 };
 
-export default Administrador;
+export default AdminJuegos;
