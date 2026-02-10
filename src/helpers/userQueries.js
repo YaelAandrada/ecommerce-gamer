@@ -85,3 +85,9 @@ export const uploadProfileImage = async (imageFile, userId) => {
   
   return response.json();
 };
+
+// Obtener reseñas del usuario
+export const getUserReviews = async (userId) => {
+  const response = await fetch(`${API_URL}/users/${userId}/reviews`);
+  return response.json();
+};
