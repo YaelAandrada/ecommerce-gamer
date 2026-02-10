@@ -91,3 +91,18 @@ export const getUserReviews = async (userId) => {
   const response = await fetch(`${API_URL}/users/${userId}/reviews`);
   return response.json();
 };
+
+// Enviar reseña
+export const submitReview = async (reviewData) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${API_URL}/reviews`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(reviewData)
+  });
+  
+  return response.json();
+};
