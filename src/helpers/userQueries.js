@@ -9,6 +9,7 @@ export const getCurrentUser = async (token) => {
     }
   });
 
+
   if (!response.ok) {
     throw new Error('Error al obtener datos del usuario');
   }
@@ -46,6 +47,25 @@ export const removeFromWishlist = async (userId, gameId) => {
   const response = await fetch(`${API_URL}/users/${userId}/wishlist/${gameId}`, {
     method: 'DELETE'
   });
+  
+  return response.json();
+};
+
+// Actualizar perfil
+export const updateUserProfile = async (userId, userData) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${API_URL}/users/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+  });
+  
+  if (!response.ok) {
+    throw new Error('Error al actualizar perfil');
+  }
   
   return response.json();
 };
