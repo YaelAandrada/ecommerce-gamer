@@ -119,3 +119,9 @@ export const deleteReview = async (reviewId) => {
   
   return response.json();
 };
+
+// Obtener juegos del usuario
+export const getUserGames = async (userId) => {
+  const response = await fetch(`${API_URL}/users/${userId}/games`);
+  return response.json();
+};
