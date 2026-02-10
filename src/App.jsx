@@ -1,30 +1,31 @@
-import {react, useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import AuthModal from "./components/AuthModal";
+
 import About from "./components/About";
 import Nosotros from "./page/Nosotros";
-import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
-import Register from "./pages/Register";
 import Home from "./page/Home";
-import Administrador from './page/Administrador';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Administrador from "./page/Administrador";
 import FormularioJuegos from "./components/FormularioJuegos";
+import UserPanel from "./pages/UserPanel";
+import Categorias from "./page/Categorias";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
-import AuthModal from "./components/AuthModal";
+
 import { ToastContainer } from "react-toastify";
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import UserPanel from './pages/UserPanel';
-import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-
   const [user, setUser] = useState(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authView, setAuthView] = useState('login');
+  const [authView, setAuthView] = useState("login");
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
+    const savedUser = localStorage.getItem("user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
@@ -36,69 +37,66 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setUser(null);
   };
-
-  useEffect(() => {
-    if (user) {
-      setIsAuthOpen(false);
-    }
-  }, [user]);
 
   return (
     <>
       <Navbar
         user={user}
         onLoginClick={() => {
-          setAuthView('login');
+          setAuthView("login");
           setIsAuthOpen(true);
         }}
         onRegisterClick={() => {
-          setAuthView('register');
+          setAuthView("register");
           setIsAuthOpen(true);
         }}
         onLogout={handleLogout}
       />
 
-
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/nosotros" element={<Nosotros />} />
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-        <Route path="/admin" element={<ProtectedAdminRoute>
-          <Administrador />
-          </ProtectedAdminRoute>} />
-        <Route
-          path="/register"
-          element={<Register />}
-        />
-        <Route path="/home" element={<Home />} />
-        <Route path="/categoria/:slug" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* <Route path="/categoria/:slug" element={<Home />} /> */}
+        <Route path="/categorias" element={<Categorias />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
 
-         <Route 
-          path="/user-panel" 
+        {/* PANEL ADMIN */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedAdminRoute>
+              <Administrador />
+            </ProtectedAdminRoute>
+          }
+        />
+
+        {/* PANEL USUARIO */}
+        <Route
+          path="/user-panel"
           element={
             <ProtectedRoute>
               <UserPanel />
             </ProtectedRoute>
-          } 
+          }
         />
+
+        {/* fallback */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      
+
       <AuthModal
         isOpen={isAuthOpen}
         view={authView}
         onClose={() => setIsAuthOpen(false)}
         onLogin={handleLogin}
-        onRegister={(userData) => {
-          setUser(userData);
-          setIsAuthOpen(false);
-        }}
+        onRegister={handleLogin}
       />
 
       <Footer />

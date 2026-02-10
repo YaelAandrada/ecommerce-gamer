@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaUser, FaGamepad, FaHeart, FaStar, FaHistory } from 'react-icons/fa';
-import { getUserStats } from '../../helpers/userQueries';
+import { getUserStats } from '../../helpers/userQueriesFront';
 
 const UserDashboard = ({ userData }) => {
   const [stats, setStats] = useState({

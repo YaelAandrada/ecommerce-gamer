@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { useEffect, useState } from 'react';
+import Categorias from '../page/Categorias';
 
 const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,22 +64,7 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
           <Link to="/home" className={isActiveLink('/')}>Inicio</Link>
 
           <div className="relative">
-            <button onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}>
-              Categorías ▼
-            </button>
-            {isCategoriesOpen && (
-              <div className="absolute top-full left-0 mt-2 bg-gray-900 rounded-lg shadow-lg p-2">
-                {categories.map(cat => (
-                  <Link
-                    key={cat.id}
-                    to={`/categoria/${cat.slug}`}
-                    className="block px-3 py-2 hover:bg-gray-700 rounded"
-                  >
-                    {cat.name}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <Link to="/categorias" className={isActiveLink('/categorias')}>Categorías</Link>
           </div>
 
           <Link to="/nosotros" className={isActiveLink('/nosotros')}>Nosotros</Link>

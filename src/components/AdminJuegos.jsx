@@ -61,6 +61,7 @@ const AdminJuegos = () => {
                 <th className="p-3">Nombre</th>
                 <th className="p-3">Precio</th>
                 <th className="p-3">Categoría</th>
+                <th className= "p-3">Imagen</th>
                 <th className="p-3">Acciones</th>
               </tr>
             </thead>
@@ -74,6 +75,7 @@ const AdminJuegos = () => {
                   <td className="p-3 font-semibold">{juego.nombre}</td>
                   <td className="p-3">${juego.precio}</td>
                   <td className="p-3">{juego.categoria}</td>
+                  <td><img src={juego.imagen} alt={juego.nombre} className="w-16 h-16 mx-auto object-cover rounded" /></td>
                   <td className="p-3 flex justify-center gap-2">
                     <button
                       onClick={() => abrirEditar(juego)}

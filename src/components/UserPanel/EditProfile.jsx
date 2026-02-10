@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaUser, FaEnvelope, FaCamera, FaSave } from 'react-icons/fa';
-import { updateUserProfile, uploadProfileImage } from '../../helpers/userQueries';
+import { updateUserProfile } from '../../helpers/userQueriesFront';
 
 const EditProfile = ({ userData, onUpdate }) => {
   const [formData, setFormData] = useState({
