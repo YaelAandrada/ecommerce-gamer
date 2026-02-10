@@ -13,6 +13,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import AuthModal from "./components/AuthModal";
 import { ToastContainer } from "react-toastify";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import UserPanel from './pages/UserPanel';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
