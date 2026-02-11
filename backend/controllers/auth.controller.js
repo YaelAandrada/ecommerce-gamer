@@ -1,19 +1,31 @@
 import User from "../models/User.js";
+import bcrypt from "bcryptjs";
 
 export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    const exists = await User.findOne({ email });
-    if (exists) return res.status(400).json({ msg: "Usuario ya existe" });
+    // Verificar usuario existente
+    const userExist = await User.findOne({ email });
+    if (userExist) return res.status(400).json({ msg: "Usuario ya existe" });
 
-    const user = new User({ username, email, password });
-    await user.save(); 
+    //  HASH PASSWORD
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    res.status(201).json({ msg: "Usuario guardado en MongoDB" });
+    // Crear usuario
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword
+    });
+
+    await newUser.save();
+
+    res.status(201).json({ msg: "Usuario registrado" });
 
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).json({ msg: "Error servidor" });
   }
 };
