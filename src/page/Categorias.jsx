@@ -8,7 +8,7 @@ function Categorias() {
         <div className='dark:bg-gray-900 mb-8 darka:text-white bg-gray-100 dark:shadow-neutral-900 rounded-lg shadow-md shadow-neutral-400'>
             <h2 className="font-bold text-2xl ml-4">Shooter</h2>
             {/* Carrucel de juegos */}
-            <Carousel categoria="Shooter" />   
+            <Carousel categoria="shooter" />   
         </div>
 
         <div className='dark:bg-gray-900 mb-8 darka:text-white bg-gray-100 dark:shadow-neutral-900 rounded-lg shadow-md shadow-neutral-400'>

@@ -1,53 +1,36 @@
 {
   "juegos": [
     {
-      "id": "1",
-      "title": "Free Fire",
-      "categoria": "battle royale",
-      "img": "/public/img/freefire.jpg",
-      "precio": 0,
-      "descripcion": "Free Fire es un juego de acción y aventura de tipo battle royale que se juega únicamente en tercera persona. El juego consiste en que hasta (según el juego; en realidad hasta 52) 50 jugadores caen desde un paracaídas en una isla o diversos lugares en busca de armas y equipamiento para eliminar a los demás jugadores."
+      "nombre": "Grand Theft Auto V",
+      "precio": "1200",
+      "categoria": "accion",
+      "imagen": "https://fotografias-neox.atresmedia.com/clipping/cmsimages02/2016/08/30/F1311F3B-298C-42B7-9D70-DD40576FAFC1/97.jpg?crop=624,351,x10,y0&width=1600&height=900&optimize=high&format=webply",
+      "desarrollador": "sadas",
+      "id": "a038"
     },
     {
-      "id": "2",
-      "title": "Valorant",
-      "categoria": "Shooter",
-      "img": "/public/img/valorant.png",
-      "precio": 1500,
-      "descripcion": "Valorant es un shooter en primera persona ambientado en un futuro cercano. ​​​​ En este juego, los jugadores toman el control de agentes, personajes que representan diversas culturas y nacionalidades de todo el mundo. Los agentes pueden utilizar armas y habilidades para derrotar a los enemigos y resolver los desafíos de la partida."
+      "nombre": "Minecraft",
+      "precio": "9000",
+      "categoria": "aventura",
+      "imagen": "https://store-images.s-microsoft.com/image/apps.6644.14216416494490173.9772fa78-5a01-45ce-9b9e-6ec61a10f4e2.c6cca0bc-53cc-48ec-887a-e5ab83e5bede?w=207",
+      "descripcion": "Minecraft es un videojuego tipo sandbox, su traducción literal sería “caja de arena” y es lo que representa la experiencia de juego. Los jugadores pueden modelar el mundo a su gusto, destruir y construir, como si estuviesen jugando en una caja de arena.",
+      "id": "3d0c"
     },
     {
-      "id": "3",
-      "title": "Mobile Legends",
-      "categoria": "MOBA",
-      "img": "/public/img/mobilelegends.jpg",
-      "precio": 0,
-      "descripcion": "Mobile Legends: Bang Bang es un juego multijugador en línea tipo MOBA (arena de batalla) diseñado para dispositivos móviles, donde dos equipos de cinco jugadores compiten en intensas partidas estratégicas."
-    },
-    {
-      "id": "4",
-      "title": "Counter Strike 2",
-      "categoria": "Shooter",
-      "img": "/public/img/cs2.jpeg",
-      "precio": 0,
-      "descripcion": "Counter-Strike 2 es un videojuego de disparos táctico en primera persona multijugador desarrollado por Valve, lanzado en septiembre de 2023 como sucesor de Counter-Strike: Global Offensive."
-    },
-    {
-      "id": "5",
-      "title": "fifa25",
+      "nombre": "ASD2",
+      "precio": "115",
       "categoria": "deportes",
-      "img": "/public/img/fifa25.jpg",
-      "precio": 0,
-      "descripcion": "FIFA 25 es un juego de deportes en tercera persona desarrollado por EA Sports y lanzado en 2023 para las plataformas PlayStation 5, Xbox Series X y Series S, Windows, y macOS."
+      "imagen": "",
+      "descripcion": "asd",
+      "id": "979f"
     }
   ],
   "usuarios": [
     {
-      "id": 1,
-      "email": "admin@gmail.com",
       "username": "admin",
-      "password": "1234",
-      "role": "admin"
+      "email": "admin@gmail.com",
+      "role": "user",
+      "id": "1"
     },
     {
       "id": "db22",
@@ -55,6 +38,22 @@
       "email": "yaelkpo62@gmail.com",
       "password": "$2b$10$pmowSad0t72hSKmmZZ9i5.Q1NTwy8p0imMq6i16SBALJGzq1MiSr.",
       "role": "admin"
+    },
+    {
+      "id": "519c",
+      "username": "admins",
+      "email": "asdafwefw@gmail.com",
+      "password": "$2b$10$Hi10.uBvhPlYINiPBoqvZ.p0ydl0BKnqS5Ldmg3e0h6bTWWo2DkkW",
+      "role": "user",
+      "isVerified": true
+    },
+    {
+      "id": "e98f",
+      "username": "Nahuel Quesada",
+      "email": "sadasdasda@gmail.com",
+      "password": "$2b$10$8qIlq7ck0xZj/E69wN1r7uOBLwPW3KM5.WzHnHkezZx42dNocSPDq",
+      "role": "user",
+      "isVerified": true
     }
   ]
 }

@@ -1,14 +1,16 @@
-import {Navigate} from 'react-router-dom'
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({children}) {
-  const user = localStorage.getItem('user');
+function ProtectedRoute({ user, children, adminOnly }) {
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
-  // if(!user){
-  //   console.log("NO PODES PASAR INTRUSO!!!");    
-  //   return <Navigate to="/login" replace /> 
-  // }
+  if (adminOnly && user.role !== "admin") {
+    return <Navigate to="/home" replace />;
+  }
 
-  return children
+  return children;
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;

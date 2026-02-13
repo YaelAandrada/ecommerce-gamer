@@ -2,10 +2,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
 import AuthLayout from '../components/AuthLayout'; 
 
-function Register() {
+function Register( setUser ) {
   const navigate = useNavigate();
 
   const handleRegister = (userData) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
     navigate('/home');
   };
 

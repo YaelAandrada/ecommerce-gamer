@@ -1,36 +1,22 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
 import { useEffect, useState } from 'react';
+import Categorias from '../page/Categorias';
+import CartModal from "./CartModal";
+import { useCart } from "../context/CardContext";
 
 const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+
+  const { totalItems } = useCart();
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const isLoggedIn = !!user;
-  const userName = user?.name || user?.username || '';
+  const userName = user?.name || user?.username || user?.displayName || '';
   const isAdmin = user?.role === 'admin';
-
-  // ... tus categorías, totales y useEffects (igual que antes)
-  const categories = [
-    { id: 1, name: 'Sandbox', slug: 'sandbox' },
-    { id: 2, name: 'Simulación', slug: 'simulacion' },
-    { id: 3, name: 'Aventura', slug: 'aventura' },
-    { id: 4, name: 'Estrategia', slug: 'estrategia' },
-    { id: 5, name: 'Deportes', slug: 'deportes' },
-    { id: 6, name: 'Carreras', slug: 'carreras' },
-    { id: 7, name: 'RPG', slug: 'rpg' },
-  ];
-
-  // 🛒 solo carrito desde localStorage
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cartItems');
-    setCartItems(savedCart ? JSON.parse(savedCart) : []);
-  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -38,7 +24,9 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
     setIsCategoriesOpen(false);
   }, [location.pathname]);
 
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  useEffect(() => {
+  console.log("USER EN NAVBAR:", user);
+}, [user]);
 
   const isActiveLink = path =>
     location.pathname === path
@@ -64,22 +52,7 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
           <Link to="/home" className={isActiveLink('/')}>Inicio</Link>
 
           <div className="relative">
-            <button onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}>
-              Categorías ▼
-            </button>
-            {isCategoriesOpen && (
-              <div className="absolute top-full left-0 mt-2 bg-gray-900 rounded-lg shadow-lg p-2">
-                {categories.map(cat => (
-                  <Link
-                    key={cat.id}
-                    to={`/categoria/${cat.slug}`}
-                    className="block px-3 py-2 hover:bg-gray-700 rounded"
-                  >
-                    {cat.name}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <Link to="/categorias" className={isActiveLink('/categorias')}>Categorías</Link>
           </div>
 
           <Link to="/nosotros" className={isActiveLink('/nosotros')}>Nosotros</Link>
@@ -88,7 +61,6 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
 
         {/* Right section */}
         <div className="hidden md:flex items-center space-x-4">
-          <ThemeToggle />
 
           {isLoggedIn ? (
             <div className="flex items-center space-x-3">
@@ -105,22 +77,13 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
             </div>
           ) : (
             <div className="flex space-x-2">
-              <button
-                onClick={onRegisterClick}
-                className="bg-green-500 px-3 py-1 rounded"
-              >
-                Registrarse
-              </button>
-              <button
-                onClick={onLoginClick}
-                className="bg-blue-600 px-3 py-1 rounded"
-              >
-                Ingresar
-              </button>
             </div>
           )}
 
-          <button className="relative px-2 py-1">
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative px-2 py-1"
+          >
             🛒
             {totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -130,6 +93,12 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
           </button>
         </div>
       </div>
+
+      <CartModal
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
+
     </nav>
   );
 };
