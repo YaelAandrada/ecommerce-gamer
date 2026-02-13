@@ -1,5 +1,4 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
 import { useEffect, useState } from 'react';
 import Categorias from '../page/Categorias';
 import CartModal from "./CartModal";
@@ -16,7 +15,7 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const navigate = useNavigate();
 
   const isLoggedIn = !!user;
-  const userName = user?.name || user?.username || '';
+  const userName = user?.name || user?.username || user?.displayName || '';
   const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
@@ -24,6 +23,10 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
     setIsCartOpen(false);
     setIsCategoriesOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+  console.log("USER EN NAVBAR:", user);
+}, [user]);
 
   const isActiveLink = path =>
     location.pathname === path
@@ -58,7 +61,6 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
 
         {/* Right section */}
         <div className="hidden md:flex items-center space-x-4">
-          <ThemeToggle />
 
           {isLoggedIn ? (
             <div className="flex items-center space-x-3">
@@ -75,18 +77,6 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
             </div>
           ) : (
             <div className="flex space-x-2">
-              <button
-                onClick={onRegisterClick}
-                className="bg-green-500 px-3 py-1 rounded"
-              >
-                Registrarse
-              </button>
-              <button
-                onClick={onLoginClick}
-                className="bg-blue-600 px-3 py-1 rounded"
-              >
-                Ingresar
-              </button>
             </div>
           )}
 

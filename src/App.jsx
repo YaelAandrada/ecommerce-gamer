@@ -3,21 +3,17 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import AuthModal from "./components/AuthModal";
 
-import About from "./components/About";
 import Nosotros from "./page/Nosotros";
 import Home from "./page/Home";
 import Login from "./pages/Login";
 import CategoriaDetalle from "./page/CategoriaDetalles";
 import Register from "./pages/Register";
 import Administrador from "./page/Administrador";
-import FormularioJuegos from "./components/FormularioJuegos";
 import Error404 from "./page/Error404";
 import UserPanel from "./pages/UserPanel";
 import Categorias from "./page/Categorias";
 import ProtectedRoute from "./components/ProtectedRoute";
-import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 
 import { ToastContainer } from "react-toastify";
 
@@ -34,9 +30,10 @@ function App() {
   }, []);
 
   const handleLogin = (userData) => {
-    setUser(userData);
-    setIsAuthOpen(false);
-  };
+  localStorage.setItem("user", JSON.stringify(userData));
+  setUser(userData);
+  setIsAuthOpen(false);
+};
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -47,59 +44,66 @@ function App() {
     <>
       <Navbar
         user={user}
-        onLoginClick={() => {
-          setAuthView("login");
-          setIsAuthOpen(true);
-        }}
-        onRegisterClick={() => {
-          setAuthView("register");
-          setIsAuthOpen(true);
-        }}
         onLogout={handleLogout}
       />
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/categoria/:slug" element={<CategoriaDetalle />} />
-        <Route path="/categorias" element={<Categorias />} />
-        <Route path="/formulario" element={<FormularioJuegos />} />
+
+        <Route path="/home" element={
+          <ProtectedRoute user={user}>
+          <Home />
+          </ProtectedRoute>}>
+        </Route>
+
+        <Route path="/nosotros" element={
+          <ProtectedRoute user={user}>
+          <Nosotros />
+          </ProtectedRoute>}>
+        </Route>
+
+        {/* LOGIN y Register */}
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/register" element={<Register setUser={setUser} />} />
+
+
+        <Route path="/categoria/:slug" element={
+          <ProtectedRoute user={user}>
+          <CategoriaDetalle />
+          </ProtectedRoute>} />
+
+        <Route path="/categorias" element={
+          <ProtectedRoute user={user}>
+          <Categorias />
+          </ProtectedRoute>
+          } />
         <Route path="*" element={<Error404 />} />
+
+
         {/* PANEL ADMIN */}
         <Route
           path="/admin"
           element={
-            <ProtectedAdminRoute>
+            <ProtectedRoute user={user} OnlyAdmin>
               <Administrador />
-            </ProtectedAdminRoute>
+            </ProtectedRoute>
           }
         />
+
 
         {/* PANEL USUARIO */}
         <Route
           path="/user-panel"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute user={user}>
               <UserPanel />
             </ProtectedRoute>
           }
         />
 
         {/* fallback */}
-        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
-      <AuthModal
-        isOpen={isAuthOpen}
-        view={authView}
-        onClose={() => setIsAuthOpen(false)}
-        onLogin={handleLogin}
-        onRegister={handleLogin}
-      />
 
       <Footer />
       <ToastContainer position="bottom-right" />

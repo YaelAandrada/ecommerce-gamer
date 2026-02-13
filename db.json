@@ -46,6 +46,14 @@
       "password": "$2b$10$Hi10.uBvhPlYINiPBoqvZ.p0ydl0BKnqS5Ldmg3e0h6bTWWo2DkkW",
       "role": "user",
       "isVerified": true
+    },
+    {
+      "id": "e98f",
+      "username": "Nahuel Quesada",
+      "email": "sadasdasda@gmail.com",
+      "password": "$2b$10$8qIlq7ck0xZj/E69wN1r7uOBLwPW3KM5.WzHnHkezZx42dNocSPDq",
+      "role": "user",
+      "isVerified": true
     }
   ]
 }
