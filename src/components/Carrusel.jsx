@@ -1,98 +1,113 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "../components/modal";
+import { useCart } from "../context/CardContext";
 import { listaJuegosAPI } from "../helpers/queries";
 
-export default function Categorias() {
-  const { slug } = useParams(); // categoría desde la URL
+export default function Carousel({ categoria }) {
   const [juegos, setJuegos] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [juegoSeleccionado, setJuegoSeleccionado] = useState(null);
-  const [error, setError] = useState(null);
+  const scrollRef = useRef(null);
+  const navigate = useNavigate();
+
+  const { addToCart } = useCart();
+
 
   useEffect(() => {
     const obtenerJuegos = async () => {
-      try {
-        setLoading(true);
+      const res = await listaJuegosAPI();
+      const data = await res.json();
 
-        const respuesta = await listaJuegosAPI();
-        if (!respuesta || !respuesta.ok) {
-          throw new Error("No se pudieron obtener los juegos");
-        }
+      const filtrados = data.filter(
+        (juego) =>
+          juego.categoria?.toLowerCase() === categoria?.toLowerCase()
+      );
 
-        const data = await respuesta.json();
-
-        // 🔍 Filtrar por categoría (slug)
-        const juegosFiltrados = data.filter(
-          (juego) =>
-            juego.categoria?.toLowerCase() === slug.toLowerCase()
-        );
-
-        setJuegos(juegosFiltrados);
-      } catch (err) {
-        console.error(err);
-        setError("Error al cargar los juegos");
-      } finally {
-        setLoading(false);
-      }
+      setJuegos(filtrados);
     };
 
     obtenerJuegos();
-  }, [slug]);
+  }, [categoria]);
 
-  if (loading) {
-    return (
-      <p className="text-center text-white mt-10">
-        Cargando categoría "{slug}"...
-      </p>
-    );
-  }
+  const scroll = (direction) => {
+    const container = scrollRef.current;
+    const scrollAmount = 300;
 
-  if (error) {
-    return (
-      <p className="text-center text-red-500 mt-10">
-        {error}
-      </p>
-    );
-  }
+    if (direction === "left") {
+      container.scrollLeft -= scrollAmount;
+    } else {
+      container.scrollLeft += scrollAmount;
+    }
+  };
 
-  if (juegos.length === 0) {
-    return (
-      <p className="text-center text-gray-400 mt-10">
-        No hay juegos en la categoría "{slug}"
-      </p>
-    );
-  }
+  if (juegos.length === 0) return null;
 
   return (
-    <section className="px-6 py-8">
-      <h1 className="text-2xl font-bold text-yellow-400 mb-6 capitalize">
-        Categoría: {slug}
-      </h1>
+    <div className="relative group px-6">
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-        {juegos.map((juego) => (
+      {/* Flecha izquierda */}
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition z-10"
+      >
+        ◀
+      </button>
+
+      {/* Flecha derecha */}
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition z-10"
+      >
+        ▶
+      </button>
+
+      <div
+        ref={scrollRef}
+        className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-hide"
+      >
+        {juegos.slice(0, 10).map((juego) => (
           <div
             key={juego.id}
-            className="cursor-pointer rounded-xl overflow-hidden bg-black hover:scale-105 transition"
-            onClick={() => setJuegoSeleccionado(juego)}
+            className="min-w-[170px] bg-gray-900 rounded-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 shadow-lg"
           >
             <img
-              src={juego.img}
-              alt={juego.title}
-              className="w-full h-56 object-cover"
+              src={juego.imagen}
+              alt={juego.nombre}
+              className="w-full h-40 object-cover"
             />
-            <div className="bg-yellow-400 text-black text-center font-bold py-2">
-              {juego.title}
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-white text-center p-2">
+              <h3 className="font-semibold text-sm mb-2">{juego.nombre}</h3>
+              <p className="text-xs mb-2">${juego.precio}</p>
+              <button
+                onClick={() => addToCart(juego)}
+                className="bg-yellow-400 text-black px-3 py-1 rounded text-xs font-semibold hover:bg-yellow-500"
+              >
+                Agregar
+              </button>
+
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Ver más */}
+      <div className="flex justify-end mt-4">
+        <button
+          onClick={() =>
+            navigate(`/categoria/${categoria.toLowerCase()}`)
+          }
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-lg transition"
+        >
+          Ver más →
+        </button>
       </div>
 
       <Modal
         juego={juegoSeleccionado}
         onClose={() => setJuegoSeleccionado(null)}
       />
-    </section>
+    </div>
   );
 }

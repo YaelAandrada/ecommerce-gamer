@@ -2,12 +2,15 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { useEffect, useState } from 'react';
 import Categorias from '../page/Categorias';
+import CartModal from "./CartModal";
+import { useCart } from "../context/CardContext";
 
 const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+
+  const { totalItems } = useCart();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,29 +19,11 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const userName = user?.name || user?.username || '';
   const isAdmin = user?.role === 'admin';
 
-  const categories = [
-    { id: 1, name: 'Sandbox', slug: 'sandbox' },
-    { id: 2, name: 'Simulación', slug: 'simulacion' },
-    { id: 3, name: 'Aventura', slug: 'aventura' },
-    { id: 4, name: 'Estrategia', slug: 'estrategia' },
-    { id: 5, name: 'Deportes', slug: 'deportes' },
-    { id: 6, name: 'Carreras', slug: 'carreras' },
-    { id: 7, name: 'RPG', slug: 'rpg' },
-  ];
-
-  // 🛒 solo carrito desde localStorage
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cartItems');
-    setCartItems(savedCart ? JSON.parse(savedCart) : []);
-  }, []);
-
   useEffect(() => {
     setIsMenuOpen(false);
     setIsCartOpen(false);
     setIsCategoriesOpen(false);
   }, [location.pathname]);
-
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const isActiveLink = path =>
     location.pathname === path
@@ -105,7 +90,10 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
             </div>
           )}
 
-          <button className="relative px-2 py-1">
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative px-2 py-1"
+          >
             🛒
             {totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -115,6 +103,12 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
           </button>
         </div>
       </div>
+
+      <CartModal
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
+
     </nav>
   );
 };

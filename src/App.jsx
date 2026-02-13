@@ -9,9 +9,11 @@ import About from "./components/About";
 import Nosotros from "./page/Nosotros";
 import Home from "./page/Home";
 import Login from "./pages/Login";
+import CategoriaDetalle from "./page/CategoriaDetalles";
 import Register from "./pages/Register";
 import Administrador from "./page/Administrador";
 import FormularioJuegos from "./components/FormularioJuegos";
+import Error404 from "./page/Error404";
 import UserPanel from "./pages/UserPanel";
 import Categorias from "./page/Categorias";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -63,10 +65,10 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/categoria/:slug" element={<Home />} /> */}
+        <Route path="/categoria/:slug" element={<CategoriaDetalle />} />
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/formulario" element={<FormularioJuegos />} />
-
+        <Route path="*" element={<Error404 />} />
         {/* PANEL ADMIN */}
         <Route
           path="/admin"
