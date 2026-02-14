@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import Modal from "./modal";
-=======
 import Modal from "../components/modal";
->>>>>>> 5a56ed3135cc7752cabc4e86a709adf9f36068b8
 import { useCart } from "../context/CardContext";
 import { listaJuegosAPI } from "../helpers/queries";
 

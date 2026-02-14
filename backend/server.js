@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import juegosRoutes from "./routes/juegos.routes.js";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use("/api/juegos", juegosRoutes);
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGO_URI, {
