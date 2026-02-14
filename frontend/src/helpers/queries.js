@@ -11,7 +11,7 @@
 // Ejemplo backend:
 // const API_URL = "https://api.miproyecto.com/api";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3000/api";
 
 //Aqui esta trabajando con una api de JSON, aqui tendrán que modificar una linea para usarlo para backend
 
