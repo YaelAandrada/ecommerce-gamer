@@ -11,7 +11,8 @@
 // Ejemplo backend:
 // const API_URL = "https://api.miproyecto.com/api";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3000/api/auth";
+
 
 //Aqui esta trabajando con una api de JSON, aqui tendrán que modificar una linea para usarlo para backend
 
@@ -108,56 +109,39 @@ export const editarJuegoAPI = async(juegoAEditar,id) =>{
 
 
 // REGISTER
+
+
 export const registerAPI = async (newUser) => {
-  try {
-    const res = await fetch(`${API_URL}/usuarios`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser)
-    });
-
-    // 📩 FUTURO BACKEND
-    // - Hashear password (bcrypt)
-    // - Generar token de verificación
-    // - Enviar email
-    // - Guardar isVerified = false
-
-    return res;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
+  return fetch(`${API_URL}/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newUser)
+  });
 };
 
+
 // LOGIN
-export const loginAPI = async (emailOrUsername) => {
+export const loginAPI = async (data) => {
   try {
-    // ⚠️ SOLO PARA JSON-SERVER
-    // En backend real:
-    // POST /auth/login
-    // body: { email, password }
-    // response: { token, user }
+    const res = await fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-    let res = await fetch(
-      `${API_URL}/usuarios?email=${emailOrUsername}`
-    );
-    let data = await res.json();
-
-    if (data.length === 0) {
-      res = await fetch(
-        `${API_URL}/usuarios?username=${emailOrUsername}`
-      );
-      data = await res.json();
-    }
-
-    if (data.length === 0) return null;
-
-    return data[0];
+    const result = await res.json();
+    return result; // { token, user }
   } catch (error) {
     console.error(error);
     return null;
   }
+      // ⚠️ SOLO PARA JSON-SERVER
+    // En backend real:
+    // POST /auth/login
+    // body: { email, password }
+    // response: { token, user }
 };
+
 
 // ❌ Nunca validar contraseña en frontend
 // ✔️ Backend compara bcrypt

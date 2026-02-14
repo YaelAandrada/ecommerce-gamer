@@ -1,45 +1,41 @@
-import { useForm } from 'react-hook-form';
-import bcrypt from 'bcryptjs';
+import { useForm } from "react-hook-form";
 import { loginAPI } from "../helpers/queries";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 function LoginForm({ onLogin }) {
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting }
-  } = useForm();
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
-    const { emailOrUsername, password } = data;
+    try {
+      const res = await loginAPI({
+        email: data.emailOrUsername,
+        password: data.password
+      });
 
-    const user = await loginAPI(emailOrUsername, password);
+      if (!res || !res.token) {
+        toast.error("Email o contraseña incorrectos");
+        return;
+      }
 
-    if (!user) {
-      toast.error("Email/usuario o contraseña incorrectos");
-      return;
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("user", JSON.stringify(res.user));
+
+      onLogin(res.user);
+      toast.success("¡Bienvenido!");
+      navigate("/home");
+
+    } catch (error) {
+      console.error(error);
+      toast.error("Error en login");
     }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-
-    if (!isValidPassword) {
-      toast.error("Email/usuario o contraseña incorrectos");
-      return;
-    }
-
-    // Guardamos usuario completo
-    const userWithoutPassword = { ...user, password: undefined };
-    localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-    onLogin(userWithoutPassword);
-    toast.success('¡Bienvenido!');
-    navigate("/home");
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
       <input
         type="text"
         placeholder="Email o usuario"
@@ -54,13 +50,11 @@ function LoginForm({ onLogin }) {
         className="border p-2 w-full"
       />
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="bg-blue-600 text-white p-2 w-full"
-      >
-        Iniciar sesión
+      <button type="submit" disabled={isSubmitting}
+        className="bg-blue-600 text-white p-2 w-full">
+        {isSubmitting ? "Ingresando..." : "Iniciar sesión"}
       </button>
+
     </form>
   );
 }
