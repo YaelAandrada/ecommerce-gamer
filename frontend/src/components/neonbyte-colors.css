@@ -1,0 +1,28 @@
+:root {
+  --neonbyte-violet: #7F00FF;
+  --neonbyte-fuchsia: #FF00FF;
+  --neonbyte-cyan: #00FFFF;
+  --neonbyte-magenta: #FF0090;
+  --neonbyte-dark: #111827;
+}
+
+.bg-violet {
+  background-color: var(--neonbyte-violet);
+}
+
+.text-fuchsia {
+  color: var(--neonbyte-fuchsia);
+}
+
+.border-cyan {
+  border: 2px solid var(--neonbyte-cyan);
+}
+
+.shadow-magenta {
+  box-shadow: 0 0 10px var(--neonbyte-magenta);
+}
+
+.bg-dark {
+  background-color: var(--neonbyte-dark);
+  color: var(--neonbyte-cyan);
+}

@@ -1,0 +1,169 @@
+/* PALETA NEONBYTE */
+:root {
+  --neonbyte-dark: #0a0a0a;
+  --neonbyte-light: #f5f5f5;
+  --neonbyte-cyan: #00ffcc;
+  --neonbyte-magenta: #ff00cc;
+  --neonbyte-green: #00ff99;
+  --neonbyte-glow: rgba(0, 255, 153, 0.3);
+  --neonbyte-text: #111;
+}
+
+.dark-mode {
+  --neonbyte-bg: var(--neonbyte-dark);
+  --neonbyte-border: var(--neonbyte-cyan);
+  --neonbyte-shadow: var(--neonbyte-magenta);
+  --neonbyte-text: var(--neonbyte-cyan);
+  --neonbyte-card-bg: #121212;
+  --neonbyte-scrollbar: #093423;
+}
+
+.light-mode {
+  --neonbyte-bg: var(--neonbyte-light);
+  --neonbyte-border: var(--neonbyte-magenta);
+  --neonbyte-shadow: var(--neonbyte-cyan);
+  --neonbyte-text: #222;
+  --neonbyte-card-bg: #ffffff;
+  --neonbyte-scrollbar: #cccccc;
+}
+
+/* SCROLL POPULARES */
+.scroll-populares {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 8px;
+}
+
+.scroll-populares::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scroll-populares::-webkit-scrollbar-thumb {
+  background-color: var(--neonbyte-scrollbar);
+  border-radius: 4px;
+}
+
+.scroll-populares .card {
+  flex-shrink: 0;
+  width: 140px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.container-card {
+  max-width: 90vw !important;
+  background-color: var(--neonbyte-bg) !important;
+  border: 2px solid var(--neonbyte-border) !important;
+  box-shadow: 0 0 20px var(--neonbyte-shadow) !important;
+  color: var(--neonbyte-text) !important;
+}
+
+/* PROMO BOXES */
+.promo-boxes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+  max-width: 900px;
+}
+
+.promo-box {
+  flex: 0 0 auto;
+  background-color: var(--neonbyte-card-bg);
+  border: 2px solid var(--neonbyte-border);
+  box-shadow: 0 0 12px var(--neonbyte-shadow);
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 260px;
+  height: 120px;
+}
+
+.promo-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 16px var(--neonbyte-shadow);
+}
+
+.promo-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--neonbyte-text);
+}
+
+.promo-icon {
+  font-size: 1.5rem;
+}
+
+.new-badge {
+  background-color: orange;
+  color: black;
+  font-size: 0.65rem;
+  padding: 2px 5px;
+  border-radius: 5px;
+  margin-left: 4px;
+}
+
+/* QUIZ */
+.news-box,
+.quiz-box {
+  flex: 1;
+  background-color: var(--neonbyte-card-bg);
+  border: 2px solid var(--neonbyte-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 12px var(--neonbyte-shadow);
+}
+
+/* BOTÓN QUIZ */
+.quiz-button {
+  background-color: var(--neonbyte-green);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.quiz-button:hover {
+  background-color: #00cc88;
+}
+
+/* CARDS */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--neonbyte-green);
+}
+
+/* NOVEDADES */
+.noticia-box {
+  background-color: var(--neonbyte-card-bg);
+  border: 2px solid var(--neonbyte-border);
+  border-radius: 12px;
+  box-shadow: 0 0 10px var(--neonbyte-glow);
+  padding: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.noticia-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 14px var(--neonbyte-glow);
+}
+
+.noticia-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
