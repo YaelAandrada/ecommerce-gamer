@@ -4,8 +4,10 @@ import { toast } from "react-toastify";
 
 const CrearJuegoModal = ({ onClose, onCreated }) => {
   const [formData, setFormData] = useState({
-    titulo: "",
+    nombre: "",
     descripcion: "",
+    requisitosMinimos: "",
+    requisitosOptimos: "",
     categoria: "",
     precio: "",
     imagen: ""
@@ -52,10 +54,10 @@ const CrearJuegoModal = ({ onClose, onCreated }) => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
-            name="titulo"
-            value={formData.titulo}
+            name="nombre"
+            value={formData.nombre}
             onChange={handleChange}
-            placeholder="Título"
+            placeholder="Nombre del juego"
             className="w-full p-2 rounded bg-gray-800 border border-gray-700"
           />
 
@@ -80,6 +82,24 @@ const CrearJuegoModal = ({ onClose, onCreated }) => {
             <option value="deportes">Deportes</option>
             <option value="estrategia">Estrategia</option>
           </select>
+
+          <textarea
+            name="requisitosMinimos"
+            value={formData.requisitosMinimos}
+            onChange={handleChange}
+            placeholder="Requisitos mínimos"
+            rows="3"
+            className="w-full p-2 rounded bg-gray-800 border border-gray-700"
+          />
+
+          <textarea
+            name="requisitosOptimos"
+            value={formData.requisitosOptimos}
+            onChange={handleChange}
+            placeholder="Requisitos óptimos"
+            rows="3"
+            className="w-full p-2 rounded bg-gray-800 border border-gray-700"
+          />
 
           <input
             type="number"

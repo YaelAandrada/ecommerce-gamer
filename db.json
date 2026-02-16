@@ -23,6 +23,17 @@
       "imagen": "",
       "descripcion": "asd",
       "id": "979f"
+    },
+    {
+      "id": "516a",
+      "nombre": "Half-Life 2",
+      "descripcion": "Perdimos la Guerra de las Siete Horas. La Tierra se rindió. El incidente de Black Mesa es un recuerdo lejano. El jugador vuelve a tomar la palanca del científico Gordon Freeman, quien se encuentra en una Tierra infestada por alienígenas, desposeída de todos sus recursos y en la que cada vez queda menos población. Freeman se ve envuelto en el papel nada envidiable de rescatar el mundo del mal que desencadenó en Black Mesa. Y mucha gente a la que aprecia cuenta con él.",
+      "requisitosMinimos": "",
+      "requisitosOptimos": "Mínimo:\nSO *: Windows 7, Vista, XP\nProcesador: 1,7 GHz\nMemoria: 512 MB de RAM\nGráficos: Tarjeta gráfica compatible con DirectX 8.1 y SSE\nAlmacenamiento: 6500 MB de espacio disponible",
+      "categoria": "accion",
+      "precio": "1500",
+      "imagen": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/220/header.jpg?t=1745368545",
+      "activo": true
     }
   ],
   "usuarios": [

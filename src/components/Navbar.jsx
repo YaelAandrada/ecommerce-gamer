@@ -9,7 +9,8 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
-  const { totalItems } = useCart();
+  const { cartItems } = useCart();
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const location = useLocation();
   const navigate = useNavigate();

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "../components/modal";
 import { useCart } from "../context/CardContext";
 import { listaJuegosAPI } from "../helpers/queries";
 
@@ -103,11 +102,6 @@ export default function Carousel({ categoria }) {
           Ver más →
         </button>
       </div>
-
-      <Modal
-        juego={juegoSeleccionado}
-        onClose={() => setJuegoSeleccionado(null)}
-      />
     </div>
   );
 }

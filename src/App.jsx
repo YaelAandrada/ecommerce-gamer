@@ -14,19 +14,25 @@ import Error404 from "./page/Error404";
 import UserPanel from "./pages/UserPanel";
 import Categorias from "./page/Categorias";
 import ProtectedRoute from "./components/ProtectedRoute";
+import GamesDetalles from "./page/GameDetalles";
+
 import { ToastContainer } from "react-toastify";
 
 function App() {
   const [user, setUser] = useState(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authView, setAuthView] = useState("login");
+  const [authLoading, setAuthLoading] = useState(true); //Deslogearse al salir completamente de la pagina
+
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-  }, []);
+  const savedUser = localStorage.getItem("user");
+  if (savedUser) {
+    setUser(JSON.parse(savedUser));
+  }
+  setAuthLoading(false);
+}, []);
+
 
   const handleLogin = (userData) => {
   localStorage.setItem("user", JSON.stringify(userData));
@@ -38,6 +44,8 @@ function App() {
     localStorage.removeItem("user");
     setUser(null);
   };
+
+  if (authLoading) return null;
 
   return (
     <>
@@ -76,6 +84,10 @@ function App() {
           <Categorias />
           </ProtectedRoute>
           } />
+        <Route path="/juego/:id" element={
+          <ProtectedRoute user={user}>
+          <GamesDetalles />
+          </ProtectedRoute>} />
         <Route path="*" element={<Error404 />} />
 
 

@@ -1,12 +1,9 @@
 import { useCart } from "../context/CardContext";
 
 function CartModal({ isOpen, onClose }) {
-  const { cartItems, removeFromCart, clearCart } = useCart();
+  const { cartItems, removeFromCart, clearCart, total } = useCart();
 
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.precio * item.quantity,
-    0
-  );
+  
 
   if (!isOpen) return null;
 

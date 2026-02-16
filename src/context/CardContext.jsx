@@ -5,57 +5,63 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    const saved = localStorage.getItem("cartItems");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [cartItems, setCartItems] = useState([]);
 
+  // 🔄 Cargar carrito
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
+  }, []);
+
+  // 💾 Guardar carrito
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (game) => {
-    setCartItems(prev => {
-      const existing = prev.find(item => item.id === game.id);
+  // ➕ Agregar al carrito
+  const addToCart = (juego) => {
+    const existe = cartItems.find(item => item.id === juego.id);
 
-      if (existing) {
-        return prev.map(item =>
-          item.id === game.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-
-      return [...prev, { ...game, quantity: 1 }];
-    });
+    if (existe) {
+      setCartItems(cartItems.map(item =>
+        item.id === juego.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
+    } else {
+      setCartItems([
+        ...cartItems,
+        {
+          ...juego,
+          quantity: 1
+        }
+      ]);
+    }
   };
 
+  // ➖ Eliminar producto
   const removeFromCart = (id) => {
-    setCartItems(prev =>
-      prev.filter(item => item.id !== id)
-    );
+    setCartItems(cartItems.filter(item => item.id !== id));
   };
 
-  const clearCart = () => setCartItems([]);
+  // 🧹 Vaciar carrito
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
-  const totalItems = cartItems.reduce(
-    (sum, item) => sum + item.quantity,
+  // 💰 Total
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.precio * item.quantity,
     0
   );
 
   return (
     <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        clearCart,
-        totalItems
-      }}
+      value={{ cartItems, addToCart, removeFromCart, clearCart, total }}
     >
       {children}
     </CartContext.Provider>
   );
 };
-
-export default CartProvider;
