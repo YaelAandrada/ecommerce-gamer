@@ -65,7 +65,7 @@ export default function Categorias() {
   }
 
   return (
-    <section className="px-6 py-8">
+    <section className="px-6 py-8 dark:bg-slate-950 pb-10">
       <h1 className="text-2xl font-bold text-yellow-400 mb-6 capitalize">
         Categoría: {slug}
       </h1>

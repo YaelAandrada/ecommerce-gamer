@@ -62,13 +62,14 @@ export default function Carousel({ categoria }) {
 
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-hide"
+        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 overflow-x-auto scrollbar-hide py-4"
       >
         {juegos.slice(0, 10).map((juego) => (
           <div
             key={juego.id}
             className="min-w-[170px] bg-gray-900 rounded-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 shadow-lg"
           >
+            {/*  */}
             <img
               src={juego.imagen}
               alt={juego.nombre}

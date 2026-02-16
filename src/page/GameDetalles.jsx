@@ -33,8 +33,8 @@ export default function GameDetalles() {
   if (!juego) return <p className="text-center mt-10">Juego no encontrado</p>;
 
   return (
-    <div className="min-h-screen px-10 py-10 bg-gray-100">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 bg-white p-8 rounded-xl shadow-lg">
+    <div className="min-h-screen px-10 py-10 dark:bg-slate-950 pb-10">
+      <div className="max-w-6xl text-white mx-auto grid md:grid-cols-2 gap-10 p-8 rounded-xl shadow-lg bg-gray-50 dark:bg-gray-900 dark:shadow-neutral-900 shadow-neutral-400">
         
         {/* Imagen */}
         <img
@@ -47,7 +47,7 @@ export default function GameDetalles() {
         <div>
           <h1 className="text-3xl font-bold mb-4">{juego.nombre}</h1>
 
-          <p className="text-gray-700 mb-4">
+          <p className="text-gray-500 mb-4">
             {juego.descripcion}
           </p>
 
