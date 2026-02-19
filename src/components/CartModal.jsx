@@ -1,15 +1,18 @@
 import { useCart } from "../context/CardContext";
 
 function CartModal({ isOpen, onClose }) {
-  const { cartItems, removeFromCart, clearCart, total } = useCart();
-
-  
+  const { cartItems, removeFromCart, clearCart } = useCart();
 
   if (!isOpen) return null;
 
+  // Calcular total asegurando que price sea número
+  const total = cartItems.reduce(
+    (acc, item) => acc + Number(item.price) * item.quantity,
+    0
+  );
+
   return (
     <div className="fixed inset-0 z-50 flex">
-
       {/* Fondo oscuro */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
@@ -18,7 +21,6 @@ function CartModal({ isOpen, onClose }) {
 
       {/* Panel lateral */}
       <div className="relative ml-auto w-[350px] h-full bg-gray-900 text-white p-6 shadow-xl transform transition-transform duration-300">
-
         <h2 className="text-2xl font-bold mb-6">🛒 Tu carrito</h2>
 
         {cartItems.length === 0 ? (
@@ -26,15 +28,13 @@ function CartModal({ isOpen, onClose }) {
         ) : (
           <>
             <div className="space-y-4 max-h-[60vh] overflow-y-auto">
-              {cartItems.map(item => (
+              {cartItems.map((item) => (
                 <div
-                  key={item.id}
+                  key={item._id}
                   className="flex justify-between bg-gray-800 p-3 rounded"
                 >
                   <div>
-                    <h3 className="text-sm font-semibold">
-                      {item.nombre}
-                    </h3>
+                    <h3 className="text-sm font-semibold">{item.title}</h3>
                     <p className="text-xs text-gray-400">
                       Cantidad: {item.quantity}
                     </p>
@@ -42,10 +42,10 @@ function CartModal({ isOpen, onClose }) {
 
                   <div className="text-right">
                     <p className="text-yellow-400 font-bold">
-                      ${item.precio * item.quantity}
+                      ${Number(item.price) * item.quantity}
                     </p>
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item._id)}
                       className="text-red-400 text-xs hover:underline"
                     >
                       Quitar
@@ -56,9 +56,7 @@ function CartModal({ isOpen, onClose }) {
             </div>
 
             <div className="mt-6 border-t border-gray-700 pt-4">
-              <h3 className="text-lg font-bold">
-                Total: ${total}
-              </h3>
+              <h3 className="text-lg font-bold">Total: ${total}</h3>
 
               <button
                 onClick={clearCart}
@@ -68,12 +66,12 @@ function CartModal({ isOpen, onClose }) {
               </button>
               <button
                 onClick={() => {
-                    window.location.href = "/checkout";
+                  window.location.href = "/checkout";
                 }}
                 className="w-full mt-3 bg-yellow-400 hover:bg-yellow-500 text-black py-2 rounded font-semibold"
-                >
+              >
                 Comprar 🛍️
-                </button>
+              </button>
             </div>
           </>
         )}
