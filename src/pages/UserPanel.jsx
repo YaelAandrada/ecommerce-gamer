@@ -1,96 +1,120 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// src/pages/UserPanel.jsx
+import React, { useState } from 'react';
 import UserDashboard from '../components/UserPanel/UserDashboard';
-import Wishlist from '../components/UserPanel/Wishlist';
-// import UserGames from '../components/UserPanel/UserGames';
-import UserReviews from '../components/UserPanel/UserReview';
-import EditProfile from '../components/UserPanel/EditProfile';
-import { getCurrentUser } from '../helpers/userQueriesFront';
+import UserWishlist from '../components/UserPanel/UserWishlist';
+import UserProfile from '../components/UserPanel/UserProfile';
 
 const UserPanel = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    loadUserData();
-  }, []);
-
-  const loadUserData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-       const user = await getCurrentUser(token);
-      setUserData(user);
-    } catch (error) {
-      console.error('Error al cargar datos del usuario:', error);
-      localStorage.removeItem('token');
-      navigate('/login');
-    } finally {
-      setLoading(false);
-    }
+  const mockUser = {
+    username: 'Usuario Prueba',
+    email: 'test@test.com'
   };
+
+  const tabs = [
+    { id: 'dashboard', nombre: 'Dashboard', icono: '📊' },
+    { id: 'perfil', nombre: 'Mi Perfil', icono: '👤' },
+    { id: 'wishlist', nombre: 'Lista de Deseos', icono: '❤️' }
+  ];
 
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
-        return <UserDashboard userData={userData} />;
+        return <UserDashboard />;
+      case 'perfil':
+        return <UserProfile />;
       case 'wishlist':
-        return <Wishlist userId={userData?._id} />;
-      case 'mygames':
-        return <UserGames userId={userData?._id} />;
-      case 'reviews':
-        return <UserReviews userId={userData?._id} />;
-      case 'edit':
-        return <EditProfile userData={userData} onUpdate={loadUserData} />;
+        return <UserWishlist />;
       default:
-        return <UserDashboard userData={userData} />;
+        return <UserDashboard />;
     }
   };
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-          Panel de Usuario
-        </h1>
-        
-        {/* Navegación por pestañas */}
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-gray-200 dark:border-gray-700">
-          {['dashboard', 'wishlist', 'mygames', 'reviews', 'edit'].map((tab) => (
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#f3f4f6',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+    
+      <div style={{ 
+        backgroundColor: 'white', 
+        boxShadow: '0 1px 3px rgba(0,0,0,0.1)' 
+      }}>
+        <div style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          padding: '1.5rem 1rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <div>
+            <h1 style={{ 
+              fontSize: '1.875rem', 
+              fontWeight: 'bold', 
+              margin: 0,
+              color: '#111827'
+            }}>
+              Panel de Usuario
+            </h1>
+            <p style={{ 
+              color: '#6b7280', 
+              margin: '0.25rem 0 0 0' 
+            }}>
+              Bienvenido, {mockUser.username}
+            </p>
+          </div>
+          <button style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: '#dc2626',
+            color: 'white',
+            border: 'none',
+            borderRadius: '0.375rem',
+            cursor: 'pointer'
+          }}>
+            Cerrar Sesión
+          </button>
+        </div>
+
+    
+        <nav style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          padding: '0 1rem', 
+          display: 'flex', 
+          gap: '1rem' 
+        }}>
+          {tabs.map((tab) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-t-lg transition-colors ${
-                activeTab === tab
-                  ? 'bg-indigo-600 dark:bg-red-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700'
-              }`}
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                padding: '0.5rem 1rem',
+                border: 'none',
+                borderBottom: activeTab === tab.id ? '2px solid #4f46e5' : '2px solid transparent',
+                color: activeTab === tab.id ? '#4f46e5' : '#6b7280',
+                cursor: 'pointer',
+                background: 'none',
+                fontSize: '0.875rem',
+                fontWeight: '500'
+              }}
             >
-              {tab === 'dashboard' && 'Resumen'}
-              {tab === 'wishlist' && 'Lista de Deseos'}
-              {tab === 'mygames' && 'Mis Juegos'}
-              {tab === 'reviews' && 'Mis Reseñas'}
-              {tab === 'edit' && 'Editar Perfil'}
+              <span style={{ marginRight: '0.5rem' }}>{tab.icono}</span>
+              {tab.nombre}
             </button>
           ))}
-        </div>
-        
-        {/* Contenido de la pestaña activa */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-          {renderContent()}
-        </div>
+        </nav>
+      </div>
+
+    
+      <div style={{ 
+        maxWidth: '1280px', 
+        margin: '0 auto', 
+        padding: '2rem 1rem' 
+      }}>
+        {renderContent()}
       </div>
     </div>
   );

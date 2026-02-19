@@ -1,96 +1,124 @@
-import React, { useState, useEffect } from 'react';
-import { FaUser, FaGamepad, FaHeart, FaStar, FaHistory } from 'react-icons/fa';
-import { getUserStats } from '../../helpers/userQueriesFront';
+import React from 'react';
 
-const UserDashboard = ({ userData }) => {
-  const [stats, setStats] = useState({
-    totalGames: 0,
-    wishlistCount: 0,
-    reviewsCount: 0,
-    avgRating: 0
-  });
+const UserDashboard = () => {
+ 
+  const mockStats = {
+    wishlist: 2,
+    reviews: 0
+  };
 
-  useEffect(() => {
-    fetchStats();
-  }, [userData]);
-
-  const fetchStats = async () => {
-    if (userData?._id) {
-      const userStats = await getUserStats(userData._id);
-      setStats(userStats);
-    }
+  const mockUser = {
+    username: 'Usuario Prueba',
+    createdAt: new Date().toISOString()
   };
 
   return (
     <div>
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-          ¡Bienvenido, {userData?.username || 'Usuario'}!
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300">
-          Esta es tu área personal donde puedes gestionar tus juegos, lista de deseos y reseñas.
+      
+      <div style={{ 
+        background: 'linear-gradient(to right, #4f46e5, #9333ea)',
+        color: 'white',
+        padding: '1.5rem',
+        borderRadius: '0.5rem',
+        marginBottom: '2rem',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+      }}>
+        <h3 style={{ 
+          fontSize: '1.25rem', 
+          fontWeight: '600', 
+          marginBottom: '0.5rem' 
+        }}>
+          ¡Hola, {mockUser.username}!
+        </h3>
+        <p style={{ margin: 0, opacity: 0.9 }}>
+          Este es tu panel personal. Aquí puedes gestionar tu perfil y tu lista de deseos.
         </p>
       </div>
 
-      {/* Estadísticas rápidas */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-blue-50 dark:bg-blue-900/30 p-6 rounded-lg shadow">
-          <div className="flex items-center">
-            <FaUser className="text-blue-500 text-2xl mr-4" />
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Miembro desde</p>
-              <p className="text-xl font-bold text-gray-800 dark:text-white">
-                {new Date(userData?.createdAt).toLocaleDateString()}
-              </p>
-            </div>
-          </div>
+      
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+        gap: '1.5rem' 
+      }}>
+        <div style={{ 
+          background: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '0.5rem', 
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+          textAlign: 'center'
+        }}>
+          <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>❤️</div>
+          <h4 style={{ 
+            fontSize: '0.875rem', 
+            color: '#6b7280', 
+            margin: '0 0 0.5rem 0' 
+          }}>
+            Lista de Deseos
+          </h4>
+          <p style={{ 
+            fontSize: '2rem', 
+            fontWeight: 'bold', 
+            color: '#4f46e5', 
+            margin: '0 0 0.25rem 0' 
+          }}>
+            {mockStats.wishlist}
+          </p>
+          <p style={{ fontSize: '0.75rem', color: '#9ca3af', margin: 0 }}>
+            juegos guardados
+          </p>
         </div>
 
-        <div className="bg-green-50 dark:bg-green-900/30 p-6 rounded-lg shadow">
-          <div className="flex items-center">
-            <FaGamepad className="text-green-500 text-2xl mr-4" />
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Juegos adquiridos</p>
-              <p className="text-xl font-bold text-gray-800 dark:text-white">
-                {stats.totalGames}
-              </p>
-            </div>
-          </div>
+        <div style={{ 
+          background: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '0.5rem', 
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+          textAlign: 'center'
+        }}>
+          <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>⭐</div>
+          <h4 style={{ 
+            fontSize: '0.875rem', 
+            color: '#6b7280', 
+            margin: '0 0 0.5rem 0' 
+          }}>
+            Reseñas
+          </h4>
+          <p style={{ 
+            fontSize: '2rem', 
+            fontWeight: 'bold', 
+            color: '#4f46e5', 
+            margin: '0 0 0.25rem 0' 
+          }}>
+            {mockStats.reviews}
+          </p>
+          <p style={{ fontSize: '0.75rem', color: '#9ca3af', margin: 0 }}>
+            reseñas escritas
+          </p>
         </div>
 
-        <div className="bg-pink-50 dark:bg-pink-900/30 p-6 rounded-lg shadow">
-          <div className="flex items-center">
-            <FaHeart className="text-pink-500 text-2xl mr-4" />
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">En lista de deseos</p>
-              <p className="text-xl font-bold text-gray-800 dark:text-white">
-                {stats.wishlistCount}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg shadow">
-          <div className="flex items-center">
-            <FaStar className="text-yellow-500 text-2xl mr-4" />
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">Reseñas escritas</p>
-              <p className="text-xl font-bold text-gray-800 dark:text-white">
-                {stats.reviewsCount}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Actividad reciente */}
-      <div>
-        <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center">
-          <FaHistory className="mr-2" /> Actividad Reciente
-        </h3>
-        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-          <p className="text-gray-600 dark:text-gray-300">
-            Aquí se mostrará tu actividad reciente: juegos comprados, reseñas publicadas, etc.
+        <div style={{ 
+          background: 'white', 
+          padding: '1.5rem', 
+          borderRadius: '0.5rem', 
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+          textAlign: 'center'
+        }}>
+          <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📅</div>
+          <h4 style={{ 
+            fontSize: '0.875rem', 
+            color: '#6b7280', 
+            margin: '0 0 0.5rem 0' 
+          }}>
+            Miembro desde
+          </h4>
+          <p style={{ 
+            fontSize: '1.25rem', 
+            fontWeight: 'bold', 
+            color: '#4f46e5', 
+            margin: 0 
+          }}>
+            Hoy
           </p>
         </div>
       </div>

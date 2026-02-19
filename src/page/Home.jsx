@@ -121,6 +121,8 @@ function Home() {
             <button className="border border-green-500 rounded py-1 hover:bg-green-500 hover:text-black">Valorant</button>
             <button className="border border-green-500 rounded py-1 hover:bg-green-500 hover:text-black">Roblox</button>
           </div>
+         
+
         </div>
       </section>
 

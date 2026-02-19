@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from './context/AuthContext.jsx';
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -11,7 +12,7 @@ import CategoriaDetalle from "./page/CategoriaDetalles";
 import Register from "./pages/Register";
 import Administrador from "./page/Administrador";
 import Error404 from "./page/Error404";
-import UserPanel from "./pages/UserPanel";
+import UserPanel from "./pages/UserPanel.jsx";
 import Categorias from "./page/Categorias";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GamesDetalles from "./page/GameDetalles";
@@ -103,14 +104,7 @@ function App() {
 
 
         {/* PANEL USUARIO */}
-        <Route
-          path="/user-panel"
-          element={
-            <ProtectedRoute user={user}>
-              <UserPanel />
-            </ProtectedRoute>
-          }
-        />
+           <Route path="/panel/*" element={<UserPanel />} />
 
         {/* fallback */}
       </Routes>

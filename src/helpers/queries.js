@@ -181,7 +181,7 @@ export const editarUsuarioAPI = async (usuario, id) => {
     console.error(error);
     return false;
   }
-};
+ };
 
 
 // ❌ Nunca validar contraseña en frontend

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Categorias from '../page/Categorias';
 import CartModal from "./CartModal";
 import { useCart } from "../context/CardContext";
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -93,6 +94,22 @@ const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
             )}
           </button>
         </div>
+      </div>
+      <div>
+      
+<Link 
+  to="/panel" 
+  style={{
+    padding: '0.5rem 1rem',
+    backgroundColor: '#4f46e5',
+    color: 'white',
+    textDecoration: 'none',
+    borderRadius: '0.375rem',
+    marginLeft: '1rem'
+  }}
+>
+
+</Link>
       </div>
 
       <CartModal
