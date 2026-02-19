@@ -15,16 +15,22 @@ const API_URL = "http://localhost:3000";
 
 //Aqui esta trabajando con una api de JSON, aqui tendrán que modificar una linea para usarlo para backend
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("token");
+
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`
+  };
+};
+
+
+
 export const crearJuegoAPI = async (juegoNuevo) => {
   try {
     return await fetch(`${API_URL}/juegos`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-
-        // 🔐 FUTURO BACKEND
-        // Authorization: `Bearer ${token}`
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(juegoNuevo),
     });
   } catch (error) {
@@ -52,20 +58,16 @@ export const listaJuegosAPI = async() =>{
 
 export const borrarJuegoAPI = async (id) => {
   try {
-    const respuesta = await fetch(`${API_URL}/juegos/${id}`, {
+    return await fetch(`${API_URL}/juegos/${id}`, {
       method: "DELETE",
-
-      // 🔐 FUTURO BACKEND
-      // headers: {
-      //   Authorization: `Bearer ${token}`
-      // }
+      headers: getAuthHeaders()
     });
-    return respuesta;
   } catch (error) {
     console.error(error);
     return false;
   }
 };
+
 
 // ⚠️ En backend:
 // - Validar token
@@ -86,77 +88,66 @@ export const obtenerUnSoloJuegoAPI = async(id) =>{
     }
 }
 
-export const editarJuegoAPI = async(juegoAEditar,id) =>{
-    try
-    {
-        const respuesta = await fetch(`http://localhost:3000/juegos/${id}`,{
-            method:"PUT",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(juegoAEditar)
-        })
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
-
-
-// REGISTER
-export const registerAPI = async (newUser) => {
+export const editarJuegoAPI = async (juegoAEditar, id) => {
   try {
-    const res = await fetch(`${API_URL}/usuarios`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser)
+    return await fetch(`${API_URL}/juegos/${id}`, {
+      method: "PUT",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(juegoAEditar)
     });
-
-    // 📩 FUTURO BACKEND
-    // - Hashear password (bcrypt)
-    // - Generar token de verificación
-    // - Enviar email
-    // - Guardar isVerified = false
-
-    return res;
   } catch (error) {
     console.error(error);
     return false;
   }
 };
 
-// LOGIN
-export const loginAPI = async (emailOrUsername) => {
+
+
+// REGISTER
+export const registerAPI = async (newUser) => {
   try {
-    // ⚠️ SOLO PARA JSON-SERVER
-    // En backend real:
-    // POST /auth/login
-    // body: { email, password }
-    // response: { token, user }
+    const res = await fetch(`${API_URL}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser)
+    });
 
-    let res = await fetch(
-      `${API_URL}/usuarios?email=${emailOrUsername}`
-    );
-    let data = await res.json();
+    const data = await res.json();
 
-    if (data.length === 0) {
-      res = await fetch(
-        `${API_URL}/usuarios?username=${emailOrUsername}`
-      );
-      data = await res.json();
+    if (!res.ok) {
+      return { error: data.msg || "Error al registrar" };
     }
 
-    if (data.length === 0) return null;
+    return data;
 
-    return data[0];
+  } catch (error) {
+    console.error(error);
+    return { error: "Error de conexión" };
+  }
+};
+
+
+// LOGIN
+export const loginAPI = async (emailOrUsername, password) => {
+  try {
+    const res = await fetch(`${API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ emailOrUsername, password })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) return null;
+
+    return data;
+
   } catch (error) {
     console.error(error);
     return null;
   }
 };
+
 
 // USUARIOS
 
