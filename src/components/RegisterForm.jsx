@@ -1,12 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from '../utils/validationSchema';
+import { registerAPI } from "../helpers/queries";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 import Input from './Input';
-import bcrypt from 'bcryptjs';
-import GoogleLoginButton from './GoogleLoginButton'; // Asegurate que esté en el mismo nivel
+import GoogleLoginButton from './GoogleLoginButton';
 
 function RegisterForm({ onRegister }) {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -17,62 +20,50 @@ function RegisterForm({ onRegister }) {
 
   const onSubmit = async (data) => {
     try {
-      const { confirmPassword, ...userData } = data;
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const newUser = {
+        username: data.username,
+        email: data.email,
+        password: data.password
+      };
 
-      if (users.find(u => u.email === userData.email)) {
-        toast.error('El Usuario ya existe');
+      const response = await registerAPI(newUser);
+
+      if (response?.error) {
+        toast.error(response.error);
         return;
       }
 
-      const hashedPassword = await bcrypt.hash(userData.password, 12);
-      const userToSave = {
-        ...userData,
-        password: hashedPassword
-      };
+      toast.success("Usuario creado correctamente");
+      navigate("/login");
 
-      users.push(userToSave);
-      localStorage.setItem('users', JSON.stringify(users));
+      if (onRegister) {
+        onRegister();
+      }
 
-      const userWithoutHash = { ...userData, password: undefined };
-      localStorage.setItem('user', JSON.stringify(userWithoutHash));
-
-      onRegister(userToSave);
-      toast.success('Registro exitoso :)');
     } catch (error) {
-      console.log(error);
-      toast.error('Error en el registro :(');
+      console.error(error);
+      toast.error("Error en registro");
     }
   };
 
   const handleGoogleRegister = async (user) => {
     try {
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-
-      if (!users.find(u => u.email === user.email)) {
-        const userToSave = {
-          username: user.displayName || 'GoogleUser',
-          email: user.email,
-          photoURL: user.photoURL,
-          password: null
-        };
-
-        users.push(userToSave);
-        localStorage.setItem('users', JSON.stringify(users));
-      }
-
       const userWithoutHash = {
-        username: user.displayName || 'GoogleUser',
+        username: user.displayName || "GoogleUser",
         email: user.email,
         photoURL: user.photoURL
       };
 
-      localStorage.setItem('user', JSON.stringify(userWithoutHash));
-      onRegister(userWithoutHash);
-      toast.success('Registro con Google exitoso!');
+      localStorage.setItem("user", JSON.stringify(userWithoutHash));
+
+      if (onRegister) {
+        onRegister(userWithoutHash);
+      }
+
+      toast.success("Registro con Google exitoso!");
     } catch (error) {
       console.error(error);
-      toast.error('Error al registrar con Google');
+      toast.error("Error al registrar con Google");
     }
   };
 
@@ -117,9 +108,9 @@ function RegisterForm({ onRegister }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
       >
-        {isSubmitting ? 'Registrando...' : 'Registrarse'}
+        {isSubmitting ? "Registrando..." : "Registrarse"}
       </button>
 
       <div className="relative flex items-center justify-center">

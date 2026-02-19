@@ -3,10 +3,12 @@ import LoginForm from '../components/LoginForm';
 import GoogleLoginButton from '../components/GoogleLoginButton';
 import AuthLayout from '../components/AuthLayout'; // Asegurate que esté en esta ruta
 
-function Login() {
+function Login({ setUser }) {
   const navigate = useNavigate();
 
   const handleLogin = (userData) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
     navigate('/home');
   };
 

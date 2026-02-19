@@ -1,103 +1,136 @@
-// POST - crear producto - 201
-// GET - obtener 1 o mas productos - 200
-// DELETE - borrar 1 producto - 200
-// PUT/PATCH - editar 1 producto
+const API_URL = "http://localhost:5000/api";
 
-export const crearJuegoAPI = async(juegoNuevo) =>{
-    try
-    {
-        const respuesta = await fetch(`http://localhost:3000/juegos`,{
-            method:"POST",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(juegoNuevo)
-        })
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("token");
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+};
 
-export const listaJuegosAPI = async() =>{
-    try
-    {
-        const respuesta = await fetch(`http://localhost:3000/juegos`)
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
+// Crear juego
+export const crearJuegoAPI = async (juegoNuevo) => {
+  try {
+    const res = await fetch(`${API_URL}/juegos`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(juegoNuevo),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
-export const borrarJuegoAPI = async(id) =>{
-    try
-    {
-        const respuesta = await fetch(`http://localhost:3000/juegos/${id}`,{
-            method:"DELETE"
-        })
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
+// Listar juegos
+export const listaJuegosAPI = async () => {
+  try {
+    const res = await fetch(`${API_URL}/juegos`);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
 
-export const obtenerUnSoloJuegoAPI = async(id) =>{
-    try
-    {
-        const respuesta = await fetch(`http://localhost:3000/juegos/${id}`)
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
+// Borrar juego
+export const borrarJuegoAPI = async (id) => {
+  try {
+    const res = await fetch(`${API_URL}/juegos/${id}`, {
+      method: "DELETE",
+      headers: getAuthHeaders(),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
-export const editarJuegoAPI = async(juegoAEditar,id) =>{
-    try
-    {
-        const respuesta = await fetch(`http://localhost:3000/juegos/${id}`,{
-            method:"PUT",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(juegoAEditar)
-        })
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
+// Obtener un solo juego
+export const obtenerUnSoloJuegoAPI = async (id) => {
+  try {
+    const res = await fetch(`${API_URL}/juegos/${id}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
-// usuario administrador
-const userAdmin = {
-    email: 'qvc@gmail.com',
-    password: '1234'
-}
+// Editar juego
+export const editarJuegoAPI = async (juegoAEditar, id) => {
+  try {
+    const res = await fetch(`${API_URL}/juegos/${id}`, {
+      method: "PUT",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(juegoAEditar),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
-export const login = (usuario) =>
-{
-    if(usuario.email === userAdmin.email && usuario.password === userAdmin.password) 
-    {
-        // guardamos el email en el session storage para que no se desloguee navegando de pagina en pagina
-        sessionStorage.setItem('userKey',JSON.stringify(userAdmin.email))
-        return true
-    }
-    else
-    {
-        return false
-    }
-}
+// REGISTER
+export const registerAPI = async (newUser) => {
+  try {
+    const res = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser),
+    });
+    const data = await res.json();
+    if (!res.ok) return { error: data.msg || "Error al registrar" };
+    return data;
+  } catch (error) {
+    console.error(error);
+    return { error: "Error de conexión" };
+  }
+};
+
+// LOGIN
+export const loginAPI = async (emailOrUsername, password) => {
+  try {
+    const res = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ emailOrUsername, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) return null;
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+// USUARIOS
+export const listarUsuariosAPI = async () => {
+  try {
+    const res = await fetch(`${API_URL}/usuarios`);
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const editarUsuarioAPI = async (usuario, id) => {
+  try {
+    const res = await fetch(`${API_URL}/usuarios/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usuario),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

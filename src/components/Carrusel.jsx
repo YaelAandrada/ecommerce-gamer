@@ -1,115 +1,108 @@
-import {useState, useEffect, useRef } from "react";
-import Modal from "./modal";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CardContext";
+import { listaJuegosAPI } from "../helpers/queries";
 
 export default function Carousel({ categoria }) {
   const [juegos, setJuegos] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [juegoSeleccionado, setJuegoSeleccionado] = useState(null);
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
+
+  const { addToCart } = useCart();
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // ✅ Trae solo los juegos de la categoría elegida
-        const res = await fetch(`http://localhost:4000/juegos?categoria=${encodeURIComponent(categoria)}`);
-        const data = await res.json();
-        setJuegos(data);
-      } catch (error) {
-        console.error("Error al obtener juegos:", error);
-      } finally {
-        setLoading(false);
-      }
+    const obtenerJuegos = async () => {
+      const res = await listaJuegosAPI();
+      const data = await res.json();
+
+      const filtrados = data.filter(
+        (juego) =>
+          juego.categoria?.toLowerCase() === categoria?.toLowerCase()
+      );
+
+      setJuegos(filtrados);
     };
-    fetchData();
+
+    obtenerJuegos();
   }, [categoria]);
 
   const scroll = (direction) => {
-    const { current } = scrollRef;
-    if (current) {
-      const scrollAmount = 300; // pixeles a mover por click
-      current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
+    const container = scrollRef.current;
+    const scrollAmount = 300;
+
+    if (direction === "left") {
+      container.scrollLeft -= scrollAmount;
+    } else {
+      container.scrollLeft += scrollAmount;
     }
   };
 
-  const abrirModal = (juego) => setJuegoSeleccionado(juego);
-  const cerrarModal = () => setJuegoSeleccionado(null);
-
-  if (loading) return <p className="text-center text-white">Cargando {categoria}...</p>;
-
-  if (juegos.length === 0)
-    return <p className="text-center text-gray-400">No hay juegos en la categoría "{categoria}".</p>;
+  if (juegos.length === 0) return null;
 
   return (
-    <div className="relative w-full flex justify-center py-6 h-40">
-      {/* Botón izquierda */}
+    <div className="relative group px-6">
+
+      {/* Flecha izquierda */}
       <button
         onClick={() => scroll("left")}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black text-white p-2 rounded-full z-10"
+        className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition z-10"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
+        ◀
       </button>
 
-      {/* Contenedor scrollable */}
+      {/* Flecha derecha */}
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition z-10"
+      >
+        ▶
+      </button>
+
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto space-x-4 px-10 scrollbar-hide scroll-smooth"
+        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 overflow-x-auto scrollbar-hide py-4"
       >
-        {juegos.map((juego) => (
+        {juegos.slice(0, 10).map((juego) => (
           <div
             key={juego.id}
-            className="relative shrink-0 w-48 md:w-56 lg:w-64 rounded-xl overflow-hidden group"
-            onClick={() => abrirModal(juego)}
+            className="min-w-[170px] bg-gray-900 rounded-xl overflow-hidden relative group hover:scale-105 transition-all duration-300 shadow-lg"
           >
+            {/*  */}
             <img
-              src={juego.img}
-              alt={juego.title}
-              className="object-cover w-full h-64 group-hover:scale-105 transition-transform duration-300"
+              src={juego.imagen}
+              alt={juego.nombre}
+              className="w-full h-40 object-cover"
             />
-            <div className="absolute bottom-0 w-full bg-yellow-400 text-black text-center font-bold py-1 text-sm">
-              {juego.title}
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-white text-center p-2">
+              <h3 className="font-semibold text-sm mb-2">{juego.nombre}</h3>
+              <p className="text-xs mb-2">${juego.precio}</p>
+              <button
+                onClick={() => addToCart(juego)}
+                className="bg-yellow-400 text-black px-3 py-1 rounded text-xs font-semibold hover:bg-yellow-500"
+              >
+                Agregar
+              </button>
+
             </div>
           </div>
         ))}
       </div>
 
-      {/* Botón derecha */}
-      <button
-        onClick={() => scroll("right")}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black text-white p-2 rounded-full z-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor" 
+      {/* Ver más */}
+      <div className="flex justify-end mt-4">
+        <button
+          onClick={() =>
+            navigate(`/categoria/${categoria.toLowerCase()}`)
+          }
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-lg transition"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
-
-      <Modal juego={juegoSeleccionado} onClose={cerrarModal} />
+          Ver más →
+        </button>
+      </div>
     </div>
   );
 }

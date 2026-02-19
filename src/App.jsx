@@ -1,86 +1,91 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Footer from "./components/Footer";
-import About from "./components/About";
-import Nosotros from "./page/Nosotros";
-import Login from "./components/Login";
-import Navbar from "./components/Navbar";
-import Register from "./components/RegisterForm";
-import Home from "./components/Home";
-import Administrador from './page/Administrador';
-import FormularioJuegos from "./components/FormularioJuegos";
-import ProtectedRoute from "./components/ProtectedRoute";
-import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
-import AuthModal from "./components/AuthModal";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Categories from "./page/Categorias";
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+// Páginas públicas
+import Home from "./page/Home";
+import About from "./page/Nosotros";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import GameDetalles from "./page/GameDetalles";   // ✅ Importar detalle
+
+// Paneles
+import UserPanel from "./pages/UserPanel";
+import AdminPanel from "./page/Administrador";
 
 function App() {
-  const [showModal, setShowModal] = React.useState(false);
-  const [modalView, setModalView] = React.useState("login");
+  const [user, setUser] = useState(null);
 
-  const abrirModalLogin = () => {
-    setShowModal(true);
-    setModalView("login");
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch {
+        console.error("Error parsing user");
+        localStorage.removeItem("user");
+      }
+    }
+  }, []);
+
+  const handleLogin = (userData, token) => {
+    localStorage.setItem("user", JSON.stringify(userData));
+    if (token) localStorage.setItem("token", token);
+    setUser(userData);
   };
 
-  const abrirModalRegister = () => {
-    setShowModal(true);
-    setModalView("register");
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);
   };
-
-  const handleLogin = () => setShowModal(false);
-  const handleRegister = () => setShowModal(false);
 
   return (
-    <div className="App relative">
-      <Navbar />
-
-      {showModal && (
-        <AuthModal
-          view={modalView}
-          onLogin={handleLogin}
-          onRegister={handleRegister}
-        />
-      )}
-
-      <Login />
+    <>
+      <Navbar user={user} onLogout={handleLogout} />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route
-          path="/login"
-          element={<Login abrirModalLogin={abrirModalLogin} />}
-        />
-        <Route path="/admin" element={<Administrador />} />
-        <Route
-          path="/register"
-          element={<Register abrirModalRegister={abrirModalRegister} />}
-        />
-        <Route path="/wishlist" element={<Home />} />
-        <Route path="/categoria/:slug" element={<Home />} />
-        <Route path="/formulario" element={<FormularioJuegos />} />
+        {/* Públicas */}
+        <Route path="/" element={<Home />} />
+        <Route path="/categorias" element={<Categories />} />
+        <Route path="/nosotros" element={<About />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Register onRegister={handleLogin} />} />
+        <Route path="/juegos/:id" element={<GameDetalles />} /> {/* ✅ Nueva ruta */}
 
+        {/* Panel Usuario */}
         <Route
-          path="/home"
+          path="/panel"
           element={
-            <ProtectedRoute>
-              <Home />
+            <ProtectedRoute user={user}>
+              <UserPanel />
             </ProtectedRoute>
           }
         />
+
+        {/* Panel Administrador */}
         <Route
-          path="/dashboard"
+          path="/admin"
           element={
-            <ProtectedAdminRoute>
-            </ProtectedAdminRoute>
+            <ProtectedRoute user={user} requiredRole="admin">
+              <AdminPanel />
+            </ProtectedRoute>
           }
         />
+
+        {/* Ruta inexistente */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-          <Footer />
+
+      <Footer />
       <ToastContainer position="bottom-right" />
-    </div>
+    </>
   );
 }
 
