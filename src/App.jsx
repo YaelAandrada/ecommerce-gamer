@@ -1,54 +1,49 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
-import Nosotros from "./page/Nosotros";
-import Home from "./page/Home";
-import Login from "./pages/Login";
-import CategoriaDetalle from "./page/CategoriaDetalles";
-import Register from "./pages/Register";
-import Administrador from "./page/Administrador";
-import Error404 from "./page/Error404";
-import UserPanel from "./pages/UserPanel.jsx";
-import Categorias from "./page/Categorias";
 import ProtectedRoute from "./components/ProtectedRoute";
-import GamesDetalles from "./page/GameDetalles";
 
-import { ToastContainer } from "react-toastify";
+// Páginas públicas
+import Home from "./page/Home";
+import Categories from "./page/Categorias";
+import About from "./page/Nosotros";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+// Paneles
+import UserPanel from "./pages/UserPanel";
+import AdminPanel from "./page/Administrador";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("user");
-
-      if (storedUser && storedUser !== "undefined") {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
         setUser(JSON.parse(storedUser));
+      } catch {
+        console.error("Error parsing user");
+        localStorage.removeItem("user");
       }
-    } catch (error) {
-      console.error("Error parsing user from localStorage:", error);
-      localStorage.removeItem("user");
-    } finally {
-      setAuthLoading(false);
     }
   }, []);
 
-  const handleLogin = (userData) => {
+  const handleLogin = (userData, token) => {
     localStorage.setItem("user", JSON.stringify(userData));
+    if (token) localStorage.setItem("token", token);
     setUser(userData);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("token"); // por si después guardás JWT
+    localStorage.removeItem("token");
     setUser(null);
   };
-
-  if (authLoading) return null;
 
   return (
     <>
@@ -56,45 +51,34 @@ function App() {
 
       <Routes>
         {/* Públicas */}
-        <Route path="/login" element={<Login setUser={handleLogin} />} />
-        <Route path="/register" element={<Register setUser={handleLogin} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/categorias" element={<Categories />} />
+        <Route path="/nosotros" element={<About />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Register onRegister={handleLogin} />} />
 
-        {/* Protegidas */}
+        {/* Panel Usuario */}
         <Route
-          path="/*"
+          path="/panel"
           element={
-            <ProtectedRoute>
-              <>
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/nosotros" element={<Nosotros />} />
-                <Route path="/categorias" element={<Categorias />} />
-                <Route path="/categoria/:slug" element={<CategoriaDetalle />} />
-                <Route path="/juego/:id" element={<GamesDetalles />} />
-                <Route path="/user-panel" element={<UserPanel />} />
-
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute OnlyAdmin>
-                      <Administrador />
-                    </ProtectedRoute>
-                  }
-                />
-
-                {/* PANEL USUARIO */}
-                <Route
-                  path="/user-panel"
-                  element={
-                    <ProtectedRoute user={user}>
-                      <UserPanel />
-                    </ProtectedRoute>
-                  }
-                />
-              </>
+            <ProtectedRoute user={user}>
+              <UserPanel />
             </ProtectedRoute>
           }
         />
+
+        {/* Panel Administrador */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute user={user} requiredRole="admin">
+              <AdminPanel />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Ruta inexistente */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
       <Footer />
