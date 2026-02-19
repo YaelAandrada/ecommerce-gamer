@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from './context/AuthContext.jsx';
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -21,28 +20,31 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authView, setAuthView] = useState("login");
-  const [authLoading, setAuthLoading] = useState(true); //Deslogearse al salir completamente de la pagina
-
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-  const savedUser = localStorage.getItem("user");
-  if (savedUser) {
-    setUser(JSON.parse(savedUser));
-  }
-  setAuthLoading(false);
-}, []);
+    try {
+      const storedUser = localStorage.getItem("user");
 
+      if (storedUser && storedUser !== "undefined") {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (error) {
+      console.error("Error parsing user from localStorage:", error);
+      localStorage.removeItem("user");
+    } finally {
+      setAuthLoading(false);
+    }
+  }, []);
 
   const handleLogin = (userData) => {
-  localStorage.setItem("user", JSON.stringify(userData));
-  setUser(userData);
-  setIsAuthOpen(false);
-};
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("token"); // por si después guardás JWT
     setUser(null);
   };
 
@@ -50,65 +52,49 @@ function App() {
 
   return (
     <>
-      <Navbar
-        user={user}
-        onLogout={handleLogout}
-      />
+      <Navbar user={user} onLogout={handleLogout} />
 
       <Routes>
-        <Route path="/" element={<Home />} />
 
-        <Route path="/home" element={
-          <ProtectedRoute user={user}>
-          <Home />
-          </ProtectedRoute>}>
-        </Route>
+        {/* Públicas */}
+        <Route path="/login" element={<Login setUser={handleLogin} />} />
+        <Route path="/register" element={<Register setUser={handleLogin} />} />
 
-        <Route path="/nosotros" element={
-          <ProtectedRoute user={user}>
-          <Nosotros />
-          </ProtectedRoute>}>
-        </Route>
-
-        {/* LOGIN y Register */}
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route path="/register" element={<Register setUser={setUser} />} />
-
-
-        <Route path="/categoria/:slug" element={
-          <ProtectedRoute user={user}>
-          <CategoriaDetalle />
-          </ProtectedRoute>} />
-
-        <Route path="/categorias" element={
-          <ProtectedRoute user={user}>
-          <Categorias />
-          </ProtectedRoute>
-          } />
-        <Route path="/juego/:id" element={
-          <ProtectedRoute user={user}>
-          <GamesDetalles />
-          </ProtectedRoute>} />
-        <Route path="*" element={<Error404 />} />
-
-
-        {/* PANEL ADMIN */}
+        {/* Protegidas */}
         <Route
-          path="/admin"
+          path="/*"
           element={
-            <ProtectedRoute user={user} OnlyAdmin>
-              <Administrador />
+            <ProtectedRoute>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/nosotros" element={<Nosotros />} />
+                <Route path="/categorias" element={<Categorias />} />
+                <Route path="/categoria/:slug" element={<CategoriaDetalle />} />
+                <Route path="/juego/:id" element={<GamesDetalles />} />
+                <Route path="/user-panel" element={<UserPanel />} />
+
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute OnlyAdmin>
+                      <Administrador />
+                    </ProtectedRoute>
+                  }
+                />
+
+
+        {/* PANEL USUARIO */}
+        <Route
+          path="/user-panel"
+          element={
+            <ProtectedRoute user={user}>
+              <UserPanel />
             </ProtectedRoute>
           }
         />
 
-
-        {/* PANEL USUARIO */}
-           <Route path="/panel/*" element={<UserPanel />} />
-
-        {/* fallback */}
       </Routes>
-
 
       <Footer />
       <ToastContainer position="bottom-right" />

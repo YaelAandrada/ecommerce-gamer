@@ -1,8 +1,7 @@
-import { useForm } from 'react-hook-form';
-import bcrypt from 'bcryptjs';
+import { useForm } from "react-hook-form";
 import { loginAPI } from "../helpers/queries";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 function LoginForm({ onLogin }) {
   const navigate = useNavigate();
@@ -16,26 +15,33 @@ function LoginForm({ onLogin }) {
   const onSubmit = async (data) => {
     const { emailOrUsername, password } = data;
 
-    const user = await loginAPI(emailOrUsername, password);
+    try {
+      const response = await loginAPI(emailOrUsername, password);
 
-    if (!user) {
-      toast.error("Email/usuario o contraseña incorrectos");
-      return;
+      if (!response) {
+        toast.error("Credenciales incorrectas");
+        return;
+      }
+
+      // 🔐 Guardamos token
+      localStorage.setItem("token", response.token);
+
+      // Guardamos datos del usuario (sin password)
+      localStorage.setItem("users", JSON.stringify(response));
+
+      onLogin(response);
+
+      toast.success("¡Bienvenido!");
+
+      if (response.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/home");
+      }
+
+    } catch (error) {
+      toast.error("Error al iniciar sesión");
     }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-
-    if (!isValidPassword) {
-      toast.error("Email/usuario o contraseña incorrectos");
-      return;
-    }
-
-    // Guardamos usuario completo
-    const userWithoutPassword = { ...user, password: undefined };
-    localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-    onLogin(userWithoutPassword);
-    toast.success('¡Bienvenido!');
-    navigate("/home");
   };
 
   return (
