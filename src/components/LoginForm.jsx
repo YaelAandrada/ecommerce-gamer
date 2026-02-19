@@ -23,13 +23,12 @@ function LoginForm({ onLogin }) {
         return;
       }
 
-      // 🔐 Guardamos token
+      // Guardamos token y usuario
       localStorage.setItem("token", response.token);
+      localStorage.setItem("user", JSON.stringify(response));
 
-      // Guardamos datos del usuario (sin password)
-      localStorage.setItem("users", JSON.stringify(response));
-
-      onLogin(response);
+      // Llamamos a la función que viene de App.jsx
+      onLogin(response, response.token);
 
       toast.success("¡Bienvenido!");
 
@@ -38,7 +37,6 @@ function LoginForm({ onLogin }) {
       } else {
         navigate("/home");
       }
-
     } catch (error) {
       toast.error("Error al iniciar sesión");
     }
