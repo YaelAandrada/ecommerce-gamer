@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = "http://localhost:5000/api";
 
 function Home() {
   const [juegos, setJuegos] = useState([]);
@@ -15,7 +15,7 @@ function Home() {
         if (!res.ok) throw new Error("Error al obtener juegos");
 
         const data = await res.json();
-        setJuegos(data);
+        setJuegos(data); // tu backend devuelve directamente un array
       } catch (err) {
         setError(err.message);
       } finally {
@@ -28,7 +28,6 @@ function Home() {
 
   return (
     <div className="bg-black text-white min-h-screen px-4 pb-10">
-
       {/* HERO */}
       <div className="max-w-6xl mx-auto mb-12 text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-green-400 mb-3">
@@ -67,23 +66,23 @@ function Home() {
                 className="bg-zinc-900 rounded-xl overflow-hidden border border-green-500 hover:scale-105 transition duration-300"
               >
                 <img
-                  src={juego.imagen}
-                  alt={juego.nombre}
+                  src={juego.imageUrl}
+                  alt={juego.title}
                   className="h-48 w-full object-cover"
                 />
 
                 <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">
-                    {juego.nombre}
+                    {juego.title}
                   </h3>
 
                   <p className="text-sm text-zinc-400 mb-3 line-clamp-2">
-                    {juego.descripcion}
+                    {juego.description}
                   </p>
 
                   <div className="flex justify-between items-center">
                     <span className="text-green-400 font-bold">
-                      ${juego.precio}
+                      ${juego.price}
                     </span>
 
                     <Link

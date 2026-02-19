@@ -1,9 +1,8 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Categorias from '../page/Categorias';
 import CartModal from "./CartModal";
 import { useCart } from "../context/CardContext";
-import { useAuth } from '../context/AuthContext';
+
 
 const Navbar = ({ user, onLoginClick, onRegisterClick, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

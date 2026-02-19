@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Categories from "./page/Categorias";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -9,10 +10,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 // Páginas públicas
 import Home from "./page/Home";
-import Categories from "./page/Categorias";
 import About from "./page/Nosotros";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import GameDetalles from "./page/GameDetalles";   // ✅ Importar detalle
 
 // Paneles
 import UserPanel from "./pages/UserPanel";
@@ -56,6 +57,7 @@ function App() {
         <Route path="/nosotros" element={<About />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/register" element={<Register onRegister={handleLogin} />} />
+        <Route path="/juegos/:id" element={<GameDetalles />} /> {/* ✅ Nueva ruta */}
 
         {/* Panel Usuario */}
         <Route

@@ -1,159 +1,119 @@
-// POST - crear producto - 201
-// GET - obtener 1 o mas productos - 200
-// DELETE - borrar 1 producto - 200
-// PUT/PATCH - editar 1 producto
-
-// ⚠️ FUTURO BACKEND
-// Esta URL debe venir de una variable de entorno:
-// import.meta.env.VITE_API_URL (Vite)
-// process.env.REACT_APP_API_URL (CRA)
-//
-// Ejemplo backend:
-// const API_URL = "https://api.miproyecto.com/api";
-
-const API_URL = "http://localhost:3000";
-
-//Aqui esta trabajando con una api de JSON, aqui tendrán que modificar una linea para usarlo para backend
+const API_URL = "http://localhost:5000/api";
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
-
   return {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`
+    Authorization: `Bearer ${token}`,
   };
 };
 
-
-
+// Crear juego
 export const crearJuegoAPI = async (juegoNuevo) => {
   try {
-    return await fetch(`${API_URL}/juegos`, {
+    const res = await fetch(`${API_URL}/juegos`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(juegoNuevo),
     });
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
-
-// 🔐 FUTURO BACKEND
-// El token JWT se obtiene en el login y se guarda en:
-// localStorage / sessionStorage / cookie httpOnly
-
-export const listaJuegosAPI = async() =>{
-    try
-    {
-        const respuesta = await fetch(`${API_URL}/juegos`)
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
-
-export const borrarJuegoAPI = async (id) => {
-  try {
-    return await fetch(`${API_URL}/juegos/${id}`, {
-      method: "DELETE",
-      headers: getAuthHeaders()
-    });
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
-
-
-// ⚠️ En backend:
-// - Validar token
-// - Verificar rol admin
-// - NO confiar en el frontend
-
-
-export const obtenerUnSoloJuegoAPI = async(id) =>{
-    try
-    {
-        const respuesta = await fetch(`http://localhost:3000/juegos/${id}`)
-        return respuesta
-    }
-    catch (error)
-    {
-        console.error(error)
-        return false
-    }
-}
-
-export const editarJuegoAPI = async (juegoAEditar, id) => {
-  try {
-    return await fetch(`${API_URL}/juegos/${id}`, {
-      method: "PUT",
-      headers: getAuthHeaders(),
-      body: JSON.stringify(juegoAEditar)
-    });
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
-
-
-
-// REGISTER
-export const registerAPI = async (newUser) => {
-  try {
-    const res = await fetch(`${API_URL}/api/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser)
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      return { error: data.msg || "Error al registrar" };
-    }
-
-    return data;
-
-  } catch (error) {
-    console.error(error);
-    return { error: "Error de conexión" };
-  }
-};
-
-
-// LOGIN
-export const loginAPI = async (emailOrUsername, password) => {
-  try {
-    const res = await fetch(`${API_URL}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ emailOrUsername, password })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) return null;
-
-    return data;
-
+    return await res.json();
   } catch (error) {
     console.error(error);
     return null;
   }
 };
 
+// Listar juegos
+export const listaJuegosAPI = async () => {
+  try {
+    const res = await fetch(`${API_URL}/juegos`);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+// Borrar juego
+export const borrarJuegoAPI = async (id) => {
+  try {
+    const res = await fetch(`${API_URL}/juegos/${id}`, {
+      method: "DELETE",
+      headers: getAuthHeaders(),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+// Obtener un solo juego
+export const obtenerUnSoloJuegoAPI = async (id) => {
+  try {
+    const res = await fetch(`${API_URL}/juegos/${id}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+// Editar juego
+export const editarJuegoAPI = async (juegoAEditar, id) => {
+  try {
+    const res = await fetch(`${API_URL}/juegos/${id}`, {
+      method: "PUT",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(juegoAEditar),
+    });
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+// REGISTER
+export const registerAPI = async (newUser) => {
+  try {
+    const res = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser),
+    });
+    const data = await res.json();
+    if (!res.ok) return { error: data.msg || "Error al registrar" };
+    return data;
+  } catch (error) {
+    console.error(error);
+    return { error: "Error de conexión" };
+  }
+};
+
+// LOGIN
+export const loginAPI = async (emailOrUsername, password) => {
+  try {
+    const res = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ emailOrUsername, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) return null;
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
 // USUARIOS
-
 export const listarUsuariosAPI = async () => {
   try {
-    const res = await fetch('http://localhost:3000/usuarios');
+    const res = await fetch(`${API_URL}/usuarios`);
     return await res.json();
   } catch (error) {
     console.error(error);
@@ -163,32 +123,14 @@ export const listarUsuariosAPI = async () => {
 
 export const editarUsuarioAPI = async (usuario, id) => {
   try {
-    return await fetch(`http://localhost:3000/usuarios/${id}`, {
+    const res = await fetch(`${API_URL}/usuarios/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(usuario)
+      body: JSON.stringify(usuario),
     });
+    return await res.json();
   } catch (error) {
     console.error(error);
-    return false;
+    return null;
   }
- };
-
-
-// ❌ Nunca validar contraseña en frontend
-// ✔️ Backend compara bcrypt
-// ✔️ Backend devuelve JWT
-
-
-/*
-================ FUTURO BACKEND =================
-
-1) Reemplazar fetch directos por endpoints reales
-2) Login devuelve JWT
-3) Guardar token de forma segura
-4) Agregar Authorization header
-5) Validar roles en backend
-6) Nunca confiar en datos del frontend
-
-=================================================
-*/
+};
