@@ -55,7 +55,6 @@ function App() {
       <Navbar user={user} onLogout={handleLogout} />
 
       <Routes>
-
         {/* Públicas */}
         <Route path="/login" element={<Login setUser={handleLogin} />} />
         <Route path="/register" element={<Register setUser={handleLogin} />} />
@@ -65,7 +64,7 @@ function App() {
           path="/*"
           element={
             <ProtectedRoute>
-              <Routes>
+              <>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/nosotros" element={<Nosotros />} />
@@ -83,17 +82,19 @@ function App() {
                   }
                 />
 
-
-        {/* PANEL USUARIO */}
-        <Route
-          path="/user-panel"
-          element={
-            <ProtectedRoute user={user}>
-              <UserPanel />
+                {/* PANEL USUARIO */}
+                <Route
+                  path="/user-panel"
+                  element={
+                    <ProtectedRoute user={user}>
+                      <UserPanel />
+                    </ProtectedRoute>
+                  }
+                />
+              </>
             </ProtectedRoute>
           }
         />
-
       </Routes>
 
       <Footer />
